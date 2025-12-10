@@ -81,7 +81,7 @@
     <div id="container">
         <form id="otp_form" action="/verify" method="POST">
             <label for="enter_otp">ENTER OTP</label>
-            <input id="enter_otp">
+            <input id="enter_otp" name="otp">
             <button id="submit">SUBMIT</button>
 
             <div id="error" style="display:none; {% if error %}display:block;{% endif %}">

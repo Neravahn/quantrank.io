@@ -3,6 +3,7 @@ from auth.emailAuth import send_otp
 
 
 app = Flask(__name__)
+app.secret_key = "idk_what_secretkey_to_use"
 
 @app.route('/', methods = ['GET'])
 def index():
@@ -42,7 +43,7 @@ def verify():
         if user_otp == real_otp:
             #SAVING LOGIC HERE
 
-            
+            print( 'success' )
             return redirect('login')
         else:
             return render_template('verify.html', error = 'Enter correct OTP')
