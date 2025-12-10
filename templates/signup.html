@@ -1,46 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>quantrank.io - signup</title>
+    <style>
+        @font-face {
+            font-family: 'Nunito';
+            src: url("{{ url_for('static', filename='fonts/Nunito-VariableFont_wght.ttf') }}") format('truetype');
+            font-weight: bold;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Nunito';
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #0d0d0d;
+            color: white;
+        }
+
+        #main_container {
+            background: #1b1b1b;
+            padding: 35px;
+            width: 350px;
+            border-radius: 14px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 8px;
+            color: #d2d2d2;
+        }
+
+        input {
+            padding: 12px;
+            border-radius: 2px;
+            border: none;
+            background: #2b2b2b;
+            color: white;
+            font-size: 15px;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        input:focus {
+            background: #333;
+        }
+
+        button {
+            margin-top: 18px;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            background: #ffffff;
+            color: black;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: rgb(255, 183, 0);
+            transform: scale(1.02);
+        }
+
+        #error {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            background: #330000;
+            color: #ff4c4c;
+            font-weight: bold;
+            font-size: 14px;
+            display: none;
+        }
+
+        @media (max-width: 480px) {
+            #main_container {
+                width: 90%;
+                padding: 25px;
+            }
+        }
+    </style>
+
 </head>
+
 <body>
     <div id="main_container">
-        <label for="name">ENTER YOUR NAME</label>
-        <input id="name">
+        <form id="signup_form" action="/signup" method="POST">
+            <label for="name">ENTER YOUR NAME</label>
+            <input id="name" type="text" required>
 
-        <label for="email">ENTER YOU E-MAIL</label>
-        <input id="email">
+            <label for="email">ENTER YOU E-MAIL</label>
+            <input id="email" type="email" required>
 
-        <label for="username">ENTER USERANAME</label>
-        <input id="username">
+            <label for="username">ENTER USERANAME</label>
+            <input id="username" type="text" required>
 
-        <label for="password">ENTER PASSWORD</label>
-        <input id="password">
+            <label for="password">ENTER PASSWORD</label>
+            <input id="password" type="password" required>
 
-        <label for="confirm_password">CONFIRM PASSWORD</label>
-        <input id="confirm_password">
+            <label for="confirm_password">CONFIRM PASSWORD</label>
+            <input id="confirm_password" type="text" required>
 
-        <button id="submit">SUBMIT</button>
+            <button id="submit">SUBMIT</button>
 
-        <div id="error">
-
-        </div>
+            <div id="error" style="display:none; {% if error %}display:block;{% endif %}">
+                {% if error %}
+                {{ error }}
+                {% endif %}
+            </div>
+        </form>
     </div>
-    
+
 
     <!--SCRIPTS-->
     <script>
-        document.addEventListener('click', () => {
+        const form = document.getElementById('signup_form');
+        const errorDiv = document.getElementById('error');
+
+        form.addEventListener('submit', function (event) {
             const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirm_password').value;
-            const errorDiv = document.getElementById('error')
+            const confirm_password = document.getElementById('confirm_password').value;
 
-            if ( password !== confirmPassword) {
+            errorDiv.innerHTML = "";
+            errorDiv.style.display = "none";
+            let errors = []
+            if (password !== confirm_password) {
+                errors.push('PASSSWORDS DO NOT MATCH');
+            }
 
+            if (errors.length > 0) {
+                event.preventDefault();
+                errorDiv.style.display = "block";
+                errorDiv.innerHTML = errors.join("<br>");
             }
         })
     </script>
 </body>
+
 </html>
