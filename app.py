@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, session, redirect
 from auth.emailAuth import send_otp
+from auth.user import check_email, check_username
+from auth.save_user import save
 
 
 app = Flask(__name__)
@@ -17,12 +19,16 @@ def signup():
         email = request.form['email']
         password = request.form['password']
         username = request.form['username']
-        otp = send_otp(email)
 
+        if check_username(username):
+            return render_template('signup.html', error = "USERNAME already in use")
+        
+        elif check_email(email):
+            return render_template('signup.html', error= "E-MAIL already in use")
+        
+        otp = send_otp(email)
         if otp is None:
             return render_template('signup.html', error= "OTP cannot be sent")
-        
-
         session['username'] = username
         session['real_otp'] = otp
         session['email'] = email
@@ -41,8 +47,7 @@ def verify():
         password = session.get('password')
         username = session.get('username')
         if user_otp == real_otp:
-            #SAVING LOGIC HERE
-
+            save(name, username, email, password)
             print( 'success' )
             return redirect('login')
         else:
