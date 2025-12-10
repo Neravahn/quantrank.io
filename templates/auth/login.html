@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>quantrank.io - login</title>
+    <style>
+        @font-face {
+            font-family: 'Nunito';
+            src: url("{{ url_for('static', filename='fonts/Nunito-VariableFont_wght.ttf') }}") format('truetype');
+            font-weight: bold;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Nunito';
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #0d0d0d;
+            color: white;
+        }
+
+        #main_container {
+            background: #1b1b1b;
+            padding: 35px;
+            width: 350px;
+            border-radius: 14px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 8px;
+            color: #d2d2d2;
+        }
+
+        input {
+            padding: 12px;
+            border-radius: 2px;
+            border: none;
+            background: #2b2b2b;
+            color: white;
+            font-size: 15px;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        input:focus {
+            background: #333;
+            border: 1px solid rgb(255, 183, 0);
+            outline: none;
+        }
+
+        button {
+            margin-top: 18px;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            background: #ffffff;
+            color: black;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: rgb(255, 183, 0);
+            transform: scale(1.02);
+        }
+
+        #error {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            background: #330000;
+            color: #ff4c4c;
+            font-weight: bold;
+            font-size: 14px;
+            display: none;
+        }
+
+        @media (max-width: 480px) {
+            #main_container {
+                width: 90%;
+                padding: 25px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="main_container">
+        <form id="login_form" action="/login" method="POST">
+
+            <label for="username">ENTER USERANAME</label>
+            <input id="username" name="username" type="text" required>
+
+            <label for="password">ENTER PASSWORD</label>
+            <input id="password" name="password" type="password" required>
+
+            <button id="submit">SUBMIT</button>
+
+            <div id="error" style="display:none; {% if error %}display:block;{% endif %}">
+                {% if error %}
+                {{ error }}
+                {% endif %}
+            </div>
+        </form>
+    </div>
+
+</body>
+
+</html>

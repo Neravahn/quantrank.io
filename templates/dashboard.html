@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>quantrank.io - dashboard</title>
+
+    <style>
+        @font-face {
+            font-family: 'JotiOne';
+            src: url("{{ url_for('static', filename='fonts/JotiOne-Regular.ttf') }}") format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Nunito';
+            src: url("{{ url_for('static', filename='fonts/Nunito-VariableFont_wght.ttf') }}") format('truetype');
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Nunito';
+        }
+
+        body {
+            background: #1a1a1a;
+            color: white;
+        }
+
+        nav {
+            width: 100%;
+            height: 70px;
+            background: #151515;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 35px;
+            border-bottom: 1px solid #222;
+        }
+
+        #logo h3 {
+            font-size: 26px;
+            font-family: 'JotiOne';
+        }
+
+        #logo hi {
+            color: rgb(255, 183, 0);
+        }
+
+        #nav-center {
+            display: flex;
+            gap: 30px;
+        }
+
+        #nav-center a {
+            text-decoration: none;
+            color: #bfbfbf;
+            transition: 0.2s;
+        }
+
+        #nav-center a:hover {
+            color: rgb(255, 183, 0);
+        }
+
+        #main_area {
+            margin: 20px auto;
+            max-width: 1400px;
+            display: flex;
+            gap: 20px;
+            height: calc(100vh - 110px);
+        }
+
+        #leaderboard_area {
+            width: 300px;
+            min-width: 300px;
+            background: #292929;
+            border-radius: 8px;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        #right_area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        #top_stats {
+            display: flex;
+            gap: 20px;
+        }
+
+        #questions_card {
+            flex: 1;
+            background: #232323;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        #questions_card h3 {
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            color: #e0e0e0;
+        }
+
+        #q_stats_box {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .q_stat {
+            flex: 1;
+            background: #2d2d2d;
+            padding: 18px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.1rem;
+            transition: 0.2s;
+        }
+
+        .q_stat:hover {
+            transform: translateY(-4px);
+        }
+
+        #easy_stat {
+            border-left: 2px solid rgb(34, 197, 94);
+            border-right: 2px solid rgb(34, 197, 94);;
+            color: rgb(34, 197, 94);
+        }
+
+        #medium_stat {
+            border-left: 2px solid rgb(255, 183, 0);
+            border-right:  2px solid rgb(255, 183, 0);
+            color: rgb(255, 183, 0);
+        }
+
+        #hard_stat {
+            border-left: 2px solid rgb(239, 68, 68);
+            border-right: 2px solid rgb(239, 68, 68);
+            color: rgb(239, 68, 68);
+        }
+
+        #rank_card {
+            width: 260px;
+            background: #232323;
+            padding: 20px;
+            border-radius: 12px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            border-left: 2px solid rgb(255, 183, 0);
+            border-right: 2px solid rgb(255, 183, 0);
+            color: rgb(255, 183, 0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #heatmap_area {
+            background: #232323;
+            padding: 25px;
+            min-height: 300px;
+            border-radius: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div id="logo">
+            <h3>quantrank.<hi>io</hi></h3>
+        </div>
+
+        <div id="nav-center">
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('questions') }}">Practice</a>
+            <a href="#">Leaderboard</a>
+            <a href="#">Analysis</a>
+            <a href="#">Profile</a>
+        </div>
+    </nav>
+
+    <div id="main_area">
+
+        <div id="leaderboard_area">
+
+        </div>
+
+        <div id="right_area">
+
+            <div id="top_stats">
+
+                <div id="questions_card">
+                    <h3>Questions Solved</h3>
+
+                    <div id="q_stats_box">
+                        <div class="q_stat" id="easy_stat">Easy: {{ easy }}</div>
+                        <div class="q_stat" id="medium_stat">Medium: {{ medium }}</div>
+                        <div class="q_stat" id="hard_stat">Hard: {{ hard }}</div>
+                    </div>
+                </div>
+
+
+                <div id="rank_card">
+                    Rank: {{ rank }}
+                </div>
+
+            </div>
+
+
+            <div id="heatmap_area">
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>quantrank.io - questions</title>
+    <style>
+        @font-face {
+            font-family: 'JotiOne';
+            src: url("{{ url_for('static', filename='fonts/JotiOne-Regular.ttf') }}") format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Nunito';
+            src: url("{{ url_for('static', filename='fonts/Nunito-VariableFont_wght.ttf') }}") format('truetype');
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Nunito';
+        }
+
+        body {
+            background: #1a1a1a;
+            color: white;
+        }
+
+        nav {
+            width: 100%;
+            height: 70px;
+            background: #151515;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 35px;
+            border-bottom: 1px solid #222;
+        }
+
+        #logo h3 {
+            font-size: 26px;
+            font-family: 'JotiOne';
+        }
+
+        #logo hi {
+            color: rgb(255, 183, 0);
+        }
+
+        #nav-center {
+            display: flex;
+            gap: 30px;
+        }
+
+        #nav-center a {
+            text-decoration: none;
+            color: #bfbfbf;
+            transition: 0.2s;
+        }
+
+        #nav-center a:hover {
+            color: rgb(255, 183, 0);
+        }
+
+
+        #container {
+            display: flex;
+            flex-direction: row;
+            margin-top: 10px;
+            padding: 0 200px 0 200px;
+            gap: 25px;
+        }
+
+        #sidebar {
+            display: flex;
+            flex-direction: column;
+            width: 320px;
+            height: calc(100vh - 120px);
+            background: #151515;
+            border-right: 1px solid #222;
+            padding: 25px;
+            overflow-y: auto;
+            border-radius: 10px;
+        }
+
+
+        #difficulty {
+            width: 100%;
+            padding: 12px;
+            background: rgb(255, 183, 0);
+            color: rgb(0, 0, 0);
+            border: 1px solid rgb(255, 183, 0);
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-bottom: 10px;
+            outline: none;
+        }
+
+        #topics {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        #card {
+            background: #232323;
+            padding: 18px;
+            border-radius: 10px;
+            border: 1px solid #2e2e2e;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        #card:hover {
+            transform: translateY(-2px);
+            border-color: rgb(255, 183, 0);
+        }
+
+        #questions_area {
+            flex: 1;
+            background: #151515;
+            padding: 25px;
+            height: calc(100vh - 120px);
+            border-radius: 10px;
+            overflow-y: auto;
+            border: 1px solid #222;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div id="logo">
+            <h3>quantrank.<hi>io</hi>
+            </h3>
+        </div>
+
+        <div id="nav-center">
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('questions') }}">Practice</a>
+            <a href="#">Leaderboard</a>
+            <a href="#">Analysis</a>
+            <a href="#">Profile</a>
+        </div>
+    </nav>
+
+
+    <div id="container">
+
+        <div id="sidebar">
+            <select id="difficulty">
+                <option value="easy">EASY</option>
+                <option value="medium">MEDIUM</option>
+                <option value="hard">HARD</option>
+            </select>
+
+            <div id="topics">
+                <div id="card">Chapter 1. Ratio and Proportion, Indices, Logarithm</div>
+                <div id="card">Chapter 2. Equations</div>
+                <div id="card">Chapter 3. Linear Inequalities</div>
+                <div id="card">Chapter 4. Mathematics of Finance</div>
+                <div id="card">Chapter 5. Permetuations and Combinations</div>
+                <div id="card">Chapter 6. Arithmetic and Geometric Progression</div>
+                <div id="card">Chapter 7. Measures of Central Tendency</div>
+                <div id="card">Chapter 8. Dispersion</div>
+                <div id="card">Chapter 9. Correlation and Regression</div>
+            </div>
+        </div>
+
+        <div id="questions_area">
+            <!--HERE QUESTIONS AND THE OPTIONS WILL BE DISPLAYED-->
+        </div>
+
+    </div>
+
+</body>
+
+</html>

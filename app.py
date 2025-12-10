@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, session, redirect
 from auth.emailAuth import send_otp
 from auth.user import check_email, check_username
 from auth.save_user import save
+from auth.login import verify_user
 
 
 app = Flask(__name__)
@@ -21,21 +22,21 @@ def signup():
         username = request.form['username']
 
         if check_username(username):
-            return render_template('signup.html', error = "USERNAME already in use")
+            return render_template('auth/signup.html', error = "USERNAME already in use")
         
         elif check_email(email):
-            return render_template('signup.html', error= "E-MAIL already in use")
+            return render_template('auth/signup.html', error= "E-MAIL already in use")
         
         otp = send_otp(email)
         if otp is None:
-            return render_template('signup.html', error= "OTP cannot be sent")
+            return render_template('auth/signup.html', error= "OTP cannot be sent")
         session['username'] = username
         session['real_otp'] = otp
         session['email'] = email
         session['name'] = name
         session['password'] = password
         return redirect('verify')
-    return render_template('signup.html')
+    return render_template('auth/signup.html')
 
 @app.route('/verify', methods = ['GET', 'POST'])
 def verify():
@@ -51,14 +52,33 @@ def verify():
             print( 'success' )
             return redirect('login')
         else:
-            return render_template('verify.html', error = 'Enter correct OTP')
+            return render_template('auth/verify.html', error = 'Enter correct OTP')
     
 
-    return render_template('verify.html')
+    return render_template('auth/verify.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    return render_template('login.html')
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        verified = verify_user(username, password)
+
+        if verified == True:
+            return redirect('/dashboard')
+        else:
+            return render_template('auth/login.html', error= 'Invalid Credentials')
+        
+    return render_template('auth/login.html')
+
+@app.route('/dashboard', methods = ['GET', 'POST'])
+def dashboard():
+    return render_template('dashboard.html')
+
+@app.route('/questions', methods = ['GET', 'POST'])
+def questions():
+    return render_template('practice/dashboard.html')
 
 
 if __name__ == "__main__":

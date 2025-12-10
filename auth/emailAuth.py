@@ -3,6 +3,7 @@ from email.mime.text import MIMEText
 import random
 
 
+
 SENDER_EMAIL = "verify.quantrank.io@gmail.com"
 APP_PASSWORD = "gzxo adsf kivo nwqf"
 
