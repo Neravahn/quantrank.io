@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>quantrank.io - signup</title>
+</head>
+<body>
+    <div id="main_container">
+        <label for="name">ENTER YOUR NAME</label>
+        <input id="name">
+
+        <label for="email">ENTER YOU E-MAIL</label>
+        <input id="email">
+
+        <label for="username">ENTER USERANAME</label>
+        <input id="username">
+
+        <label for="password">ENTER PASSWORD</label>
+        <input id="password">
+
+        <label for="confirm_password">CONFIRM PASSWORD</label>
+        <input id="confirm_password">
+
+        <button id="submit">SUBMIT</button>
+
+        <div id="error">
+
+        </div>
+    </div>
+    
+
+    <!--SCRIPTS-->
+    <script>
+        document.addEventListener('click', () => {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm_password').value;
+            const errorDiv = document.getElementById('error')
+
+            if ( password !== confirmPassword) {
+
+            }
+        })
+    </script>
+</body>
+</html>

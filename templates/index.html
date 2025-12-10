@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>quantrank.io</title>
+    <style>
+        @font-face {
+            font-family: 'JotiOne';
+            src: url("{{ url_for('static', filename='fonts/JotiOne-Regular.ttf') }}") format('truetype');
+            font-weight: bold;
+        }
+
+        @font-face {
+            font-family: 'Nunito';
+            src: url("{{ url_for('static', filename='fonts/Nunito-VariableFont_wght.ttf') }}") format('truetype');
+            font-weight: bold;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: white;
+            background: black;
+            font-family: 'Nunito';
+        }
+
+        #logo_container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3rem;
+            font-family: 'JotiOne';
+        }
+
+        hi {
+            color: rgb(255, 183, 0);
+        }
+
+
+        #button_container {
+            display: flex;
+            gap: 10px;
+
+        }
+
+        .button {
+            padding: 14px 32px;
+            width: 200px;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: rgb(255, 255, 255);
+            color: black;
+            transition: 0.25s ease;
+            margin-bottom: 30px;
+            font-family: 'Nunito';
+        }
+
+        .button:hover {
+            background: rgb(255, 200, 60);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="logo_container">
+        <h1>quantrank.<hi>io</hi>
+        </h1>
+    </div>
+
+    <div id="button_container">
+        <a href="{{ url_for('login') }}">
+            <button class="button">LOGIN</button>
+        </a>
+        <a href="{{ url_for('signup') }}">
+            <button class="button">SIGN UP</button>
+        </a>
+    </div>
+</body>
+
+</html>
