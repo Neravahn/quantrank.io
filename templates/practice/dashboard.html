@@ -104,7 +104,7 @@
             gap: 15px;
         }
 
-        #card {
+        .card {
             background: #232323;
             padding: 18px;
             border-radius: 10px;
@@ -113,7 +113,7 @@
             transition: 0.2s;
         }
 
-        #card:hover {
+        .card:hover {
             transform: translateY(-2px);
             border-color: rgb(255, 183, 0);
         }
@@ -157,24 +157,50 @@
             </select>
 
             <div id="topics">
-                <div id="card">Chapter 1. Ratio and Proportion, Indices, Logarithm</div>
-                <div id="card">Chapter 2. Equations</div>
-                <div id="card">Chapter 3. Linear Inequalities</div>
-                <div id="card">Chapter 4. Mathematics of Finance</div>
-                <div id="card">Chapter 5. Permetuations and Combinations</div>
-                <div id="card">Chapter 6. Arithmetic and Geometric Progression</div>
-                <div id="card">Chapter 7. Measures of Central Tendency</div>
-                <div id="card">Chapter 8. Dispersion</div>
-                <div id="card">Chapter 9. Correlation and Regression</div>
+                <div class="card" data-topic="ratio_proportion">Chapter 1. Ratio and Proportion, Indices, Logarithm
+                </div>
+                <div class="card" data-topic="equations">Chapter 2. Equations</div>
+                <div class="card" data-topic="inequalities">Chapter 3. Linear Inequalities</div>
+                <div class="card" data-topic="finance">Chapter 4. Mathematics of Finance</div>
+                <div class="card" data-topic="permutations">Chapter 5. Permutations and Combinations</div>
+                <div class="card" data-topic="progression">Chapter 6. Arithmetic and Geometric Progression</div>
+                <div class="card" data-topic="central_tendency">Chapter 7. Measures of Central Tendency</div>
+                <div class="card" data-topic="dispersion">Chapter 8. Dispersion</div>
+                <div class="card" data-topic="correlation">Chapter 9. Correlation and Regression</div>
             </div>
         </div>
-
         <div id="questions_area">
             <!--HERE QUESTIONS AND THE OPTIONS WILL BE DISPLAYED-->
         </div>
+        <!--SCRIPTS-->
+        <script>
+            const cards = document.querySelectorAll(".card");
+            const difficultySelect = document.getElementById("difficulty");
 
-    </div>
 
+            cards.forEach(card => {
+                card.addEventListener("click", () => {
+                    const topic = card.dataset.topic;
+                    const difficulty = difficultySelect.value;
+
+                    fetch("/questions", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            topic: topic,
+                            difficulty: difficulty
+                        })
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            //DISPLAY QUESTIONS AND OPTIONS I WILL ADD buttons
+                            document.getElementById("questions_area").innerHTML = data.html;
+                        });
+                });
+            });
+        </script>
 </body>
 
 </html>

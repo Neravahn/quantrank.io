@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, redirect
+from flask import Flask, render_template, request, session, redirect, jsonify
 from auth.emailAuth import send_otp
 from auth.user import check_email, check_username
 from auth.save_user import save
@@ -78,6 +78,15 @@ def dashboard():
 
 @app.route('/questions', methods = ['GET', 'POST'])
 def questions():
+    if request.method== 'POST':
+            data = request.get_json()
+            topic = data.get("topic")
+            difficulty = data.get('difficulty')
+
+            print(topic)
+            print(difficulty)
+            html = render_template("practice/questions.html", topic = topic, difficulty = difficulty)
+            return jsonify({"html": html})
     return render_template('practice/dashboard.html')
 
 
