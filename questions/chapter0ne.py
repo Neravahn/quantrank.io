@@ -3,8 +3,16 @@ import math
 from sub_supScript import sub_num, sub_text, sup_num, sup_text
 
 def ratio_1():
-    a = random.randint(2, 20)
-    b = random.randint(2, 20)
+    num_val = []
+    while len(num_val) < 2:
+        z = random.randint(2, 20)
+        if z not in num_val:
+            num_val.append(z)
+        else:
+            continue
+
+    a = num_val[0]
+    b = num_val[1]
     gcd = math.gcd(a, b)
     a_s, b_s = a // gcd, b // gcd
 
@@ -26,17 +34,32 @@ def ratio_1():
     options.pop(random_pop)
     options.insert(random_pop, answer)
     return question, options, answer
+q, o, a = ratio_1()
+print(q, o, a)
+
+
+
+
+
 
 
 
 def ratio_2():
-    a = random.randint(2, 20)
-    b = random.randint(2, 20)
+    num_val = []
+    while len(num_val) < 2:
+        z = random.randint(2, 20)
+        if z not in num_val:
+            num_val.append(z)
+        else:
+            continue
+
+    a = num_val[0]
+    b = num_val[1]
     gcd = math.gcd(a, b)
 
     a_s, b_s = a//gcd, b//gcd
 
-    question = f"The duplicate ratio orf {a_s} : {b_s} is ?"
+    question = f"The duplicate ratio of {a_s} : {b_s} is ?"
     answer = f"{a_s ** 2} : {b_s **2}"
 
     options = []
@@ -55,6 +78,8 @@ def ratio_2():
     options.pop(random_pop)
     options.insert(random_pop, answer)
     return question, options, answer
+q, o, a = ratio_2()
+print(q, o, a)
 
 
 
@@ -174,36 +199,33 @@ def ratio_6():
     options.pop(random_pop)
     options.insert(random_pop, answer)
     return question, options, answer
-q, o, a = ratio_6()
-print(q, o, a)
-
 
 
 def ratio_7():
 
     a = random.randint(1, 10)
-    b = random.randint(1, 10)
+    b = random.randint(2, 10)
     gcd= math.gcd(a, b)
     a_s = a // gcd
     b_s = b// gcd
 
 
-    c = random.randint(1, 10)
-    d = random.randint(1, 10)
+    c = random.randint(2, 10)
+    d = random.randint(2, 10)
     gcd = math.gcd(c, d)
     c_s = c// gcd
     d_s = d//gcd
 
 
-    e = random.randint(1, 10)
-    f = random.randint(1, 10)
+    e = random.randint(2, 10)
+    f = random.randint(2, 10)
     gcd = math.gcd(e, f)
     e_s = e // gcd
     f_s = f // gcd
 
 
-    g = random.randint(1, 10)
-    h = random.randint(1, 10)
+    g = random.randint(2, 10)
+    h = random.randint(2, 10)
     gcd = math.gcd(g, h)
     g_s = g//gcd
     h_s = h// gcd
@@ -213,6 +235,22 @@ def ratio_7():
     f_b = (b_s) * (d_s ** 2) * (f_s ** 3) * (h_s)
     gcd = math.gcd(f_a, f_b)
     answer = f"{f_a // gcd} : {f_b // gcd}"
+
+    options = []
+    while len(options) < 4:
+        option_list = []
+        while len(option_list) < 8:
+            a = random.randint(2, 10)
+            option_list_ele = f"{a // gcd}"
+            option_list.append(option_list_ele)
+
+
+        x = option_list[0]
+        y = option_list[1]
+
+
+
+
     return question, answer
 
 
