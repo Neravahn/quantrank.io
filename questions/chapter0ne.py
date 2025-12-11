@@ -3,17 +3,33 @@ import math
 from sub_supScript import sub_num, sub_text, sup_num, sup_text
 
 def ratio_1():
-    a = random.randint(2, 100)
-    b = random.randint(2, 100)
+    a = random.randint(2, 20)
+    b = random.randint(2, 20)
     gcd = math.gcd(a, b)
     a_s, b_s = a // gcd, b // gcd
 
-    x = random.randint(1, 100)
+    x = random.randint(1, 20)
     c = a_s * x
 
     question = f"The ratio of two quantities is {a_s} : {b_s}. If the antecedent is {c}, the consequent is ?"
     answer = b_s * x
-    return question, answer
+
+    options = []
+    while len(options) < 4:
+        option = random.randint(2, 20)
+        if option not in options and option != answer:
+            options.append(option)
+        else :
+            continue
+
+    random_pop = random.randint(0, 3)
+    options.pop(random_pop)
+    options.insert(random_pop, answer)
+    
+    return question, options, answer
+
+q, o, a = ratio_1()
+print(q, o, a)
 
 
 
@@ -250,8 +266,6 @@ def ratio_13():
     answer = f"{y} : {z}"
     return question , answer
 
-q, a = ratio_13()
-print(q, a)
 
 
 
@@ -286,7 +300,3 @@ def ratio_14():
     gcd = math.gcd(ans_x, ans_y)
     answer = f"{ans_x // gcd} : {ans_y // gcd}"
     return question, answer
-
-q, a = ratio_14()
-print(q, a)
-
