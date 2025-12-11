@@ -108,6 +108,7 @@ def ratio_3():
     answer = f"{a_s} : {b_s}"
 
     options = []
+    options.append(answer)
     while len(options) < 4:
         num_val = []
         while len(num_val) < 2:
@@ -124,9 +125,7 @@ def ratio_3():
             options.append(option)
 
 
-    random_pop = random.randint(0, 3)
-    options.pop(random_pop)
-    options.insert(random_pop, answer)
+    random.shuffle(options)
     return question, options, answer
 q, o, a = ratio_3()
 print(q, o, a)
@@ -153,6 +152,7 @@ def ratio_4():
     answer = f"{a_s ** 3} : {b_s ** 3}"
 
     options = []
+    options.append(answer)
     while len(options) < 4:
         num_val =[]
         while len(num_val) < 2:
@@ -168,9 +168,7 @@ def ratio_4():
         if option not in options and option != answer:
             options.append(option)
 
-    random_pop = random.randint(0, 3)
-    options.pop(random_pop)
-    options.insert(random_pop, answer)
+    random.shuffle(options)
     return question, options, answer
 q, o, a = ratio_4()
 print(q, o,a )
@@ -198,6 +196,7 @@ def ratio_5():
     answer = f"{a_s} : {b_s}"
 
     options = []
+    options.append(answer)
     while len(options) < 4:
         num_val =[]
         while len(num_val) < 2:
@@ -213,9 +212,7 @@ def ratio_5():
         if option not in options and option != answer:
             options.append(option)
 
-    random_pop =random.randint(0, 3)
-    options.pop(random_pop)
-    options.insert(random_pop, answer)
+    random.shuffle(options)
     return question, options, answer
 q, o, a = ratio_5()
 print(q, o, a)
@@ -250,6 +247,7 @@ def ratio_6():
     answer = f"{f_a // f_g} : {f_b // f_g}"
 
     options = []
+    options.append(answer)
     while len(options) < 4:
         num_val =[]
         while len(num_val) < 4:
@@ -269,9 +267,7 @@ def ratio_6():
         if option not in options and option != answer:
             options.append(option)
 
-    random_pop = random.randint(0, 3)
-    options.pop(random_pop)
-    options.insert(random_pop, answer)
+    random.shuffle(options)
     return question, options, answer
 q, o, a = ratio_6()
 print(q, o, a)
@@ -279,56 +275,71 @@ print(q, o, a)
 
 
 def ratio_7():
+    num_val = []
+    while len(num_val) < 8:
+        z = random.randint(2, 10)
+        if z not in num_val:
+            num_val.append(z)
+        else:
+            continue
 
-    a = random.randint(1, 10)
-    b = random.randint(2, 10)
+    a = num_val[0]
+    b = num_val[1]
     gcd= math.gcd(a, b)
     a_s = a // gcd
     b_s = b// gcd
 
 
-    c = random.randint(2, 10)
-    d = random.randint(2, 10)
+    c = num_val[2]
+    d = num_val[3]
     gcd = math.gcd(c, d)
     c_s = c// gcd
     d_s = d//gcd
 
 
-    e = random.randint(2, 10)
-    f = random.randint(2, 10)
+    e = num_val[4]
+    f = num_val[5]
     gcd = math.gcd(e, f)
     e_s = e // gcd
     f_s = f // gcd
 
-
-    g = random.randint(2, 10)
-    h = random.randint(2, 10)
+    g = num_val[6]
+    h = num_val[7]
     gcd = math.gcd(g, h)
     g_s = g//gcd
     h_s = h// gcd
 
-    question = f"The ratio compunded of {a_s} : {b_s}, the duplicate ratio of{c_s} : {d_s} the triplicate ratio of{e_s} : {f_s} and {g_s} : {h_s}"
+    question = f"The ratio compunded of {a_s} : {b_s}, the duplicate ratio of {c_s} : {d_s} the triplicate ratio of {e_s} : {f_s} and {g_s} : {h_s}"
     f_a = (a_s) * (c_s ** 2) * (e_s ** 3) * (g_s)
     f_b = (b_s) * (d_s ** 2) * (f_s ** 3) * (h_s)
     gcd = math.gcd(f_a, f_b)
     answer = f"{f_a // gcd} : {f_b // gcd}"
 
     options = []
+    options.append(answer)
     while len(options) < 4:
         option_list = []
         while len(option_list) < 8:
             a = random.randint(2, 10)
-            option_list_ele = f"{a // gcd}"
-            option_list.append(option_list_ele)
+            if a not in options and a != answer:
+                option_list.append(a)
+            else:
+                continue
+        option_x = (option_list[0]) * (option_list[1] ** 2) * (option_list[2] ** 3) * (option_list[3])
+        option_y = (option_list[4]) * (option_list[5] ** 2) * (option_list[6] ** 3) * (option_list[7])
+        gcd = math.gcd(option_x, option_y)
+        option = f"{option_x // gcd} : {option_y // gcd}"
+        if option not in options:
+            options.append(option)
+        else:
+            continue
+    
+    random.shuffle(options)
+    return question, options, answer
+q, o, a = ratio_7()
+print(q, o, a)
 
 
-        x = option_list[0]
-        y = option_list[1]
-
-
-
-
-    return question, answer
 
 
 
