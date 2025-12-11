@@ -255,35 +255,38 @@ print(q, a)
 
 
 
-def ratio_13():
+def ratio_14():
     x = random.randint(2, 20)
     y = random.randint(2, 20)
 
     sup_1 = random.randint(2, 4)
     sup_2 = random.randint(2, 4)
 
-    eq_x = {
-        f'x{sup_num(sup_1)}y + xy{sup_num(sup_2)}' : ((x ** sup_1) * y) + (x * (y ** sup_2))
-    }
-    eq_y = {
-        f'x{sup_num(sup_1)} + y{sup_num(sup_2)}' : (x ** sup_1) + (y ** sup_2)
+    eq = {
+        f'x{sup_num(sup_1)}y + xy{sup_num(sup_2)}' : ((x ** sup_1) * y) + (x * (y ** sup_2)),
+        f'x{sup_num(sup_1)} + y{sup_num(sup_2)}' : (x ** sup_1 ) + (y ** sup_2),
+        f'x{sup_num(sup_2)}y + xy{sup_num(sup_1)}' : ((x ** sup_2) * y) + (x * (y ** sup_1)),
+        f'x{sup_num(sup_1)} + xy{sup_num(sup_2)} + y{sup_num(sup_1)}' : (x** sup_1) + (x * (y ** sup_2)) + (y ** sup_1),
+        f'x{sup_num(sup_1)}y + x{sup_num(sup_2)}y{sup_num(sup_1)}' : ((x ** sup_1) * y) + ((x ** sup_2) * (y ** sup_1))
     }
 
-    key_eq_x = [f'x{sup_num(sup_1)}y + xy{sup_num(sup_2)}']
-    key_eq_y = [f'x{sup_num(sup_1)} + y{sup_num(sup_2)}']
-    rand_eq_x = random.choice(key_eq_x)
-    rand_eq_y = random.choice(key_eq_y)
-
+    key_eq = [f'x{sup_num(sup_1)}y + xy{sup_num(sup_2)}',
+                f'x{sup_num(sup_1)} + y{sup_num(sup_2)}',
+                f'x{sup_num(sup_2)}y + xy{sup_num(sup_1)}',
+                f'x{sup_num(sup_1)} + xy{sup_num(sup_2)} + y{sup_num(sup_1)}',
+                f'x{sup_num(sup_1)}y + x{sup_num(sup_2)}y{sup_num(sup_1)}'
+                ]
+    rand_eq_x, rand_eq_y = random.sample(key_eq, 2)
 
     question = f"If x : y = {x} : {y}, then solve for {rand_eq_x} : {rand_eq_y}"
 
-    ans_x = eq_x[rand_eq_x]
-    ans_y = eq_y[rand_eq_y]
+    ans_x = eq[rand_eq_x]
+    ans_y = eq[rand_eq_y]
 
     gcd = math.gcd(ans_x, ans_y)
     answer = f"{ans_x // gcd} : {ans_y // gcd}"
     return question, answer
 
-q, a = ratio_13()
+q, a = ratio_14()
 print(q, a)
 
