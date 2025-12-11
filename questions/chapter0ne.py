@@ -14,8 +14,6 @@ def ratio_1():
     answer = b_s * x
     return question, answer
 
-q, a = ratio_1()
-print(q, a)
 
 
 
@@ -29,9 +27,6 @@ def ratio_2():
     question = f"The duplicate ratio orf {a_s} : {b_s} is ?"
     answer = f"{a_s ** 2} : {b_s **2}"
     return question, answer
-
-q, a = ratio_2()
-print(q, a)
 
 
 
@@ -47,9 +42,6 @@ def ratio_3():
     answer = F"{a_s} : {b_s}"
     return question, answer
 
-q, a = ratio_3()
-print(q, a)
-
 
 
 def ratio_4():
@@ -62,8 +54,6 @@ def ratio_4():
     answer = f"{a_s ** 3} : {b_s ** 3}"
     return question, answer
 
-q, a = ratio_4()
-print(q, a)
 
 
 def ratio_5():
@@ -77,8 +67,6 @@ def ratio_5():
     answer = f"{a_s} : {b_s}"
     return question, answer
 
-q, a = ratio_5()
-print(q, a)
 
 
 def ratio_6():
@@ -103,8 +91,6 @@ def ratio_6():
 
     return question, answer
 
-q, a = ratio_6()
-print(q, a)
 
 
 def ratio_7():
@@ -143,5 +129,94 @@ def ratio_7():
     answer = f"{f_a // gcd} : {f_b // gcd}"
     return question, answer
 
-q, a = ratio_7()
+
+
+def ratio_8():
+    a_s = random.randint(3, 10)
+    b_s = random.randint(3, 10)
+    gcd = math.gcd(a_s, b_s)
+    a_s_gcd = a_s//gcd
+    b_s_gcd = b_s//gcd
+
+
+    k = random.randint(4, 8)
+    a = a_s_gcd * k
+    b = b_s_gcd * k
+
+    x = random.randint(5, 10)
+    c = a - x
+    d = b - x
+    gcd = math.gcd(c, d)
+    c_s = c//gcd
+    d_s = d//gcd
+
+
+    question = f"Two numbers are in ratio {a_s_gcd} : {b_s_gcd}. If {x} be subtracted from each, they are in the ratio {c_s} : {d_s}. The numbers are ?"
+    answer = f"({a}, {b})"
+
+    return question, answer
+
+
+
+def ratio_9():
+    angle = 180
+    x = 0
+    while True:
+        divisor = random.randint(5, 20)
+        if angle % divisor == 0:
+            x = divisor
+            break
+        else:
+            continue
+
+    div_angle = 180 // x
+    while True:
+        a = random.randint(2, 50)
+        b = random.randint(2, 50)
+        c = random.randint(2, 50)
+
+        if a + b + c == div_angle:
+            break
+        else:
+            continue
+
+    question = f"The angles of a triangle are in ratio {a} : {b} : {c}. Find the angles"
+    answer = f"({a * x}, {b * x}, {c * x})"
+    return question, answer
+
+
+
+def ratio_10():
+    a = random.randint(2, 20)
+    b = random.randint(2, 20)
+
+    x = random.randint(20, 50)
+
+    total_amt = (a * x) + (b * x)
+
+    question = f"Division of {total_amt}$ between X and Y is in ratio {a} : {b}. X and Y would get ?"
+    answer = f"({a * x}, {b * x})"
+
+    return question, answer
+
+
+
+def ratio_11():
+    amt1 = random.randint(200, 500)
+    hr1 = random.randint(5, 20)
+    amt2 = random.randint(200, 500)
+    hr2 = random.randint(5, 20)
+
+    perhr_val1 = round(amt1 / hr1)
+    perhr_val2 = round(amt2 / hr2)
+
+    gcd = math.gcd(perhr_val1, perhr_val2)
+    perhr_val1_gcd = perhr_val1 // gcd
+    perhr_val2_gcd = perhr_val2 // gcd
+
+    question = f"Anand earns {amt1} in {hr1} hrs and Promode {amt2} in {hr2}hrs. The ratio of their earnings is ( round off if necessary)"
+    answer = f"{perhr_val1_gcd} : {perhr_val2_gcd}"
+    return question, answer
+
+q, a= ratio_11()
 print(q, a)
