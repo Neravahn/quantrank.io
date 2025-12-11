@@ -23,6 +23,7 @@ def ratio_1():
     answer = b_s * x
 
     options = []
+    options.append(answer)
     while len(options) < 4:
         option = random.randint(2, 20)
         if option not in options and option != answer:
@@ -30,9 +31,7 @@ def ratio_1():
         else :
             continue
 
-    random_pop = random.randint(0, 3)
-    options.pop(random_pop)
-    options.insert(random_pop, answer)
+    random.shuffle(options)
     return question, options, answer
 q, o, a = ratio_1()
 print(q, o, a)
@@ -60,6 +59,7 @@ def ratio_2():
     answer = f"{a_s ** 2} : {b_s **2}"
 
     options = []
+    options.append(answer)
     while len(options) < 4:
         num_val = []
         while len(num_val) < 2:
@@ -77,9 +77,7 @@ def ratio_2():
         else:
             continue
 
-    random_pop = random.randint(0, 3)
-    options.pop(random_pop)
-    options.insert(random_pop, answer)
+    random.shuffle(options)
     return question, options, answer
 q, o, a = ratio_2()
 print(q, o, a)
@@ -135,9 +133,19 @@ print(q, o, a)
 
 
 
+
+
 def ratio_4():
-    a = random.randint(2, 10)
-    b = random.randint(2, 10)
+    num_val =[]
+    while len(num_val) < 2:
+        z = random.randint(2, 10)
+        if z not in num_val:
+            num_val.append(z)
+        else:
+            continue
+
+    a = num_val[0]
+    b = num_val[1]
     gcd = math.gcd(a, b)
     a_s, b_s = a//gcd, b//gcd
     
@@ -146,8 +154,15 @@ def ratio_4():
 
     options = []
     while len(options) < 4:
-        option_x = random.randint(2, 10)
-        option_y = random.randint(2, 10)
+        num_val =[]
+        while len(num_val) < 2:
+            z = random.randint(2, 10)
+            if z not in num_val:
+                num_val.append(z)
+            else:
+                continue
+        option_x = num_val[0]
+        option_y = num_val[1]
         gcd = math.gcd(option_x, option_y)
         option = f"{(option_x // gcd) ** 3} : {(option_y //gcd) ** 3}"
         if option not in options and option != answer:
@@ -157,12 +172,24 @@ def ratio_4():
     options.pop(random_pop)
     options.insert(random_pop, answer)
     return question, options, answer
+q, o, a = ratio_4()
+print(q, o,a )
+
+
 
 
 
 def ratio_5():
-    a= random.randint(1, 9)
-    b = random.randint(1, 9)
+    num_val =[]
+    while len(num_val) < 2:
+        z = random.randint(2, 9)
+        if z not in num_val:
+            num_val.append(z)
+        else:
+            continue
+        
+    a= num_val[0]
+    b = num_val[1]
     gcd = math.gcd(a, b)
 
     a_s, b_s = a // gcd, b //gcd
@@ -172,8 +199,15 @@ def ratio_5():
 
     options = []
     while len(options) < 4:
-        option_x = random.randint(2, 9)
-        option_y = random.randint(2, 9)
+        num_val =[]
+        while len(num_val) < 2:
+            z = random.randint(2, 9)
+            if z not in num_val:
+                num_val.append(z)
+            else:
+                continue
+        option_x = num_val[0]
+        option_y = num_val[1]
         gcd = math.gcd(option_x, option_y)
         option = f"{option_x // gcd} : {option_y // gcd}"
         if option not in options and option != answer:
@@ -183,17 +217,28 @@ def ratio_5():
     options.pop(random_pop)
     options.insert(random_pop, answer)
     return question, options, answer
+q, o, a = ratio_5()
+print(q, o, a)
+
 
 
 def ratio_6():
-    a = random.randint(2, 10)
-    b = random.randint(2, 10)
+    num_val =[]
+    while len(num_val) < 4:
+        z = random.randint(2, 10)
+        if z not in num_val:
+            num_val.append(z)
+        else:
+            continue
+    
+    a = num_val[0]
+    b = num_val[1]
     gcd = math.gcd(a, b)
     a_s = a // gcd
     b_s = b//gcd
 
-    c = random.randint(2, 10)
-    d = random.randint(2, 10)
+    c = num_val[2]
+    d = num_val[3]
     gcd = math.gcd(c, d)
     c_s = c//gcd
     d_s = d//gcd
@@ -206,14 +251,21 @@ def ratio_6():
 
     options = []
     while len(options) < 4:
-        option_x = random.randint(2, 10)
-        option_y = random.randint(2, 10)
+        num_val =[]
+        while len(num_val) < 4:
+            z = random.randint(2, 10)
+            if z not in num_val:
+                num_val.append(z)
+            else:
+                continue
+        option_x = num_val[0]
+        option_y = num_val[1]
         gcd = math.gcd(option_x, option_y)
 
-        option_r = random.randint(2, 10)
-        option_s = random.randint(2, 10)
+        option_r = num_val[2]
+        option_s = num_val[3]
         gcd_2 = math.gcd(option_r, option_s)
-        option = f"{(option_x // gcd) * ((option_r // gcd_2) ** 2)} : {(option_y // gcd) * ((option_r // gcd_2) ** 2)}"
+        option = f"{(option_x // gcd) * ((option_r // gcd_2) ** 2)} : {(option_y // gcd) * ((option_s // gcd_2) ** 2)}"
         if option not in options and option != answer:
             options.append(option)
 
@@ -221,6 +273,9 @@ def ratio_6():
     options.pop(random_pop)
     options.insert(random_pop, answer)
     return question, options, answer
+q, o, a = ratio_6()
+print(q, o, a)
+
 
 
 def ratio_7():
