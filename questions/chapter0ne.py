@@ -25,7 +25,6 @@ def ratio_1():
     random_pop = random.randint(0, 3)
     options.pop(random_pop)
     options.insert(random_pop, answer)
-    
     return question, options, answer
 
 
@@ -46,7 +45,7 @@ def ratio_2():
         option_y = random.randint(2, 20)
 
         gcd = math.gcd(option_x, option_y)
-        option = f"{option_x // gcd} : {option_y // gcd}"
+        option = f"{(option_x // gcd) ** 2} : {(option_y // gcd) ** 2}"
         if option not in options and option != answer:
             options.append(option)
         else:
@@ -57,8 +56,7 @@ def ratio_2():
     options.insert(random_pop, answer)
     return question, options, answer
 
-q, o, a = ratio_2()
-print(q, o, a)
+
 
 
 def ratio_3():
@@ -70,7 +68,7 @@ def ratio_3():
     a_s_squared, b_s_squared = a_s ** 2, b_s ** 2
 
     question = f"The sub-duplicate ratio of {a_s_squared} : {b_s_squared} is ?"
-    answer = F"{a_s} : {b_s}"
+    answer = f"{a_s} : {b_s}"
 
     options = []
     while len(options) < 4:
@@ -88,57 +86,96 @@ def ratio_3():
     return question, options, answer
 
 
-q, o, a = ratio_3()
-print(q, o, a)
-
 
 
 def ratio_4():
-    a = random.randint(1, 10)
-    b = random.randint(1, 10)
+    a = random.randint(2, 10)
+    b = random.randint(2, 10)
     gcd = math.gcd(a, b)
     a_s, b_s = a//gcd, b//gcd
     
     question = f"The triplicate ratio of {a_s} : {b_s} is ?"
     answer = f"{a_s ** 3} : {b_s ** 3}"
-    return question, answer
+
+    options = []
+    while len(options) < 4:
+        option_x = random.randint(2, 10)
+        option_y = random.randint(2, 10)
+        gcd = math.gcd(option_x, option_y)
+        option = f"{(option_x // gcd) ** 3} : {(option_y //gcd) ** 3}"
+        if option not in options and option != answer:
+            options.append(option)
+
+    random_pop = random.randint(0, 3)
+    options.pop(random_pop)
+    options.insert(random_pop, answer)
+    return question, options, answer
 
 
 
 def ratio_5():
-    a= random.randint(1, 10)
-    b = random.randint(1, 10)
+    a= random.randint(1, 9)
+    b = random.randint(1, 9)
     gcd = math.gcd(a, b)
 
     a_s, b_s = a // gcd, b //gcd
 
     question = f"The sub-triplicate ratio of {a_s ** 3} : {b_s ** 3} is ?"
     answer = f"{a_s} : {b_s}"
-    return question, answer
 
+    options = []
+    while len(options) < 4:
+        option_x = random.randint(2, 9)
+        option_y = random.randint(2, 9)
+        gcd = math.gcd(option_x, option_y)
+        option = f"{option_x // gcd} : {option_y // gcd}"
+        if option not in options and option != answer:
+            options.append(option)
+
+    random_pop =random.randint(0, 3)
+    options.pop(random_pop)
+    options.insert(random_pop, answer)
+    return question, options, answer
 
 
 def ratio_6():
-    a = random.randint(1, 10)
-    b = random.randint(1, 10)
+    a = random.randint(2, 10)
+    b = random.randint(2, 10)
     gcd = math.gcd(a, b)
     a_s = a // gcd
     b_s = b//gcd
 
-    c = random.randint(1, 10)
-    d = random.randint(1, 10)
+    c = random.randint(2, 10)
+    d = random.randint(2, 10)
     gcd = math.gcd(c, d)
     c_s = c//gcd
     d_s = d//gcd
 
     question = f"The ratio compounded of {a_s} : {b_s} and the duplicate ratio of {c_s} : {d_s} is"
-
     f_a = (a_s) * (c_s ** 2)
     f_b = (b_s) * (d_s ** 2)
     f_g = math.gcd(f_a, f_b)
     answer = f"{f_a // f_g} : {f_b // f_g}"
 
-    return question, answer
+    options = []
+    while len(options) < 4:
+        option_x = random.randint(2, 10)
+        option_y = random.randint(2, 10)
+        gcd = math.gcd(option_x, option_y)
+
+        option_r = random.randint(2, 10)
+        option_s = random.randint(2, 10)
+        gcd_2 = math.gcd(option_r, option_s)
+        option = f"{(option_x // gcd) * ((option_r // gcd_2) ** 2)} : {(option_y // gcd) * ((option_r // gcd_2) ** 2)}"
+        if option not in options and option != answer:
+            options.append(option)
+
+    random_pop = random.randint(0, 3)
+    options.pop(random_pop)
+    options.insert(random_pop, answer)
+    return question, options, answer
+q, o, a = ratio_6()
+print(q, o, a)
 
 
 
