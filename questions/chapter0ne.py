@@ -1,5 +1,6 @@
 import random
 import math
+from sub_supScript import sub_num, sub_text, sup_num, sup_text
 
 def ratio_1():
     a = random.randint(2, 100)
@@ -218,5 +219,71 @@ def ratio_11():
     answer = f"{perhr_val1_gcd} : {perhr_val2_gcd}"
     return question, answer
 
-q, a= ratio_11()
+
+
+def ratio_12():
+    a = random.randint(3, 15)
+    b = random.randint(3, 15)
+
+    x = random.randint(20, 90)
+    
+    d = abs((a*x) - (b*x))
+
+    question = f"The ratio of two numbers is {a} : {b}, their diffrence is {d}. Find the numbers"
+    answer = f"{a*x}, {b*x}"
+    return question, answer
+
+
+
+def ratio_13():
+    a = random.randint(3, 20)
+    b = random.randint(3, 20)
+    c = random.randint(3, 20)
+    d = random.randint(3, 20)
+
+
+    question = f"P, Q and R are three cities. The ratio of average temprature between P and Q is {a} : {b} and that between P and R is {c} : {d}. The ratio between temprature of Q and R is ?"
+    gcd = math.gcd((a *d), (b * c))
+    z = (a * d) // gcd
+    y = (b * c) // gcd
+
+    answer = f"{y} : {z}"
+    return question , answer
+
+q, a = ratio_13()
 print(q, a)
+
+
+
+def ratio_13():
+    x = random.randint(2, 20)
+    y = random.randint(2, 20)
+
+    sup_1 = random.randint(2, 4)
+    sup_2 = random.randint(2, 4)
+
+    eq_x = {
+        f'x{sup_num(sup_1)}y + xy{sup_num(sup_2)}' : ((x ** sup_1) * y) + (x * (y ** sup_2))
+    }
+    eq_y = {
+        f'x{sup_num(sup_1)} + y{sup_num(sup_2)}' : (x ** sup_1) + (y ** sup_2)
+    }
+
+    key_eq_x = [f'x{sup_num(sup_1)}y + xy{sup_num(sup_2)}']
+    key_eq_y = [f'x{sup_num(sup_1)} + y{sup_num(sup_2)}']
+    rand_eq_x = random.choice(key_eq_x)
+    rand_eq_y = random.choice(key_eq_y)
+
+
+    question = f"If x : y = {x} : {y}, then solve for {rand_eq_x} : {rand_eq_y}"
+
+    ans_x = eq_x[rand_eq_x]
+    ans_y = eq_y[rand_eq_y]
+
+    gcd = math.gcd(ans_x, ans_y)
+    answer = f"{ans_x // gcd} : {ans_y // gcd}"
+    return question, answer
+
+q, a = ratio_13()
+print(q, a)
+
