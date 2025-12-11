@@ -28,22 +28,35 @@ def ratio_1():
     
     return question, options, answer
 
-q, o, a = ratio_1()
-print(q, o, a)
-
-
 
 
 def ratio_2():
-    a = random.randint(2, 100)
-    b = random.randint(2, 100)
+    a = random.randint(2, 20)
+    b = random.randint(2, 20)
     gcd = math.gcd(a, b)
 
     a_s, b_s = a//gcd, b//gcd
 
     question = f"The duplicate ratio orf {a_s} : {b_s} is ?"
     answer = f"{a_s ** 2} : {b_s **2}"
-    return question, answer
+
+    options = []
+    while len(options) < 4:
+        option_x = random.randint(2, 20)
+        option_y = random.randint(2, 20)
+        option = f"{option_x} : {option_y}"
+        if option not in options and option != answer:
+            options.append(f"{option}")
+        else:
+            continue
+
+    random_pop = random.randint(0, 3)
+    options.pop(random_pop)
+    options.insert(random_pop, answer)
+    return question, options, answer
+
+q, o, a = ratio_2()
+print(q, o, a)
 
 
 
