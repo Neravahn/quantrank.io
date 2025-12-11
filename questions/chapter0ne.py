@@ -44,9 +44,11 @@ def ratio_2():
     while len(options) < 4:
         option_x = random.randint(2, 20)
         option_y = random.randint(2, 20)
-        option = f"{option_x} : {option_y}"
+
+        gcd = math.gcd(option_x, option_y)
+        option = f"{option_x // gcd} : {option_y // gcd}"
         if option not in options and option != answer:
-            options.append(f"{option}")
+            options.append(option)
         else:
             continue
 
@@ -59,10 +61,9 @@ q, o, a = ratio_2()
 print(q, o, a)
 
 
-
 def ratio_3():
-    a = random.randint(2, 100)
-    b = random.randint(2, 100)
+    a = random.randint(2, 9)
+    b = random.randint(2, 9)
     gcd = math.gcd(a, b)
     a_s, b_s = a // gcd, b // gcd
 
@@ -70,7 +71,25 @@ def ratio_3():
 
     question = f"The sub-duplicate ratio of {a_s_squared} : {b_s_squared} is ?"
     answer = F"{a_s} : {b_s}"
-    return question, answer
+
+    options = []
+    while len(options) < 4:
+        option_x = random.randint(2, 9)
+        option_y = random.randint(2, 9)
+        gcd = math.gcd(option_x, option_y)
+        option = f'{option_x // gcd} : {option_y // gcd}'
+        if option not in options and option != answer:
+            options.append(option)
+
+
+    random_pop = random.randint(0, 3)
+    options.pop(random_pop)
+    options.insert(random_pop, answer)
+    return question, options, answer
+
+
+q, o, a = ratio_3()
+print(q, o, a)
 
 
 
