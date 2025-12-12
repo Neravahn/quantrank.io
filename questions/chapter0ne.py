@@ -3,16 +3,16 @@ import math
 from sub_supScript import sub_num, sub_text, sup_num, sup_text
 
 def ratio_1():
-    num_val = []
-    while len(num_val) < 2:
+    ear = []
+    while len(ear) < 2:
         z = random.randint(2, 20)
-        if z not in num_val:
-            num_val.append(z)
+        if z not in ear:
+            ear.append(z)
         else:
             continue
 
-    a = num_val[0]
-    b = num_val[1]
+    a = ear[0]
+    b = ear[1]
     gcd = math.gcd(a, b)
     a_s, b_s = a // gcd, b // gcd
 
@@ -41,16 +41,16 @@ print(q, o, a)
 
 
 def ratio_2():
-    num_val = []
-    while len(num_val) < 2:
+    ear = []
+    while len(ear) < 2:
         z = random.randint(2, 20)
-        if z not in num_val:
-            num_val.append(z)
+        if z not in ear:
+            ear.append(z)
         else:
             continue
 
-    a = num_val[0]
-    b = num_val[1]
+    a = ear[0]
+    b = ear[1]
     gcd = math.gcd(a, b)
 
     a_s, b_s = a//gcd, b//gcd
@@ -61,15 +61,15 @@ def ratio_2():
     options = []
     options.append(answer)
     while len(options) < 4:
-        num_val = []
-        while len(num_val) < 2:
+        ear = []
+        while len(ear) < 2:
             z = random.randint(2, 20)
-            if z not in num_val:
-                num_val.append(z)
+            if z not in ear:
+                ear.append(z)
             else:
                 continue
-        option_x = num_val[0]
-        option_y = num_val[1]
+        option_x = ear[0]
+        option_y = ear[1]
         gcd = math.gcd(option_x, option_y)
         option = f"{(option_x // gcd) ** 2} : {(option_y // gcd) ** 2}"
         if option not in options and option != answer:
@@ -89,16 +89,16 @@ print(q, o, a)
 
 
 def ratio_3():
-    num_val = []
-    while len(num_val) < 2:
+    ear = []
+    while len(ear) < 2:
         z = random.randint(2, 9)
-        if z not in num_val:
-            num_val.append(z)
+        if z not in ear:
+            ear.append(z)
         else:
             continue
 
-    a = num_val[0]
-    b =num_val[1]
+    a = ear[0]
+    b =ear[1]
     gcd = math.gcd(a, b)
     a_s, b_s = a // gcd, b // gcd
 
@@ -110,15 +110,15 @@ def ratio_3():
     options = []
     options.append(answer)
     while len(options) < 4:
-        num_val = []
-        while len(num_val) < 2:
+        ear = []
+        while len(ear) < 2:
             z = random.randint(2, 9)
-            if z not in num_val:
-                num_val.append(z)
+            if z not in ear:
+                ear.append(z)
             else:
                 continue
-        option_x = num_val[0]
-        option_y = num_val[1]
+        option_x = ear[0]
+        option_y = ear[1]
         gcd = math.gcd(option_x, option_y)
         option = f'{option_x // gcd} : {option_y // gcd}'
         if option not in options and option != answer:
@@ -135,16 +135,16 @@ print(q, o, a)
 
 
 def ratio_4():
-    num_val =[]
-    while len(num_val) < 2:
+    ear =[]
+    while len(ear) < 2:
         z = random.randint(2, 10)
-        if z not in num_val:
-            num_val.append(z)
+        if z not in ear:
+            ear.append(z)
         else:
             continue
 
-    a = num_val[0]
-    b = num_val[1]
+    a = ear[0]
+    b = ear[1]
     gcd = math.gcd(a, b)
     a_s, b_s = a//gcd, b//gcd
     
@@ -154,15 +154,15 @@ def ratio_4():
     options = []
     options.append(answer)
     while len(options) < 4:
-        num_val =[]
-        while len(num_val) < 2:
+        ear =[]
+        while len(ear) < 2:
             z = random.randint(2, 10)
-            if z not in num_val:
-                num_val.append(z)
+            if z not in ear:
+                ear.append(z)
             else:
                 continue
-        option_x = num_val[0]
-        option_y = num_val[1]
+        option_x = ear[0]
+        option_y = ear[1]
         gcd = math.gcd(option_x, option_y)
         option = f"{(option_x // gcd) ** 3} : {(option_y //gcd) ** 3}"
         if option not in options and option != answer:
@@ -178,16 +178,16 @@ print(q, o,a )
 
 
 def ratio_5():
-    num_val =[]
-    while len(num_val) < 2:
+    ear =[]
+    while len(ear) < 2:
         z = random.randint(2, 9)
-        if z not in num_val:
-            num_val.append(z)
+        if z not in ear:
+            ear.append(z)
         else:
             continue
         
-    a= num_val[0]
-    b = num_val[1]
+    a= ear[0]
+    b = ear[1]
     gcd = math.gcd(a, b)
 
     a_s, b_s = a // gcd, b //gcd
@@ -198,15 +198,15 @@ def ratio_5():
     options = []
     options.append(answer)
     while len(options) < 4:
-        num_val =[]
-        while len(num_val) < 2:
+        ear =[]
+        while len(ear) < 2:
             z = random.randint(2, 9)
-            if z not in num_val:
-                num_val.append(z)
+            if z not in ear:
+                ear.append(z)
             else:
                 continue
-        option_x = num_val[0]
-        option_y = num_val[1]
+        option_x = ear[0]
+        option_y = ear[1]
         gcd = math.gcd(option_x, option_y)
         option = f"{option_x // gcd} : {option_y // gcd}"
         if option not in options and option != answer:
@@ -220,22 +220,22 @@ print(q, o, a)
 
 
 def ratio_6():
-    num_val =[]
-    while len(num_val) < 4:
+    ear =[]
+    while len(ear) < 4:
         z = random.randint(2, 10)
-        if z not in num_val:
-            num_val.append(z)
+        if z not in ear:
+            ear.append(z)
         else:
             continue
     
-    a = num_val[0]
-    b = num_val[1]
+    a = ear[0]
+    b = ear[1]
     gcd = math.gcd(a, b)
     a_s = a // gcd
     b_s = b//gcd
 
-    c = num_val[2]
-    d = num_val[3]
+    c = ear[2]
+    d = ear[3]
     gcd = math.gcd(c, d)
     c_s = c//gcd
     d_s = d//gcd
@@ -249,19 +249,19 @@ def ratio_6():
     options = []
     options.append(answer)
     while len(options) < 4:
-        num_val =[]
-        while len(num_val) < 4:
+        ear =[]
+        while len(ear) < 4:
             z = random.randint(2, 10)
-            if z not in num_val:
-                num_val.append(z)
+            if z not in ear:
+                ear.append(z)
             else:
                 continue
-        option_x = num_val[0]
-        option_y = num_val[1]
+        option_x = ear[0]
+        option_y = ear[1]
         gcd = math.gcd(option_x, option_y)
 
-        option_r = num_val[2]
-        option_s = num_val[3]
+        option_r = ear[2]
+        option_s = ear[3]
         gcd_2 = math.gcd(option_r, option_s)
         option = f"{(option_x // gcd) * ((option_r // gcd_2) ** 2)} : {(option_y // gcd) * ((option_s // gcd_2) ** 2)}"
         if option not in options and option != answer:
@@ -275,36 +275,36 @@ print(q, o, a)
 
 
 def ratio_7():
-    num_val = []
-    while len(num_val) < 8:
+    ear = []
+    while len(ear) < 8:
         z = random.randint(2, 10)
-        if z not in num_val:
-            num_val.append(z)
+        if z not in ear:
+            ear.append(z)
         else:
             continue
 
-    a = num_val[0]
-    b = num_val[1]
+    a = ear[0]
+    b = ear[1]
     gcd= math.gcd(a, b)
     a_s = a // gcd
     b_s = b// gcd
 
 
-    c = num_val[2]
-    d = num_val[3]
+    c = ear[2]
+    d = ear[3]
     gcd = math.gcd(c, d)
     c_s = c// gcd
     d_s = d//gcd
 
 
-    e = num_val[4]
-    f = num_val[5]
+    e = ear[4]
+    f = ear[5]
     gcd = math.gcd(e, f)
     e_s = e // gcd
     f_s = f // gcd
 
-    g = num_val[6]
-    h = num_val[7]
+    g = ear[6]
+    h = ear[7]
     gcd = math.gcd(g, h)
     g_s = g//gcd
     h_s = h// gcd
@@ -344,16 +344,16 @@ print(q, o, a)
 
 
 def ratio_8():
-    num_val = []
-    while len(num_val) < 2:
+    ear = []
+    while len(ear) < 2:
         z = random.randint(3, 10)
-        if z not in num_val:
-            num_val.append(z)
+        if z not in ear:
+            ear.append(z)
         else:
             continue
 
-    a_s = num_val[0]
-    b_s = num_val[1]
+    a_s = ear[0]
+    b_s = ear[1]
     gcd = math.gcd(a_s, b_s)
     a_s_gcd = a_s//gcd
     b_s_gcd = b_s//gcd
@@ -414,22 +414,22 @@ def ratio_9():
 
     div_angle = 180 // x
     while True:
-        num_val = []
-        while len(num_val) < 3:
+        ear = []
+        while len(ear) < 3:
             z = random.randint(2, 50)
-            if z not in num_val:
-                num_val.append(z)
+            if z not in ear:
+                ear.append(z)
             else:
                 continue
 
-        if sum(num_val) == div_angle:
+        if sum(ear) == div_angle:
             break
         else:
             continue
 
-    a =num_val[0]
-    b = num_val[1]
-    c = num_val[2]
+    a =ear[0]
+    b = ear[1]
+    c = ear[2]
 
     question = f"The angles of a triangle are in ratio {a} : {b} : {c}. Find the angles"
     answer = f"({a * x}, {b * x}, {c * x})"
@@ -470,16 +470,16 @@ print(q, o, a)
 
 
 def ratio_10():
-    num_val = []
-    while len(num_val) < 2:
+    ear = []
+    while len(ear) < 2:
         z = random.randint(2, 20)
-        if z not in num_val:
-            num_val.append(z)
+        if z not in ear:
+            ear.append(z)
         else:
             continue
     
-    a = num_val[0]
-    b = num_val[1]
+    a = ear[0]
+    b = ear[1]
     gcd = math.gcd(a, b)
 
     x = random.randint(20, 50)
@@ -492,16 +492,16 @@ def ratio_10():
     options = []
     options.append(answer)
     while len(options)< 4:
-        num_val = []
-        while len(num_val) < 2:
+        ear = []
+        while len(ear) < 2:
             z = random.randint(40, 1000) #<--- THIS WAL LOWEST TO LOWER MUL AND HIGHEST TO HIGHEST
-            if z not in num_val:
-                num_val.append(z)
+            if z not in ear:
+                ear.append(z)
             else:
                 continue
         
-        option_x = num_val[0]
-        option_y = num_val[1]
+        option_x = ear[0]
+        option_y = ear[1]
 
         option = f"({option_x}, {option_y})"
         if option not in options and option != answer:
@@ -537,16 +537,16 @@ def ratio_11():
 
 
 def ratio_12():
-    num_val = []
-    while len(num_val) < 2:
+    ear = []
+    while len(ear) < 2:
         z = random.randint(3, 15)
-        if z not in num_val:
-            num_val.append(z)
+        if z not in ear:
+            ear.append(z)
         else:
             continue
 
-    a = num_val[0]
-    b = num_val[1]
+    a = ear[0]
+    b = ear[1]
     gcd = math.gcd(a, b)
 
     x = random.randint(20, 90)
@@ -559,15 +559,15 @@ def ratio_12():
     options = []
     options.append(answer)
     while len(options) < 4:
-        num_val = []
-        while len(num_val) < 2:
+        ear = []
+        while len(ear) < 2:
             z = random.randint(60, 1350)
-            if z not in num_val:
-                num_val.append(z)
+            if z not in ear:
+                ear.append(z)
             else:
                 continue
         
-        option = f"({num_val[0], num_val[1]})"
+        option = f"({ear[0], ear[1]})"
         if option not in options and option != answer:
             options.append(option)
         else:
@@ -581,17 +581,17 @@ print(q, o, a)
 
 
 def ratio_13():
-    num_val = []
-    while len(num_val) < 4:
+    ear = []
+    while len(ear) < 4:
         z = random.randint(3, 20)
-        if z not in num_val:
-            num_val.append(z)
+        if z not in ear:
+            ear.append(z)
         else:
             continue
-    a = num_val[0]
-    b = num_val[1]
-    c = num_val[2]
-    d = num_val[3]
+    a = ear[0]
+    b = ear[1]
+    c = ear[2]
+    d = ear[3]
 
 
     question = f"P, Q and R are three cities. The ratio of average temprature between P and Q is {a} : {b} and that between P and R is {c} : {d}. The ratio between temprature of Q and R is ?"
@@ -604,16 +604,16 @@ def ratio_13():
     options = []
     options.append(answer)
     while len(options) < 4:
-        num_val = []
-        while len(num_val) < 2:
+        ear = []
+        while len(ear) < 2:
             z = random.randint(60, 400)
-            if z not in num_val:
-                num_val.append(z)
+            if z not in ear:
+                ear.append(z)
             else:
                 continue
 
-        option_x = num_val[0]
-        option_y = num_val[1]
+        option_x = ear[0]
+        option_y = ear[1]
         gcd = math.gcd(option_x, option_y)
 
         option = f"{option_x // gcd} : {option_y // gcd}"
@@ -633,16 +633,16 @@ print(q, o, a)
 
 
 def ratio_14():
-    num_val = []
-    while len(num_val) < 2:
+    ear = []
+    while len(ear) < 2:
         z = random.randint(2, 20)
-        if z not in num_val:
-            num_val.append(z)
+        if z not in ear:
+            ear.append(z)
         else:
             continue
     
-    x = num_val[0]
-    y = num_val[1]
+    x = ear[0]
+    y = ear[1]
     gcd = math.gcd(x, y)
     x = x // gcd
     y = y // gcd
@@ -678,16 +678,16 @@ def ratio_14():
     options = []
     options.append(answer)
     while len(options) < 4:
-        num_val = []
-        while len(num_val) < 2:
+        ear = []
+        while len(ear) < 2:
             z = random.randint(300, 2000)
-            if z not in num_val:
-                num_val.append(z)
+            if z not in ear:
+                ear.append(z)
             else:
                 continue
         
-        option_x = num_val[0]
-        option_y = num_val[1]
+        option_x = ear[0]
+        option_y = ear[1]
         gcd = math.gcd(option_x, option_y)
 
         option = f"{option_x // gcd} : {option_y // gcd}"
@@ -705,20 +705,20 @@ print(q, o, a)
 
 
 def ratio_15():
-    num_val = []
-    while len(num_val) < 4:
+    ear = []
+    while len(ear) < 4:
         z = random.randint(2, 15)
-        if z not in num_val:
-            num_val.append(z)
+        if z not in ear:
+            ear.append(z)
         else:
             continue
         
-    p = num_val[0]
-    q = num_val[1]
+    p = ear[0]
+    q = ear[1]
     gcd_1 = math.gcd(p, q)
 
-    x = num_val[2]
-    y = num_val[3]
+    x = ear[2]
+    y = ear[3]
     gcd_2 = math.gcd(x, y)
 
     mul_1 = random.randint(2, 10)
@@ -758,20 +758,28 @@ print(q, a)
 
 
 def ratio_16():
-    num_val = []
-    while len(num_val) < 4:
-        z = random.randint(2, 15)
-        if z not in num_val:
-            num_val.append(z)
+    def gen_val():
+        num_val_list = []
+        while len(num_val_list) < 4:
+            z = random.randint(2, 15)
+            if z not in num_val_list:
+                num_val_list.append(z)
+            else:
+                continue
+        return num_val_list
+    print(gen_val())
+    while True:
+        num_val = gen_val()
+        if num_val[0] * num_val[3] >  num_val[1] * num_val[2] and num_val[3] > num_val[2]:
+            break
         else:
             continue
-
-    ear_1 = num_val[0]
+    ear_1 = num_val[0] #<----- HERE THIS SHOULD BE GREATER
     ear_2 = num_val[1]
     gcd_1 = math.gcd(ear_1, ear_2)
 
     spend_1 = num_val[2]
-    spend_2 = num_val[3]
+    spend_2 = num_val[3] #<----- THIS SHOUL BE GREATER
     gcd_2 = math.gcd(spend_1, spend_2)
 
     save = random.randint(50, 100)
