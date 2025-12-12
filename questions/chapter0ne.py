@@ -631,6 +631,7 @@ print(q, o, a)
 
 
 
+
 def ratio_14():
     num_val = []
     while len(num_val) < 2:
@@ -699,3 +700,35 @@ def ratio_14():
     return question, options, answer
 q, o, a = ratio_14()
 print(q, o, a)
+
+
+
+
+def ratio_15():
+    num_val = []
+    while len(num_val) < 4:
+        z = random.randint()
+        if z not in num_val:
+            num_val.append(z)
+        else:
+            continue
+        
+    p = num_val[0]
+    q = num_val[1]
+    gcd_1 = math.gcd(p, q)
+
+    x = num_val[2]
+    y = num_val[3]
+    gcd_2 = math.gcd(x, y)
+
+    sup_1 = random.randint(2, 4)
+    sup_2 = random.randint(2, 4)
+
+    eq = {
+        
+    }
+
+    
+
+
+    question = f"If p : q = {p // gcd_1} : {q // gcd_1} and x : y = {x // gcd_2} : {y // gcd_2}, then the value of {eq_1} : {eq_2}"
