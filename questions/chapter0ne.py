@@ -757,3 +757,29 @@ print(q, a)
 
 
 
+def ratio_16():
+    num_val = []
+    while len(num_val) < 4:
+        z = random.randint(2, 15)
+        if z not in num_val:
+            num_val.append(z)
+        else:
+            continue
+
+    ear_1 = num_val[0]
+    ear_2 = num_val[1]
+    gcd_1 = math.gcd(ear_1, ear_2)
+
+    spend_1 = num_val[2]
+    spend_2 = num_val[3]
+    gcd_2 = math.gcd(spend_1, spend_2)
+
+    save = random.randint(50, 100)
+
+    question = f"Daily earning of two persons are in the ratio {ear_1 // gcd_1} : {ear_2 // gcd_1} and their daily expenses are in the ratio {spend_1 // gcd_2} : {spend_2 // gcd_2} if each save {save} per day, their daily earnings are"
+    x = (((spend_2 // gcd_2) * save) - ((spend_1 // gcd_2) * save)) // (((spend_2 // gcd_2) *( ear_1 // gcd_1)) - ((spend_1 // gcd_2) * (ear_2 // gcd_1)))
+
+    answer = f"{ear_1 * x}, {ear_2 * x}"
+    return question, answer
+q, a = ratio_16()
+print(q, a)
