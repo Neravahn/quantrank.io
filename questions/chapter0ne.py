@@ -809,12 +809,31 @@ def ratio_16():
             break
         
     question = f"Daily earning of two persons are in the ratio {ear_1 // gcd_1} : {ear_2 // gcd_1} and their daily expenses are in the ratio {spend_1 // gcd_2} : {spend_2 // gcd_2} if each save {save} per day, their daily earnings are? (round off if required)"
-    answer = f"{amt_1}, {amt_2}"
+    answer = f"({amt_1}, {amt_2})"
 
+    options = []
+    options.append(answer)
+    while len(options) < 4:
+        num_val = []
+        while len(num_val) < 2:
+            z = random.randint(300, 1000)
+            if z not in num_val:
+                num_val.append(z)
+            else:continue
+        
+        x = num_val[0]
+        y = num_val[1]
+        option = f"({x}, {y})"
+        if option not in options and option != answer:
+            options.append(option)
+        else: 
+            continue
 
-    return question, answer
-q, a = ratio_16()
-print(q, a)
+    random.shuffle(options)
+    return question, options, answer
+q, o, a = ratio_16()
+print(q, o, a)
+
 
 
 
@@ -841,6 +860,17 @@ def ratio_17():
     speed_2 = dist // hrs
     const = speed_2 // y
     answer = const * x
-    return question, answer
-q, a = ratio_17()
-print(q, a)
+
+    options = []
+    options.append(answer)
+    while len(options) < 4:
+        z = random.randint(20, 300)
+        if x not in options and z != answer:
+            options.append(z)
+        else:
+            continue
+    
+    random.shuffle(options)
+    return question, options, answer
+q, o, a = ratio_17()
+print(q, o, a)
