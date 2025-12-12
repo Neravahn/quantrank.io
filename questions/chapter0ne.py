@@ -344,8 +344,16 @@ print(q, o, a)
 
 
 def ratio_8():
-    a_s = random.randint(3, 10)
-    b_s = random.randint(3, 10)
+    num_val = []
+    while len(num_val) < 2:
+        z = random.randint(3, 10)
+        if z not in num_val:
+            num_val.append(z)
+        else:
+            continue
+
+    a_s = num_val[0]
+    b_s = num_val[1]
     gcd = math.gcd(a_s, b_s)
     a_s_gcd = a_s//gcd
     b_s_gcd = b_s//gcd
@@ -366,7 +374,30 @@ def ratio_8():
     question = f"Two numbers are in ratio {a_s_gcd} : {b_s_gcd}. If {x} be subtracted from each, they are in the ratio {c_s} : {d_s}. The numbers are ?"
     answer = f"({a}, {b})"
 
-    return question, answer
+    options = []
+    options.append(answer)
+    while len(options) < 4:
+        list = []
+        while len(list) < 2:
+            p = random.randint(3, 10)
+            if p not in list:
+                list.append(p)
+            else:
+                continue
+
+        const = random.randint(4, 8)
+        option_x = list[0] * const
+        option_y = list[1] * const
+        option = f"({option_x}, {option_y})"
+        if option not in options:
+            options.append(option)
+
+    random.shuffle(options)
+    return question, options, answer
+q, o, a = ratio_8()
+print(q, o, a)
+
+
 
 
 
@@ -383,18 +414,56 @@ def ratio_9():
 
     div_angle = 180 // x
     while True:
-        a = random.randint(2, 50)
-        b = random.randint(2, 50)
-        c = random.randint(2, 50)
+        num_val = []
+        while len(num_val) < 3:
+            z = random.randint(2, 50)
+            if z not in num_val:
+                num_val.append(z)
+            else:
+                continue
 
-        if a + b + c == div_angle:
+        if sum(num_val) == div_angle:
             break
         else:
             continue
 
+    a =num_val[0]
+    b = num_val[1]
+    c = num_val[2]
+
     question = f"The angles of a triangle are in ratio {a} : {b} : {c}. Find the angles"
     answer = f"({a * x}, {b * x}, {c * x})"
-    return question, answer
+
+    options = []
+    options.append(answer)
+    while len(options) < 4:
+        list = []
+        while len(list) < 3:
+            p = random.randint(40, 100)
+            if p not in list:
+                list.append(p)
+            else:
+                continue
+
+            if len(list) == 3 and sum(list) == 180:
+                break
+            else:
+                continue
+
+        num_1 = list[0]
+        num_2 = list[1]
+        num_3 = list[2]
+
+        option = f"({num_1}, {num_2}, {num_3})"
+        if option not in options:
+            options.append(option)
+        else:
+            continue
+    
+    random.shuffle(options)
+    return question, options, answer
+q, o, a = ratio_9()
+print(q, o, a)
 
 
 
