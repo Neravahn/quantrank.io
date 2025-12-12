@@ -1149,5 +1149,54 @@ def proportion_7():
 
     random.shuffle(options)
     return question, options, answer
-q, o, a = proportion_7()
+
+
+
+
+
+def proportion_8():
+    num_val = []
+    while len(num_val) < 2:
+        z = random.randint(2, 15)
+        if z not in num_val:
+            num_val.append(z)
+        else:
+            continue
+
+    x = z = a = num_val[0]
+    y = w = b = num_val[1]
+
+    rand_mul = random.randint(2, 9)
+
+    eq_dict = {
+        f'(x + z) / (y + w) * {rand_mul}' : (x + z) / (y + w) * rand_mul,
+        f'(y + z) / (x + w) * {rand_mul}' : (y + z) / (x + w) * rand_mul,
+        f'(x + w) / (y + z) * {rand_mul}' : (x + w) / (y + z) * rand_mul,
+        f'(y + w) / (x + z) * {rand_mul}' : (y + w) / (x + z) * rand_mul
+    }
+
+    eq = [
+        f'(x + z) / (y + w) * {rand_mul}',
+        f'(y + z) / (x + w) * {rand_mul}',
+        f'(x + w) / (y + z) * {rand_mul}',
+        f'(y + w) / (x + z) * {rand_mul}'
+    ]
+    
+    rand_eq = random.choice(eq)
+    question = f"If x : y = z : w = {a} : {b} then the value of {rand_eq} is"
+    answer = int(eq_dict[rand_eq])
+
+
+    options = []
+    options.append(answer)
+    while len(options) < 4:
+        option = random.randint(2, 9)
+        if option not in options and option != answer:
+            options.append(option)
+        else:
+            continue
+    
+    random.shuffle(options)
+    return question, options, answer
+q, o, a = proportion_8()
 print(q, o, a)
