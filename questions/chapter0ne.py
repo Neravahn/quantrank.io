@@ -33,8 +33,6 @@ def ratio_1():
 
     random.shuffle(options)
     return question, options, answer
-q, o, a = ratio_1()
-print(q, o, a)
 
 
 
@@ -79,8 +77,7 @@ def ratio_2():
 
     random.shuffle(options)
     return question, options, answer
-q, o, a = ratio_2()
-print(q, o, a)
+
 
 
 
@@ -127,8 +124,7 @@ def ratio_3():
 
     random.shuffle(options)
     return question, options, answer
-q, o, a = ratio_3()
-print(q, o, a)
+
 
 
 
@@ -170,8 +166,7 @@ def ratio_4():
 
     random.shuffle(options)
     return question, options, answer
-q, o, a = ratio_4()
-print(q, o,a )
+
 
 
 
@@ -214,8 +209,9 @@ def ratio_5():
 
     random.shuffle(options)
     return question, options, answer
-q, o, a = ratio_5()
-print(q, o, a)
+
+
+
 
 
 
@@ -269,8 +265,9 @@ def ratio_6():
 
     random.shuffle(options)
     return question, options, answer
-q, o, a = ratio_6()
-print(q, o, a)
+
+
+
 
 
 
@@ -336,8 +333,7 @@ def ratio_7():
     
     random.shuffle(options)
     return question, options, answer
-q, o, a = ratio_7()
-print(q, o, a)
+
 
 
 
@@ -394,8 +390,7 @@ def ratio_8():
 
     random.shuffle(options)
     return question, options, answer
-q, o, a = ratio_8()
-print(q, o, a)
+
 
 
 
@@ -462,8 +457,7 @@ def ratio_9():
     
     random.shuffle(options)
     return question, options, answer
-q, o, a = ratio_9()
-print(q, o, a)
+
 
 
 
@@ -511,8 +505,8 @@ def ratio_10():
 
     random.shuffle(options)
     return question, options, answer
-q, o, a = ratio_10()
-print(q, o, a)
+
+
 
 
 
@@ -533,6 +527,8 @@ def ratio_11():
     question = f"Anand earns {amt1} in {hr1} hrs and Promode {amt2} in {hr2}hrs. The ratio of their earnings is ( round off if necessary)"
     answer = f"{perhr_val1_gcd} : {perhr_val2_gcd}"
     return question, answer
+
+
 
 
 
@@ -575,8 +571,9 @@ def ratio_12():
     
     random.shuffle(options)
     return question, options, answer
-q, o, a = ratio_12()
-print(q, o, a)
+
+
+
 
 
 
@@ -624,8 +621,7 @@ def ratio_13():
 
     random.shuffle(options)
     return question , options, answer
-q, o, a = ratio_13()
-print(q, o, a)
+
 
 
 
@@ -698,8 +694,8 @@ def ratio_14():
 
     random.shuffle(options) 
     return question, options, answer
-q, o, a = ratio_14()
-print(q, o, a)
+
+
 
 
 
@@ -713,13 +709,17 @@ def ratio_15():
         else:
             continue
         
-    p = ear[0]
-    q = ear[1]
-    gcd_1 = math.gcd(p, q)
+    p_s = ear[0]
+    q_s = ear[1]
+    gcd_1 = math.gcd(p_s, q_s)
+    p = p_s // gcd_1
+    q = q_s // gcd_1
 
-    x = ear[2]
-    y = ear[3]
-    gcd_2 = math.gcd(x, y)
+    x_s = ear[2]
+    y_s = ear[3]
+    gcd_2 = math.gcd(x_s, y_s)
+    x = x_s // gcd_2
+    y = y_s // gcd_2
 
     mul_1 = random.randint(2, 10)
     mul_2 = random.randint(2, 10)
@@ -744,50 +744,103 @@ def ratio_15():
 
     rand_eq_x, rand_eq_y = random.sample(eq_key, 2)
 
-    question = f"If p : q = {p // gcd_1} : {q // gcd_1} and x : y = {x // gcd_2} : {y // gcd_2}, then the value of {rand_eq_x} : {rand_eq_y}"
+    question = f"If p : q = {p} : {q} and x : y = {x } : {y}, then the value of {rand_eq_x} : {rand_eq_y}"
     sol_x = eq[rand_eq_x]
     sol_y = eq[rand_eq_y]
     gcd = math.gcd(sol_x, sol_y)
 
     answer = f"{sol_x // gcd} : {sol_y // gcd}"
-    return question, answer
-q, a = ratio_15()
-print(q, a)
+
+    options = []
+    options.append(answer)
+    while len(options) < 4:
+        num_val = []
+        while len(num_val) < 2:
+            z = random.randint(50, 300)
+            if z not in num_val:
+                num_val.append(z)
+            else:
+                continue
+        
+        option_x = num_val[0]
+        option_y = num_val[1]
+        gcd = math.gcd(option_x, option_y)
+
+        option = f"{option_x // gcd} : {option_y // gcd}"
+        if option not in options and option != answer:
+            options.append(option)
+        else:
+            continue
+    
+    random.shuffle(options)
+    return question, options, answer
+
+
 
 
 
 
 def ratio_16():
-    def gen_val():
-        num_val_list = []
-        while len(num_val_list) < 4:
-            z = random.randint(2, 15)
-            if z not in num_val_list:
-                num_val_list.append(z)
-            else:
-                continue
-        return num_val_list
-    print(gen_val())
-    while True:
-        num_val = gen_val()
-        if num_val[0] * num_val[3] >  num_val[1] * num_val[2] and num_val[3] > num_val[2]:
-            break
+    amt_ratio = []
+    while len(amt_ratio) < 2:
+        z = random.randint(2, 15)
+        if z not in amt_ratio:
+            amt_ratio.append(z)
         else:
             continue
-    ear_1 = num_val[0] #<----- HERE THIS SHOULD BE GREATER
-    ear_2 = num_val[1]
+    
+    amt_const = random.randint(40, 100)
+    ear_1 = amt_ratio[0]
+    ear_2 = amt_ratio[1]
     gcd_1 = math.gcd(ear_1, ear_2)
 
-    spend_1 = num_val[2]
-    spend_2 = num_val[3] #<----- THIS SHOUL BE GREATER
-    gcd_2 = math.gcd(spend_1, spend_2)
+    amt_1 = ear_1 * amt_const
+    amt_2 = ear_2 * amt_const
 
-    save = random.randint(50, 100)
+    
+    while True:
+        save = random.randint(50, 100)
+        spend_1 = amt_1 - save
+        spend_2 = amt_2 - save
+        gcd_2 = math.gcd(spend_1, spend_2)
+        if gcd_2 is None:
+            continue
+        else:
+            break
+        
+    question = f"Daily earning of two persons are in the ratio {ear_1 // gcd_1} : {ear_2 // gcd_1} and their daily expenses are in the ratio {spend_1 // gcd_2} : {spend_2 // gcd_2} if each save {save} per day, their daily earnings are? (round off if required)"
+    answer = f"{amt_1}, {amt_2}"
 
-    question = f"Daily earning of two persons are in the ratio {ear_1 // gcd_1} : {ear_2 // gcd_1} and their daily expenses are in the ratio {spend_1 // gcd_2} : {spend_2 // gcd_2} if each save {save} per day, their daily earnings are"
-    x = (((spend_2 // gcd_2) * save) - ((spend_1 // gcd_2) * save)) // (((spend_2 // gcd_2) *( ear_1 // gcd_1)) - ((spend_1 // gcd_2) * (ear_2 // gcd_1)))
 
-    answer = f"{ear_1 * x}, {ear_2 * x}"
     return question, answer
 q, a = ratio_16()
+print(q, a)
+
+
+
+
+
+def ratio_17():
+    num_val = []
+    while len(num_val) < 2:
+        z = random.randint(2, 15)
+        if z not in num_val:
+            num_val.append(z)
+        else:
+            continue
+
+    x_s = num_val[0]
+    y_s = num_val[1]
+    gcd = math.gcd(x_s, y_s)
+    x = x_s // gcd
+    y = y_s // gcd
+
+    dist = random.randint(300, 800)
+    hrs =  random.randint(3, 9)
+    question = f"The ratio between the speeds of two trains is {x} : {y}. If the second train runs {dist} kms in {hrs}, the speed of the first train is? (rounhd off if necessary)"
+    speed_2 = dist // hrs
+    const = speed_2 // y
+    answer = const * x
+    return question, answer
+q, a = ratio_17()
 print(q, a)
