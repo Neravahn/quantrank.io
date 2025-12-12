@@ -1,0 +1,75 @@
+<style>
+    #question-box {
+        font-size: 1.7rem;
+        margin-bottom: 25px;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    #options-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        width: 100%;
+        max-width: 700px;
+        margin: auto;
+        margin-top: 200px;
+    }
+
+    .option-btn {
+        padding: 18px;
+        font-size: 1.3rem;
+        border-radius: 12px;
+        border: 2px solid rgb(255, 183, 0);
+        cursor: pointer;
+        background: rgb(255, 183, 0);
+        transition: 0.2s;
+        text-align: center;
+    }
+
+    .option-btn:hover {
+        background: #f2f2f2;
+        transform: translateY(-2px);
+    }
+
+    #skip_button {
+        position: fixed;
+        bottom: 100px;
+        right: 250px;
+        background: rgb(255, 183, 0);
+        border: 2px solid rgb(255, 183, 0);
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        cursor: pointer;
+        transition: 0.2s ease-in-out;
+    }
+
+    #skip_button:hover {
+        background: #ffffff;
+        transform: scale(1.08);
+    }
+
+    #skip_button img {
+        width: 60px;
+        height: 30px;
+        object-fit: contain;
+    }
+</style>
+
+<div>
+    <div id="question-box">{{ question }}</div>
+
+    <div id="options-grid">
+        <button type="button" class="option-btn" data-option="1">1. {{ option1 }}</button>
+        <button type="button" class="option-btn" data-option="2">2. {{ option2 }}</button>
+        <button type="button" class="option-btn" data-option="3">3. {{ option3 }}</button>
+        <button type="button" class="option-btn" data-option="4">4. {{ option4 }}</button>
+
+    </div>
+
+    <div id="skip">
+        <button id="skip_button">
+            <img src="{{ url_for('static', filename='images/skip.png')}}">
+        </button>
+    </div>
+</div>

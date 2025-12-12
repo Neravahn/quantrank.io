@@ -13,11 +13,11 @@ def check(difficulty, chapter_name):
 
     cursor.execute(query, (chapter_name, difficulty))
     func_name = cursor.fetchone()[0]
+    if chapter_name == 'ratio_proportion':
+        x = ch1
+    
+    func = getattr(x, func_name)
+    question, options, answer = func()
 
-    return func_name
-
-func_name = check('easy', 'ratio_proportion')
-func = getattr(ch1, func_name)
-q, o, a = func()
-print(q, o, a)
+    return question, options, answer
 

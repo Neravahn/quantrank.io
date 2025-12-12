@@ -3,6 +3,7 @@ from auth.emailAuth import send_otp
 from auth.user import check_email, check_username
 from auth.save_user import save
 from auth.login import verify_user
+from questionImport import check
 
 
 app = Flask(__name__)
@@ -82,12 +83,37 @@ def questions():
             data = request.get_json()
             topic = data.get("topic")
             difficulty = data.get('difficulty')
+            question, options, answer = check(difficulty, topic)
+            option1 = options[0]
+            option2 = options[1]
+            option3 = options[2]
+            option4 = options[3]
 
-            print(topic)
-            print(difficulty)
-            html = render_template("practice/questions.html", topic = topic, difficulty = difficulty)
+            session['answer'] = answer
+            html = render_template("questions.html",
+                                    question = question, 
+                                    answer = answer,
+                                    option1 = option1,
+                                    option2 = option2,
+                                    option3 = option3,
+                                    option4 = option4
+                                    )
             return jsonify({"html": html})
-    return render_template('practice/dashboard.html')
+    return render_template('question_dash.html')
+
+@app.route('/check_answers', methods=['POST'])
+def check_answers():
+    data = request.get_json()
+    if not data:
+        print("none")
+    selected = data.get('selected')
+    print("Selected:", selected)
+
+    answer = session.get('answer')
+    print("Correct Answer:", answer)
+    
+    return jsonify({"correct": selected == answer, "correct_answer": answer})
+
 
 
 if __name__ == "__main__":

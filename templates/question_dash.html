@@ -127,8 +127,9 @@
             overflow-y: auto;
             border: 1px solid #222;
         }
+
         navhi {
-            color:rgb(255, 183, 0);
+            color: rgb(255, 183, 0);
         }
     </style>
 </head>
@@ -142,7 +143,9 @@
 
         <div id="nav-center">
             <a href="{{ url_for('dashboard') }}">Dashboard</a>
-            <a href="{{ url_for('questions') }}"><navhi>Practice</navhi></a>
+            <a href="{{ url_for('questions') }}">
+                <navhi>Practice</navhi>
+            </a>
             <a href="#">Leaderboard</a>
             <a href="#">Analysis</a>
             <a href="#">Profile</a>
@@ -204,6 +207,47 @@
                         });
                 });
             });
+
+            function submitAnswer(selectedOption) {
+                fetch("/check_answers", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ selected: selectedOption })
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data.message);
+                    });
+            }
+            document.getElementById("questions_area").addEventListener("click", function (e) {
+                if (e.target.classList.contains("option-btn")) {
+                    const selected = e.target.dataset.option;
+                    submitAnswer(selected);
+                }
+                if (e.target.id === "skip_button") {
+                    skipQuestion();
+                }
+            });
+
+            function loadQuestion(topic = null, difficulty = null) {
+                if (!topic) topic = document.querySelector(".card.selected")?.dataset.topic;
+                if (!difficulty) difficulty = document.getElementById("difficulty").value;
+
+                fetch("/questions", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ topic: topic, difficulty: difficulty })
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        document.getElementById("questions_area").innerHTML = data.html;
+                    });
+            }
+
+            function skipQuestion() {
+                loadQuestion();
+            }
+
         </script>
 </body>
 
