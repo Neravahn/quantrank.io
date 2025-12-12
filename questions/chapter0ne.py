@@ -467,18 +467,53 @@ print(q, o, a)
 
 
 
+
+
 def ratio_10():
-    a = random.randint(2, 20)
-    b = random.randint(2, 20)
+    num_val = []
+    while len(num_val) < 2:
+        z = random.randint(2, 20)
+        if z not in num_val:
+            num_val.append(z)
+        else:
+            continue
+    
+    a = num_val[0]
+    b = num_val[1]
+    gcd = math.gcd(a, b)
 
     x = random.randint(20, 50)
 
     total_amt = (a * x) + (b * x)
 
-    question = f"Division of {total_amt}$ between X and Y is in ratio {a} : {b}. X and Y would get ?"
+    question = f"Division of {total_amt}$ between X and Y is in ratio {a // gcd} : {b // gcd}. X and Y would get ?"
     answer = f"({a * x}, {b * x})"
 
-    return question, answer
+    options = []
+    options.append(answer)
+    while len(options)< 4:
+        num_val = []
+        while len(num_val) < 2:
+            z = random.randint(40, 1000) #<--- THIS WAL LOWEST TO LOWER MUL AND HIGHEST TO HIGHEST
+            if z not in num_val:
+                num_val.append(z)
+            else:
+                continue
+        
+        option_x = num_val[0]
+        option_y = num_val[1]
+
+        option = f"({option_x}, {option_y})"
+        if option not in options and option != answer:
+            options.append(option)
+        else:
+            continue
+
+    random.shuffle(options)
+    return question, options, answer
+q, o, a = ratio_10()
+print(q, o, a)
+
 
 
 
@@ -502,24 +537,61 @@ def ratio_11():
 
 
 def ratio_12():
-    a = random.randint(3, 15)
-    b = random.randint(3, 15)
+    num_val = []
+    while len(num_val) < 2:
+        z = random.randint(3, 15)
+        if z not in num_val:
+            num_val.append(z)
+        else:
+            continue
+
+    a = num_val[0]
+    b = num_val[1]
+    gcd = math.gcd(a, b)
 
     x = random.randint(20, 90)
     
     d = abs((a*x) - (b*x))
 
-    question = f"The ratio of two numbers is {a} : {b}, their diffrence is {d}. Find the numbers"
-    answer = f"{a*x}, {b*x}"
-    return question, answer
+    question = f"The ratio of two numbers is {a // gcd} : {b // gcd}, their diffrence is {d}. Find the numbers"
+    answer = f"({a*x}, {b*x})"
+
+    options = []
+    options.append(answer)
+    while len(options) < 4:
+        num_val = []
+        while len(num_val) < 2:
+            z = random.randint(60, 1350)
+            if z not in num_val:
+                num_val.append(z)
+            else:
+                continue
+        
+        option = f"({num_val[0], num_val[1]})"
+        if option not in options and option != answer:
+            options.append(option)
+        else:
+            continue
+    
+    random.shuffle(options)
+    return question, options, answer
+q, o, a = ratio_12()
+print(q, o, a)
 
 
 
 def ratio_13():
-    a = random.randint(3, 20)
-    b = random.randint(3, 20)
-    c = random.randint(3, 20)
-    d = random.randint(3, 20)
+    num_val = []
+    while len(num_val) < 4:
+        z = random.randint(3, 20)
+        if z not in num_val:
+            num_val.append(z)
+        else:
+            continue
+    a = num_val[0]
+    b = num_val[1]
+    c = num_val[2]
+    d = num_val[3]
 
 
     question = f"P, Q and R are three cities. The ratio of average temprature between P and Q is {a} : {b} and that between P and R is {c} : {d}. The ratio between temprature of Q and R is ?"
@@ -528,14 +600,52 @@ def ratio_13():
     y = (b * c) // gcd
 
     answer = f"{y} : {z}"
-    return question , answer
+    
+    options = []
+    options.append(answer)
+    while len(options) < 4:
+        num_val = []
+        while len(num_val) < 2:
+            z = random.randint(60, 400)
+            if z not in num_val:
+                num_val.append(z)
+            else:
+                continue
+
+        option_x = num_val[0]
+        option_y = num_val[1]
+        gcd = math.gcd(option_x, option_y)
+
+        option = f"{option_x // gcd} : {option_y // gcd}"
+        if option not in options and option != answer:
+            options.append(option)
+        else:
+            continue
+
+    random.shuffle(options)
+    return question , options, answer
+q, o, a = ratio_13()
+print(q, o, a)
+
 
 
 
 
 def ratio_14():
-    x = random.randint(2, 20)
-    y = random.randint(2, 20)
+    num_val = []
+    while len(num_val) < 2:
+        z = random.randint(2, 20)
+        if z not in num_val:
+            num_val.append(z)
+        else:
+            continue
+    
+    x = num_val[0]
+    y = num_val[1]
+    gcd = math.gcd(x, y)
+    x = x // gcd
+    y = y // gcd
+
 
     sup_1 = random.randint(2, 4)
     sup_2 = random.randint(2, 4)
@@ -563,4 +673,29 @@ def ratio_14():
 
     gcd = math.gcd(ans_x, ans_y)
     answer = f"{ans_x // gcd} : {ans_y // gcd}"
-    return question, answer
+
+    options = []
+    options.append(answer)
+    while len(options) < 4:
+        num_val = []
+        while len(num_val) < 2:
+            z = random.randint(300, 2000)
+            if z not in num_val:
+                num_val.append(z)
+            else:
+                continue
+        
+        option_x = num_val[0]
+        option_y = num_val[1]
+        gcd = math.gcd(option_x, option_y)
+
+        option = f"{option_x // gcd} : {option_y // gcd}"
+        if option not in options and option != answer:
+            options.append(option)
+        else:
+            continue
+
+    random.shuffle(options) 
+    return question, options, answer
+q, o, a = ratio_14()
+print(q, o, a)
