@@ -831,9 +831,6 @@ def ratio_16():
 
     random.shuffle(options)
     return question, options, answer
-q, o, a = ratio_16()
-print(q, o, a)
-
 
 
 
@@ -872,5 +869,156 @@ def ratio_17():
     
     random.shuffle(options)
     return question, options, answer
-q, o, a = ratio_17()
+
+
+
+#=======================================
+           #PROPORTION
+#=======================================
+
+
+def proportion_1():
+    def list_gen():
+        num_val = []
+        while len(num_val) < 4:
+            z = random.randint(2, 15)
+            if z not in num_val:
+                num_val.append(z)
+            else:
+                continue
+        return num_val
+
+    while True:
+        num_val = list_gen()
+        a = num_val[0]
+        b = num_val[1]
+        c = num_val[2]
+        d = num_val[3]
+
+        if a / b == c / d:
+            break
+        else:
+            continue
+
+    question = f"The fourth proportional to {a}, {b}, {c} is"
+    answer = d
+    options = []
+    options.append(answer)
+    while len(options) < 4:
+        z = random.randint(2, 15)
+        if z not in options and z != answer:
+            options.append(z)
+        else:
+            continue
+
+    random.shuffle(options)
+    return question, options, answer
+q, o, a = proportion_1()
 print(q, o, a)
+
+
+
+
+def proportion_2():
+    def list_gen():
+        num_val = []
+        while len(num_val) < 3:
+            z = random.randint(2, 15)
+            if z not in num_val:
+                num_val.append(z)
+            else:
+                continue
+        return num_val
+
+    while True:
+        num_val = list_gen()
+        a = num_val[0]
+        b = num_val[1]
+        c = num_val[2]
+
+        if a / b == b / c:
+            break
+        else:
+            continue
+
+    question = f"The third proportional to {a} and {b} is"
+    answer = c
+    options = []
+    options.append(answer)
+    while len(options) < 4:
+        z = random.randint(2, 15)
+        if z not in options and z != answer:
+            options.append(z)
+        else:
+            continue
+
+    random.shuffle(options)
+    return question, options, answer
+q, o, a = proportion_1()
+print(q, o, a)
+    
+
+
+def proportion_3():
+    def gen_nums():
+        num_val = []
+        while len(num_val) <2:
+            z = random.randint(2, 15)
+            if z not in num_val:
+                num_val.append(z)
+            else:
+                continue
+        
+        return num_val
+    
+    while True:
+        num_val = gen_nums()
+        a = num_val[0]
+        b = num_val[1]
+        root = int(math.sqrt(a * b))
+        if root * root == a * b:
+            answer = root
+            break
+        else:
+            continue
+
+    question = f"The mean proportion between {a} and {b} is "
+    
+
+    return question, answer
+q, a = proportion_3()
+print(q, a)
+
+
+
+
+def proportion_4():
+    def gen_num():
+        num_val = []
+        while len(num_val) < 3:
+            z = random.randint(2, 15)
+            if z not in num_val:
+                num_val.append(z)
+            else:
+                continue
+        return num_val
+    
+    while True:
+        num_val = gen_num()
+        a = num_val[0]
+        b = num_val[1]
+        c = num_val[2]
+
+        if a % b == 0:
+            break
+        else:
+            continue
+
+    div = a / b
+
+    answer = c * div
+    question = f"The number which has same ratio to {c} that {a} has to {b} is"
+
+    return question, answer
+q, a = proportion_4()
+print(q, a)
