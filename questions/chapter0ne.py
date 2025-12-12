@@ -707,7 +707,7 @@ print(q, o, a)
 def ratio_15():
     num_val = []
     while len(num_val) < 4:
-        z = random.randint()
+        z = random.randint(2, 15)
         if z not in num_val:
             num_val.append(z)
         else:
@@ -721,14 +721,39 @@ def ratio_15():
     y = num_val[3]
     gcd_2 = math.gcd(x, y)
 
-    sup_1 = random.randint(2, 4)
-    sup_2 = random.randint(2, 4)
+    mul_1 = random.randint(2, 10)
+    mul_2 = random.randint(2, 10)
+    sub_1 = random.randint(2, 4)
+    sub_2 = random.randint(2, 4)
 
     eq = {
-        
-    }
+            f"{mul_1}px + {mul_2}qy" : (mul_1 * p * x) + (mul_2 * q * y),
+            f"{mul_1}pq - {mul_2}xy" : (mul_1 * p * q) - (mul_2 * x * y),
+            f"p{sup_num(sub_1)}y + {mul_2}q x{sup_num(sub_2)}" : ((p ** sub_1) * y) + (mul_2 * q * (x ** sub_2)),
+            f"x{sup_num(sub_2)}y{sup_num(sub_2)} + {mul_1}pq" : ((x ** sub_2) * (y ** sub_2)) + (mul_1 * p * q),
+            f"{mul_1}q x{sup_num(sub_1)} + p{sup_num(sub_2)} {mul_2}y" : (mul_1 * q * (x ** sub_1)) + ((p ** sub_2) * mul_2 * y),
+        }
 
-    
+    eq_key = [
+        f"{mul_1}px + {mul_2}qy",
+        f"{mul_1}pq - {mul_2}xy",
+        f"p{sup_num(sub_1)}y + {mul_2}q x{sup_num(sub_2)}",
+        f"x{sup_num(sub_2)}y{sup_num(sub_2)} + {mul_1}pq",
+        f"{mul_1}q x{sup_num(sub_1)} + p{sup_num(sub_2)} {mul_2}y"
+    ]
+
+    rand_eq_x, rand_eq_y = random.sample(eq_key, 2)
+
+    question = f"If p : q = {p // gcd_1} : {q // gcd_1} and x : y = {x // gcd_2} : {y // gcd_2}, then the value of {rand_eq_x} : {rand_eq_y}"
+    sol_x = eq[rand_eq_x]
+    sol_y = eq[rand_eq_y]
+    gcd = math.gcd(sol_x, sol_y)
+
+    answer = f"{sol_x // gcd} : {sol_y // gcd}"
+    return question, answer
+q, a = ratio_15()
+print(q, a)
 
 
-    question = f"If p : q = {p // gcd_1} : {q // gcd_1} and x : y = {x // gcd_2} : {y // gcd_2}, then the value of {eq_1} : {eq_2}"
+
+
