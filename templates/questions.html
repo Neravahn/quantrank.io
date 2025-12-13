@@ -54,6 +54,49 @@
         height: 30px;
         object-fit: contain;
     }
+
+    #result-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+
+        display: none;
+        justify-content: center;
+        align-items: center;
+
+        background: rgba(0, 0, 0, 0.55);
+        z-index: 999;
+    }
+
+    #result-card {
+        width: 450px;
+        min-height: 200px;
+        background: #000;
+        border-radius: 16px;
+        border: 2px solid rgb(255, 183, 0);
+        box-shadow: 0 10px 30px rgba(255, 183, 0, 0.35);
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #popup-content {
+        padding: 30px 50px;
+        font-size: 2rem;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .correct {
+        color: #00ff00;
+    }
+
+    .wrong {
+        color: #ff0000;
+    }
 </style>
 
 <div>
@@ -72,4 +115,11 @@
             <img src="{{ url_for('static', filename='images/skip.png')}}">
         </button>
     </div>
+
+    <div id="result-overlay">
+        <div id="result-card">
+            <div id="popup-content"></div>
+        </div>
+    </div>
+
 </div>

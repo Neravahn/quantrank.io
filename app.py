@@ -125,12 +125,11 @@ def check_answers():
     elif selected == 4:
         op_sel = option4
 
+
     if op_sel == answer:
-        print('correct answer')
+        return jsonify({"message" : "correct"})
     else:
-        print('wrong answer')
-    
-    return jsonify({"correct": selected == answer, "correct_answer": answer})
+        return jsonify({"message" : "wrong"})
 
 
 

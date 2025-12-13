@@ -202,11 +202,32 @@
                 })
                     .then(res => res.json())
                     .then(data => {
-                        console.log(data.message);
-
-                        loadQuestion();
+                        showPopup(data.message);
                     });
             }
+            function showPopup(result) {
+                const overlay = document.getElementById("result-overlay");
+                const content = document.getElementById("popup-content");
+
+                if (!overlay || !content) return;
+
+                overlay.style.display = "flex";
+
+                if (result === "correct") {
+                    content.textContent = "CORRECT!";
+                    content.className = "correct";
+                } else {
+                    content.textContent = "WRONG!";
+                    content.className = "wrong";
+                }
+
+                overlay.onclick = () => {
+                    overlay.style.display = "none";
+                    overlay.onclick = null;
+                    loadQuestion();
+                };
+            }
+
             document.getElementById("questions_area").addEventListener("click", function (e) {
                 if (e.target.classList.contains("option-btn")) {
                     const selected = e.target.dataset.option;
@@ -235,6 +256,7 @@
             function skipQuestion() {
                 loadQuestion();
             }
+
         </script>
 </body>
 
