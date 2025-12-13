@@ -19,4 +19,4 @@ def insert(chapter_name, difficulty, function_name):
     
 
 
-insert('ratio_proportion', 'easy', 'proportion_8')
+insert('ratio_proportion', 'medium', 'proportion_15')

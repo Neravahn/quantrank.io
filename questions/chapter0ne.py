@@ -1,6 +1,6 @@
 import random
 import math
-from sub_supScript import sub_num, sub_text, sup_num, sup_text
+from .sub_supScript import sub_num, sub_text, sup_num, sup_text
 
 def ratio_1():
     ear = []

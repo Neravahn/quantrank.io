@@ -4,7 +4,7 @@ from auth.user import check_email, check_username
 from auth.save_user import save
 from auth.login import verify_user
 from questionImport import check
-
+from auth.userStats import stats_save, update_points, update_stats
 
 app = Flask(__name__)
 app.secret_key = "idk_what_secretkey_to_use"
@@ -31,11 +31,11 @@ def signup():
         otp = send_otp(email)
         if otp is None:
             return render_template('auth/signup.html', error= "OTP cannot be sent")
-        session['username'] = username
-        session['real_otp'] = otp
-        session['email'] = email
-        session['name'] = name
-        session['password'] = password
+        session['username_signup'] = username
+        session['real_otp_signup'] = otp
+        session['email_signup'] = email
+        session['name_signup'] = name
+        session['password_signup'] = password
         return redirect('verify')
     return render_template('auth/signup.html')
 
@@ -43,14 +43,21 @@ def signup():
 def verify():
     if request.method == 'POST':
         user_otp = request.form['otp']
-        real_otp = session.get('real_otp')
-        name = session.get('name')
-        email = session.get('email')
-        password = session.get('password')
-        username = session.get('username')
+        real_otp = session.get('real_otp_signup')
+        name = session.get('name_signup')
+        email = session.get('email_signup')
+        password = session.get('password_signup')
+        username = session.get('username_signup')
+
+        
         if user_otp == real_otp:
             save(name, username, email, password)
-            print( 'success' )
+            stats_save(username)
+            session.pop('username_signup', None)
+            session.pop('email_signup', None)
+            session.pop('password_signup', None)
+            session.pop('real_otp_signup', None)
+            session.pop('name_signup', None)
             return redirect('login')
         else:
             return render_template('auth/verify.html', error = 'Enter correct OTP')
@@ -67,6 +74,7 @@ def login():
         verified = verify_user(username, password)
 
         if verified == True:
+            session['username'] = username
             return redirect('/dashboard')
         else:
             return render_template('auth/login.html', error= 'Invalid Credentials')
@@ -75,6 +83,8 @@ def login():
 
 @app.route('/dashboard', methods = ['GET', 'POST'])
 def dashboard():
+    if 'username' not in session:
+        return redirect('/login')
     return render_template('dashboard.html')
 
 @app.route('/questions', methods = ['GET', 'POST'])
@@ -83,6 +93,7 @@ def questions():
             data = request.get_json()
             topic = data.get("topic")
             difficulty = data.get('difficulty')
+            session['difficulty'] = difficulty
             question, options, answer = check(difficulty, topic)
             option1 = options[0]
             option2 = options[1]
@@ -95,7 +106,6 @@ def questions():
             session['answer'] = answer
             html = render_template("questions.html",
                                     question = question, 
-                                    answer = answer,
                                     option1 = option1,
                                     option2 = option2,
                                     option3 = option3,
@@ -111,6 +121,8 @@ def check_answers():
     option3 = session.get('option3')
     option4 = session.get('option4')
     answer = session.get('answer')
+    username = session.get('username')
+    difficulty = session.get('difficulty')
 
     data = request.get_json()
 
@@ -127,8 +139,11 @@ def check_answers():
 
 
     if op_sel == answer:
+        update_stats(username, difficulty)
+        update_points(username, 1)
         return jsonify({"message" : "correct"})
     else:
+        update_points(username, -1)
         return jsonify({"message" : "wrong"})
 
 

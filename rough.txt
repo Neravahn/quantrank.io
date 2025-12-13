@@ -23,3 +23,10 @@ proportion_5() ----> EASY
 proportion_6() ----> EASY
 proportion_7() ----> EASY
 proportion_8() ----> EASY
+proportion_9() ----> MEDIUM
+proportion_10() ---> MEDIUM
+proportion_11() ---> HARD
+proportion_12() ---> HARD
+proportion_13() ---> HARD
+proportion_14() ---> EASY
+proportion_15() ---> MEDIUM
