@@ -109,10 +109,14 @@
         #heatmap_area {
             background: #000000;
             min-height: 277px;
-            padding: 5px;
+            padding: 12px;
             border-radius: 12px;
-            border: 2px solid #151515;
-            width: 1130px;
+            border: 2px solid #15151500;
+            width: 1000px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         #profile_area {
@@ -124,6 +128,7 @@
             align-items: center;
             text-align: center;
             width: 600px;
+            margin-left: 50px;
         }
 
         #profile-pic {
@@ -175,6 +180,14 @@
         #heatmap_canvas {
             display: block;
         }
+
+        hhi {
+            color: rgb(255, 183, 0);
+        }
+
+        #heatmap_txt {
+            margin-bottom: 5px;
+        }
     </style>
 </head>
 
@@ -222,12 +235,13 @@
                 </div>
 
                 <div id="analysis">
-                    <canvas id="analysis_chart"></canvas>
+                    IDK WHAT TO ADD HERE
                 </div>
             </div>
 
 
             <div id="heatmap_area">
+                <div id="heatmap_txt">HEATMAP <hhi>PLACEHOLDER</hhi> TEXT</div>
                 <canvas id="heatmap_canvas" width="1117" height="277"></canvas>
             </div>
 
@@ -328,77 +342,33 @@
                 chart.draw();
             });
 
-            //ACCURACY CHART HERE
-            const analysisCanvas = document.getElementById('analysis_chart').getContext('2d');
-
-            // PLACEHOLDER VALUE 20 DAYS
-            const days = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20'];
-            const accuracy = [72, 85, 63, 91, 77, 69, 88, 95, 54, 80, 66, 73, 84, 78, 90, 61, 87, 75, 92, 68];
-
-            new Chart(analysisCanvas, {
-                type: 'line',
-                data: {
-                    labels: days,
-                    datasets: [{
-                        data: accuracy,
-                        fill: true,
-                        backgroundColor: 'rgba(70, 130, 250, 0.2)',
-                        borderColor: '#4DA6FF',
-                        tension: 0.5,
-                        pointBackgroundColor: '#004C99',
-                        pointBorderColor: '#4DA6FF',
-                        pointRadius: 0
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            max: 100,
-                            title: {
-                                display: false,
-                                text: 'Accuracy %',
-                                color: '#fff',
-                                font: { size: 14 }
-                            },
-                            ticks: { display: false }
-                        },
-                        x: {
-                            title: {
-                                display: false,
-                                text: 'Day',
-                                color: '#fff',
-                                font: { size: 14 }
-                            },
-                            ticks: { display: false }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            enabled: true
-                        }
-                    }
-                }
-            });
-
-
             //HEATMAP CHART
             (() => {
                 const canvas = document.getElementById('heatmap_canvas');
                 const ctx = canvas.getContext('2d');
 
-                const COLS = 40;
-                const ROWS = 10;
-                const CELL = 25;
+                const COLS = 62;
+                const ROWS = 8;
+                const CELL = 15;
                 const GAP = 3;
                 const RADIUS = 5;
 
-                const GRAY = 'rgba(27, 27, 27, 1)';
+                const values = Array.from({ length: ROWS }, () =>
+                    Array.from({ length: COLS }, () => Math.floor(Math.random() * 30))
+                );
+
+                function getHeatColor(value) {
+                    if (value <= 0) return 'rgba(40, 40, 40, 1)';
+
+                    const max = 20;
+                    const intensity = Math.min(value, max) / max;
+                    const r = Math.floor(46 * (0.3 + 0.7 * intensity));
+                    const g = Math.floor(204 * (0.3 + 0.7 * intensity));
+                    const b = Math.floor(113 * (0.3 + 0.7 * intensity));
+                    return `rgb(${r}, ${g}, ${b})`;
+                }
+
+
 
                 function roundRect(x, y, w, h, r) {
                     ctx.beginPath();
@@ -423,13 +393,63 @@
                             const px = x * (CELL + GAP);
                             const py = y * (CELL + GAP);
 
-                            ctx.fillStyle = GRAY;
+                            const value = values[y][x];
+                            ctx.fillStyle = getHeatColor(value);
                             roundRect(px, py, CELL, CELL, RADIUS);
                         }
                     }
                 }
 
                 draw();
+
+                const tooltip = document.createElement('div');
+                tooltip.style.position = 'absolute';
+                tooltip.style.padding = '8px 12px';        
+                tooltip.style.background = '#222';
+                tooltip.style.color = '#fff';
+                tooltip.style.borderRadius = '4px';
+                tooltip.style.border = '1.5px solid #fff';
+                tooltip.style.fontSize = '15px';
+                tooltip.style.pointerEvents = 'none';
+                tooltip.style.transition = '0.1s';
+                tooltip.style.opacity = 0;
+
+                document.body.appendChild(tooltip);
+
+                canvas.addEventListener('mousemove', (e) => {
+                    const rect = canvas.getBoundingClientRect();
+
+                    // Mouse position relative to canvas
+                    const mouseX = e.clientX - rect.left;
+                    const mouseY = e.clientY - rect.top;
+
+                    // Determine which cell
+                    const x = Math.floor(mouseX / (CELL + GAP));
+                    const y = Math.floor(mouseY / (CELL + GAP));
+
+                    if (x >= 0 && x < COLS && y >= 0 && y < ROWS) {
+                        const value = values[y][x];
+
+                        tooltip.innerText = `Points earned: ${value} on 00-00-0000`;
+
+                        // Position tooltip using page coordinates
+                        tooltip.style.left = `${e.pageX + 10}px`;
+                        tooltip.style.top = `${e.pageY + 10}px`;
+                        tooltip.style.opacity = 1;
+
+                        draw();
+                    } else {
+                        tooltip.style.opacity = 0;
+                        draw();
+                    }
+                });
+
+
+                canvas.addEventListener('mouseleave', () => {
+                    tooltip.style.opacity = 0;
+                    draw();
+                });
+
             })();
 
 
