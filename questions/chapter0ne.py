@@ -1425,6 +1425,7 @@ def proportion_11():
 
 
 
+
 def proportion_12():
     num_val = []
     while len(num_val) < 3:
@@ -1479,5 +1480,104 @@ def proportion_12():
     random.shuffle(options)
 
     return question, options, answer
-q, o, a = proportion_12()
-print(q, o, a)
+
+
+
+
+
+
+def proportion_13():
+    def gen_num():
+        num_val = []
+        while len(num_val) < 4:
+            z = random.randint(2, 15)
+            if z not in num_val:
+                num_val.append(z)
+            else:
+                continue
+
+        return num_val
+
+    while True:
+        num_val = gen_num()
+        a = num_val[0]
+        b = num_val[1]
+        c = num_val[2]
+        d = num_val[3]
+
+        if a / b != c / d:
+            break
+        else:
+            continue
+
+    question = f"The numbers {a}, {b}, {c}, {d} are not in proportion. The fourth term for which they will be in proportion is ?(round off if necessary)"
+    d = round(c * b / a)
+    answer = d
+
+    options = []
+    options.append(answer)
+    while len(options) < 4:
+        option = random.randint(2, 90)
+        if option not in options and option != answer:
+            options.append(option)
+        else:
+            continue
+
+    random.shuffle(options)
+    return question, options, answer
+
+
+
+
+
+def proportio_14():
+    options = ['Dividendo', 'Componendo', 'Alternendo', 'None of these']
+    random.shuffle(options)
+    question = f"If x / y = w / z, implies y / x = z / w, then the process is called"
+    answer = 'None of these'
+    return question, options, answer
+
+
+
+
+
+def proportion_15():
+    num_val = []
+    while len(num_val) < 2:
+        z = random.randint(2, 15)
+        if z not in num_val:
+            num_val.append(z)
+        else:
+            continue
+
+    a_s = num_val[0]
+    b_s = num_val[1]
+    gcd_1 = math.gcd(a_s, b_s)
+    a = a_s // gcd_1
+    b = b_s // gcd_1
+
+    mul = random.randint(10, 50)
+
+    org_a = a * mul
+    org_b = b * mul
+
+    while True:
+        sum = random.randint(30, 100)
+
+        org_p = org_a + sum
+        org_q = org_b + sum
+
+        gcd_org = math.gcd(org_a, org_b)
+        if gcd_org is None:
+            continue
+        else:
+            break
+
+    p = org_p // gcd_org
+    q = org_q // gcd_org
+
+    question = f"Two numbers are in ratio {a} : {b}, if {sum} be added to each number of the ratio, then the new ratio will be {p} : {q}, then the numbers are"
+    answer = f"{org_a}, {org_b}"
+    return question, answer
+q, a = proportion_15()
+print(q, a)
