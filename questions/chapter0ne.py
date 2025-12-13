@@ -1,6 +1,6 @@
 import random
 import math
-from .sub_supScript import sub_num, sub_text, sup_num, sup_text
+from sub_supScript import sub_num, sub_text, sup_num, sup_text
 
 def ratio_1():
     ear = []
@@ -572,8 +572,6 @@ def ratio_12():
     random.shuffle(options)
     return question, options, answer
 
-q, o, a = ratio_12()
-print(q, o, a)
 
 
 
@@ -1201,3 +1199,58 @@ def proportion_8():
     
     random.shuffle(options)
     return question, options, answer
+
+
+
+def proportion_9():
+    num_val = []
+    while len(num_val) < 2:
+        z = random.randint(2, 15)
+        if z not in num_val:
+            num_val.append(z)
+        else:
+            continue
+
+    a = num_val[0]
+    b = num_val[1]
+
+    x_y = []
+    while len(x_y) < 2:
+        z = random.randint(2, 15)
+        if z not in x_y:
+            x_y.append(z)
+        else:
+            continue
+    
+    x = x_y[0]
+    y = x_y[1]
+    
+    r_mul_1 = random.randint(2, 9)
+    r_mul_2 = random.randint(2, 9)
+    sup_1 = random.randint(2, 4)
+    sup_2 = random.randint(2, 4)
+
+    eq = {
+    f"{r_mul_1}x - {r_mul_2}y": (r_mul_1 * x) - (r_mul_2 * y),
+    f"{r_mul_2}y - {r_mul_1}x": (r_mul_2 * y) - (r_mul_1 * x),
+    f"x{sup_num(sup_1)} + {r_mul_1}y": (x ** sup_1) + (r_mul_1 * y),
+    f"{r_mul_2}x + y{sup_num(sup_2)}": (r_mul_2 * x) + (y ** sup_2),
+    f"{r_mul_1}xy": r_mul_1 * x * y  
+    }
+
+    key_eq = [
+        f"{r_mul_1}x - {r_mul_2}y",
+        f"{r_mul_2}y - {r_mul_1}x",
+        f"x{sup_num(sup_1)} + {r_mul_1}y",
+        f"{r_mul_2}x + y{sup_num(sup_2)}",
+        f"{r_mul_1}xy"
+    ]
+
+    rand_eq_x, rand_eq_y = random.sample(key_eq, 2)
+    a = eq[rand_eq_x]
+    b = eq[rand_eq_y]
+    question = f"If ({rand_eq_x})/({rand_eq_y}) = {a}/{b}, the value of x : y"
+    answer = f"{x} : {y}"
+    return question, answer
+q, a = proportion_9()
+print(q, a)
