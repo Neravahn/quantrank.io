@@ -1338,5 +1338,146 @@ def proportion_10():
 
     random.shuffle(options)
     return question, options, answer
-q, o, a = proportion_10()
+
+
+
+
+
+
+def proportion_11():
+    num_val = []
+    while len(num_val) < 3:
+        z = random.randint(2, 15)
+        if z not in num_val:
+            num_val.append(z)
+        else:
+            continue
+
+    x = num_val[0]
+    y = num_val[1]
+    z = num_val[2]
+
+    mul_1 = random.randint(2, 10)
+    mul_2 = random.randint(2, 10)
+
+
+    eq = {
+    f"{mul_1}x + {mul_2}y - z": (mul_1 * x) + (mul_2 * y) - z,
+    f"{mul_2}x - y + {mul_1}z": (mul_2 * x) - y + (mul_1 * z),
+    f"-{mul_1}x + {mul_2}y + {mul_1}z": (-mul_1 * x) + (mul_2 * y) + (mul_1 * z),
+    f"{mul_1}x - {mul_2}y + z": (mul_1 * x) - (mul_2 * y) + z,
+    f"{mul_2}x + y - {mul_1}z": (mul_2 * x) + y - (mul_1 * z),
+    f"x + {mul_1}y + {mul_2}z": x + (mul_1 * y) + (mul_2 * z),
+    f"-x + {mul_2}y - {mul_1}z": -x + (mul_2 * y) - (mul_1 * z),
+    f"{mul_1}x + y + {mul_2}z": (mul_1 * x) + y + (mul_2 * z),
+    f"{mul_2}x - {mul_1}y + z": (mul_2 * x) - (mul_1 * y) + z,
+    f"-{mul_2}x + {mul_1}y - z": (-mul_2 * x) + (mul_1 * y) - z,
+    }
+
+    eq_key = [
+        f"{mul_1}x + {mul_2}y - z",
+        f"{mul_2}x - y + {mul_1}z",
+        f"-{mul_1}x + {mul_2}y + {mul_1}z",
+        f"{mul_1}x - {mul_2}y + z",
+        f"{mul_2}x + y - {mul_1}z",
+        f"x + {mul_1}y + {mul_2}z",
+        f"-x + {mul_2}y - {mul_1}z",
+        f"{mul_1}x + y + {mul_2}z",
+        f"{mul_2}x - {mul_1}y + z",
+        f"-{mul_2}x + {mul_1}y - z"
+    ]
+
+    rand_eq = random.choice(eq_key)
+
+    const = random.randint(2, 6)
+    list_var = ['x', 'y', 'z']
+    var = random.choice(list_var)
+
+    rand_const = f"{const}{var}"
+    ans_var = None
+    if var == 'x':
+        ans_var = x
+    elif var == 'y':
+        ans_var = y
+    else:
+        ans_var = z    
+
+
+    question = f"If x/{x} = y/{y} = z/{z}, then the value of {rand_eq} / {rand_const} is (round off if necessary)"
+
+    equation = eq[rand_eq] / (const*ans_var)
+    answer = round(equation)
+
+    options = []
+    options.append(answer)
+    while len(options) < 4:
+        option = random.randint(-10, 10)
+        if option not in options and option != answer:
+            options.append(option)
+        else:
+            continue
+    
+    random.shuffle(options)
+    return question, options, answer
+
+
+
+
+
+
+def proportion_12():
+    num_val = []
+    while len(num_val) < 3:
+        z = random.randint(2, 9)
+        if z not in num_val:
+            num_val.append(z)
+        else:
+            continue
+    
+    a_s = num_val[0]
+    b_s = num_val[1]
+    c_s = num_val[2]
+    gcd = math.gcd(a_s, b_s, c_s)
+    a = a_s // gcd
+    b = b_s // gcd
+    c = c_s // gcd
+
+
+    mul = random.randint(2, 8)
+
+    yrs = random.randint(5, 15)
+
+    a_pres = ((a * mul) + yrs)
+    b_pres = ((b * mul) + yrs) 
+    c_pres = ((c * mul) + yrs)
+
+    age_sum = a_pres + b_pres + c_pres
+    question = f"The sum of age of 3 persons is {age_sum}, {yrs} yrs ago their age were in ratio {a} : {b} : {c}. Their present ages are ?"
+    answer = f"({a_pres}, {b_pres}, {c_pres})"
+
+    options = []
+    options.append(answer)
+    while len(options) < 4:
+        num_val = []
+        while len(num_val) < 3:
+            z = random.randint(20, 80)
+            if z not in num_val:
+                num_val.append(z)
+            else:
+                continue
+        
+        option_a =num_val[0]
+        option_b = num_val[1]
+        option_c = num_val[2]
+
+        option = f"({option_a}, {option_b}, {option_c})"
+        if option not in options and option != answer:
+            options.append(option)
+        else:
+            continue
+    
+    random.shuffle(options)
+
+    return question, options, answer
+q, o, a = proportion_12()
 print(q, o, a)
