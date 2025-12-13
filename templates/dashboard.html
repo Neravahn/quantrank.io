@@ -67,21 +67,10 @@
 
         #main_area {
             margin: 20px auto;
-            max-width: 1400px;
+            width: 100%;
             display: flex;
             gap: 20px;
             height: calc(100vh - 110px);
-        }
-
-        #profile_area {
-            width: 300px;
-            min-width: 300px;
-            background: #000000;
-            border-radius: 12px;
-            overflow-y: auto;
-            padding: 20px;
-            border: 2px solid #15151500;
-            height: 900px;
         }
 
         #right_area {
@@ -99,13 +88,9 @@
 
         #piechart {
             border: 1px solid #00000000;
-            width: 300px;
+            width: 500px;
             background: #000000;
-            height: 300px;
-            margin-top: 100px;
-            margin-left: 100px;
-            margin-right: 100px;
-
+            height: 500px;
         }
 
         #leaderboard_area {
@@ -114,21 +99,49 @@
             border-radius: 12px;
         }
 
+        #analysis {
+            border: 2px solid #151515;
+            width: 675px;
+            border-radius: 12px;
+            margin-left: 20px;
+        }
 
         #heatmap_area {
             background: #000000;
-            padding: 25px;
-            min-height: 300px;
+            min-height: 277px;
+            padding: 5px;
             border-radius: 12px;
             border: 2px solid #151515;
+            width: 1130px;
         }
 
-        #profile {
-            height: 500px;
+        #profile_area {
             border: 2px solid #151515;
             border-radius: 12px;
             margin-bottom: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 600px;
         }
+
+        #profile-pic {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #fff;
+            margin-top: 50px;
+        }
+
+        #username {
+            font-size: 1.4rem;
+            margin-top: 10px;
+            margin-bottom: 100px;
+        }
+
+
 
         navhi {
             color: rgb(255, 183, 0);
@@ -144,6 +157,23 @@
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+
+        #analytics {
+            border: 2px solid #151515;
+            height: 250px;
+            width: calc(100% - 20px);
+            margin-top: 30px;
+            border-radius: 12px;
+        }
+
+        #analysis_chart {
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        #heatmap_canvas {
+            display: block;
         }
     </style>
 </head>
@@ -170,8 +200,17 @@
     <div id="main_area">
 
         <div id="profile_area">
-            <div id="profile">
-                PROFILE
+            <img id="profile-pic" src="https://via.placeholder.com/150">
+            <div id="username">
+                uName: {{ username }}
+            </div>
+
+            <div id="leaderboard_area">
+                <div class="leaderboard_card">RANK 1</div>
+                <div class="leaderboard_card">RANK 2</div>
+                <div class="leaderboard_card">RANK 3</div>
+                <div class="leaderboard_card">RANK 4</div>
+                <div class="leaderboard_card">MY RANK</div>
             </div>
         </div>
 
@@ -182,24 +221,20 @@
                     <canvas id="difficultyPieChart"></canvas>
                 </div>
 
-
-                <div id="leaderboard_area">
-                    <div class="leaderboard_card">RANK 1</div>
-                    <div class="leaderboard_card">RANK 2</div>
-                    <div class="leaderboard_card">RANK 3</div>
-                    <div class="leaderboard_card">RANK 4</div>
-                    <div class="leaderboard_card">MY RANK</div>
+                <div id="analysis">
+                    <canvas id="analysis_chart"></canvas>
                 </div>
-
             </div>
 
 
             <div id="heatmap_area">
-                HEATMAP PLACEHOLDER
+                <canvas id="heatmap_canvas" width="1117" height="277"></canvas>
             </div>
 
         </div>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@1.2.0/dist/chartjs-chart-matrix.min.js"></script>
+
         <script>
             const canvas = document.getElementById('difficultyPieChart');
             const ctx = canvas.getContext('2d');
@@ -223,13 +258,13 @@
                     const text = chart.$centerText || '';
                     const lines = text.split('\n');
 
-                    ctx.font = '600 14px Nunito';
+                    ctx.font = '600 22px Nunito';
                     ctx.fillStyle = '#ffffff';
-                    ctx.fillText(lines[0] || '', centerX, centerY - 8);
+                    ctx.fillText(lines[0] || '', centerX, centerY + 10);
 
-                    ctx.font = '400 12px Nunito';
+                    ctx.font = '400 20px Nunito';
                     ctx.fillStyle = '#bfbfbf';
-                    ctx.fillText(lines[1] || '', centerX, centerY + 10);
+                    ctx.fillText(lines[1] || '', centerX, centerY + 30);
 
                     ctx.restore();
                 }
@@ -243,7 +278,7 @@
                         data: [easy, medium, hard],
                         backgroundColor: ['#2ecc71', '#f1c40f', '#e74c3c'],
                         borderWidth: 0,
-                        hoverOffset: 6
+                        hoverOffset: 20
                     }]
                 },
                 options: {
@@ -252,6 +287,9 @@
                     circumference: 270,
                     responsive: true,
                     maintainAspectRatio: false,
+                    layout: {
+                        padding: 25
+                    },
                     plugins: {
                         legend: { display: false },
                         tooltip: { enabled: false }
@@ -289,6 +327,112 @@
                 chart.$centerText = `TOTAL\n ${total}`;
                 chart.draw();
             });
+
+            //ACCURACY CHART HERE
+            const analysisCanvas = document.getElementById('analysis_chart').getContext('2d');
+
+            // PLACEHOLDER VALUE 20 DAYS
+            const days = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20'];
+            const accuracy = [72, 85, 63, 91, 77, 69, 88, 95, 54, 80, 66, 73, 84, 78, 90, 61, 87, 75, 92, 68];
+
+            new Chart(analysisCanvas, {
+                type: 'line',
+                data: {
+                    labels: days,
+                    datasets: [{
+                        data: accuracy,
+                        fill: true,
+                        backgroundColor: 'rgba(70, 130, 250, 0.2)',
+                        borderColor: '#4DA6FF',
+                        tension: 0.5,
+                        pointBackgroundColor: '#004C99',
+                        pointBorderColor: '#4DA6FF',
+                        pointRadius: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            title: {
+                                display: false,
+                                text: 'Accuracy %',
+                                color: '#fff',
+                                font: { size: 14 }
+                            },
+                            ticks: { display: false }
+                        },
+                        x: {
+                            title: {
+                                display: false,
+                                text: 'Day',
+                                color: '#fff',
+                                font: { size: 14 }
+                            },
+                            ticks: { display: false }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            enabled: true
+                        }
+                    }
+                }
+            });
+
+
+            //HEATMAP CHART
+            (() => {
+                const canvas = document.getElementById('heatmap_canvas');
+                const ctx = canvas.getContext('2d');
+
+                const COLS = 40;
+                const ROWS = 10;
+                const CELL = 25;
+                const GAP = 3;
+                const RADIUS = 5;
+
+                const GRAY = 'rgba(27, 27, 27, 1)';
+
+                function roundRect(x, y, w, h, r) {
+                    ctx.beginPath();
+                    ctx.moveTo(x + r, y);
+                    ctx.lineTo(x + w - r, y);
+                    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+                    ctx.lineTo(x + w, y + h - r);
+                    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+                    ctx.lineTo(x + r, y + h);
+                    ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+                    ctx.lineTo(x, y + r);
+                    ctx.quadraticCurveTo(x, y, x + r, y);
+                    ctx.closePath();
+                    ctx.fill();
+                }
+
+                function draw() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                    for (let y = 0; y < ROWS; y++) {
+                        for (let x = 0; x < COLS; x++) {
+                            const px = x * (CELL + GAP);
+                            const py = y * (CELL + GAP);
+
+                            ctx.fillStyle = GRAY;
+                            roundRect(px, py, CELL, CELL, RADIUS);
+                        }
+                    }
+                }
+
+                draw();
+            })();
+
+
         </script>
 
 </body>

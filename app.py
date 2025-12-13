@@ -93,7 +93,16 @@ def dashboard():
     medium = data[1]
     hard = data[2]
     
-    return render_template('dashboard.html', easy = easy, medium = medium, hard = hard)
+    return render_template('dashboard.html',
+                            easy = easy, 
+                            medium = medium, 
+                            hard = hard, 
+                            username = username,
+                            accuracy = 'PH',
+                            total = 'PH',
+                            correct = 'PH',
+                            wrong = 'PH'
+                            )
 
 @app.route('/questions', methods = ['GET', 'POST'])
 def questions():
