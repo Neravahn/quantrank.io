@@ -1211,8 +1211,11 @@ def proportion_9():
         else:
             continue
 
-    a = num_val[0]
-    b = num_val[1]
+    a_s = num_val[0]
+    b_s = num_val[1]
+    gcd_1 = math.gcd(a_s, b_s)
+    a = a_s // gcd_1
+    b = b_s // gcd_1
 
     x_y = []
     while len(x_y) < 2:
@@ -1222,8 +1225,11 @@ def proportion_9():
         else:
             continue
     
-    x = x_y[0]
-    y = x_y[1]
+    x_s = x_y[0]
+    y_s = x_y[1]
+    gcd_2 = math.gcd(x_s, y_s)
+    x = x_s // gcd_2
+    y = y_s // gcd_2
     
     r_mul_1 = random.randint(2, 9)
     r_mul_2 = random.randint(2, 9)
@@ -1251,6 +1257,86 @@ def proportion_9():
     b = eq[rand_eq_y]
     question = f"If ({rand_eq_x})/({rand_eq_y}) = {a}/{b}, the value of x : y"
     answer = f"{x} : {y}"
-    return question, answer
-q, a = proportion_9()
-print(q, a)
+
+
+    options = []
+    options.append(answer)
+    while len(options) < 4:
+        num_val = []
+        while len(num_val) < 2:
+            z = random.randint(2, 15)
+            if z not in num_val:
+                num_val.append(z)
+            else:
+                continue
+        
+        option_x = num_val[0]
+        option_y = num_val[1]
+        gcd = math.gcd(option_x, option_y)
+        option = f"{option_x // gcd} : {option_y // gcd}"
+        if option not in options and option != answer:
+            options.append(option)
+        else:
+            continue
+    
+    random.shuffle(options)
+    return question, options, answer
+
+
+
+
+
+def proportion_10():
+    num_val = []
+    while len(num_val) < 4:
+        z = random.randint(2, 15)
+        if z not in num_val:
+            num_val.append(z)
+        else:
+            continue
+
+    a_s = num_val[0]
+    b_s = num_val[1]
+    gcd_1 = math.gcd(a_s, b_s)
+    a = a_s // gcd_1
+    b = b_s // gcd_1
+
+    b_2_s = num_val[2]
+    c_s = num_val[3]
+    gcd_2 = math.gcd(b_2_s, c_s)
+    b_2 = b_2_s // gcd_2
+    c = c_s // gcd_2
+
+    question = f"If A : B = {a} : {b} and B : C = {b_2} : {c} then A : B : C is"
+    A = (a * b_2)
+    B = (b * b_2)
+    C = (b * c)
+    gcd = math.gcd(A, B, C)
+    answer = f"{A // gcd} : {B // gcd} : {C // gcd}"
+
+    options = []
+    options.append(answer)
+    while len(options) < 4:
+        num_val = []
+        while len(num_val) < 3:
+            z = random.randint(2, 150)
+            if z not in num_val:
+                num_val.append(z)
+            else:
+                continue
+        
+        option_A = num_val[0]
+        option_B = num_val[1]
+        option_C = num_val[2]
+        gcd_ans = math.gcd(option_A, option_B, option_C)
+    
+        option = f"{option_A // gcd_ans} : {option_B // gcd_ans} : {option_C // gcd_ans}"
+        if option not in options and option != answer:
+            options.append(option)
+        else:
+            continue
+
+    random.shuffle(options)
+    return question, options, answer
+q, o, a = proportion_10()
+print(q, o, a)
