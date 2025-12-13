@@ -4,8 +4,8 @@ from auth.user import check_email, check_username
 from auth.save_user import save
 from auth.login import verify_user
 from questionImport import check
-from auth.userStats import stats_save, update_points, update_stats
-
+from statsFolder.userStats import stats_save, update_points, update_stats
+from statsFolder.getUserDetails import getUserData
 app = Flask(__name__)
 app.secret_key = "idk_what_secretkey_to_use"
 
@@ -31,6 +31,7 @@ def signup():
         otp = send_otp(email)
         if otp is None:
             return render_template('auth/signup.html', error= "OTP cannot be sent")
+        
         session['username_signup'] = username
         session['real_otp_signup'] = otp
         session['email_signup'] = email
@@ -49,7 +50,7 @@ def verify():
         password = session.get('password_signup')
         username = session.get('username_signup')
 
-        
+
         if user_otp == real_otp:
             save(name, username, email, password)
             stats_save(username)
@@ -85,7 +86,14 @@ def login():
 def dashboard():
     if 'username' not in session:
         return redirect('/login')
-    return render_template('dashboard.html')
+    
+    username = session.get('username')
+    data = getUserData(username)
+    easy = data[0]
+    medium = data[1]
+    hard = data[2]
+    
+    return render_template('dashboard.html', easy = easy, medium = medium, hard = hard)
 
 @app.route('/questions', methods = ['GET', 'POST'])
 def questions():

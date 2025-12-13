@@ -47,6 +47,7 @@
 
         #logo hi {
             color: rgb(255, 183, 0);
+            font-family: 'JotiOne';
         }
 
         #nav-center {
@@ -72,14 +73,15 @@
             height: calc(100vh - 110px);
         }
 
-        #leaderboard_area {
+        #profile_area {
             width: 300px;
             min-width: 300px;
             background: #000000;
-            border-radius: 8px;
+            border-radius: 12px;
             overflow-y: auto;
             padding: 20px;
-            border: 2px solid #151515;
+            border: 2px solid #15151500;
+            height: 900px;
         }
 
         #right_area {
@@ -92,86 +94,56 @@
         #top_stats {
             display: flex;
             gap: 20px;
+            height: 500px;
         }
 
-        #questions_card {
-            flex: 1;
-            background: #000000;
-            padding: 20px;
-            border-radius: 12px;
+        #piechart {
+            border: 1px solid #00000000;
+            width: 500px;
+        }
+
+        #leaderboard_area {
             border: 2px solid #151515;
-        }
-
-        #questions_card h3 {
-            margin-bottom: 15px;
-            font-size: 1.4rem;
-            color: #e0e0e0;
-        }
-
-        #q_stats_box {
-            display: flex;
-            justify-content: space-between;
-            gap: 15px;
-        }
-
-        .q_stat {
-            flex: 1;
-            background: #000000;
-            padding: 18px;
-            border-radius: 10px;
-            text-align: center;
-            font-size: 1.1rem;
-            transition: 0.2s;
-        }
-
-        .q_stat:hover {
-            transform: translateY(-4px);
-        }
-
-        #easy_stat {
-            border-left: 2px solid rgb(34, 197, 94);
-            border-right: 2px solid rgb(34, 197, 94);;
-            color: rgb(34, 197, 94);
-        }
-
-        #medium_stat {
-            border-left: 2px solid rgb(255, 183, 0);
-            border-right:  2px solid rgb(255, 183, 0);
-            color: rgb(255, 183, 0);
-        }
-
-        #hard_stat {
-            border-left: 2px solid rgb(239, 68, 68);
-            border-right: 2px solid rgb(239, 68, 68);
-            color: rgb(239, 68, 68);
-        }
-
-        #rank_card {
-            width: 260px;
-            background: #000000;
-            padding: 20px;
+            width: 500px;
             border-radius: 12px;
-            font-size: 1.5rem;
-            font-weight: bold;
-            border-left: 2px solid rgb(255, 183, 0);
-            border-right: 2px solid rgb(255, 183, 0);
-            color: rgb(255, 183, 0);
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
+
 
         #heatmap_area {
             background: #000000;
             padding: 25px;
             min-height: 300px;
             border-radius: 12px;
-            border: 1px solid #151515;
+            border: 2px solid #151515;
+        }
+
+        #profile {
+            height: 500px;
+            border: 2px solid #151515;
+            border-radius: 12px;
+            margin-bottom: 50px;
+        }
+
+        #q_stats_box {
+            height: 300px;
+            border: 2px solid #151515;
+            border-radius: 12px;
         }
 
         navhi {
-            color:rgb(255, 183, 0);
+            color: rgb(255, 183, 0);
         }
+
+        .leaderboard_card {
+            padding: 12px 16px;
+            border-radius: 10px;
+            background: rgb(255, 183, 0);
+            color: #ffffff;
+            font-size: 14px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+
     </style>
 </head>
 
@@ -179,11 +151,14 @@
 
     <nav>
         <div id="logo">
-            <h3>quantrank.<hi>io</hi></h3>
+            <h3>quantrank.<hi>io</hi>
+            </h3>
         </div>
 
         <div id="nav-center">
-            <a href="{{ url_for('dashboard') }}"><navhi>Dashboard</navhi></a>
+            <a href="{{ url_for('dashboard') }}">
+                <navhi>Dashboard</navhi>
+            </a>
             <a href="{{ url_for('questions') }}">Practice</a>
             <a href="#">Leaderboard</a>
             <a href="#">Analysis</a>
@@ -193,28 +168,29 @@
 
     <div id="main_area">
 
-        <div id="leaderboard_area">
-            PROFILE PLACEHOLDER
+        <div id="profile_area">
+            <div id="profile">
+                PROFILE
+            </div>
+            <div id="q_stats_box">
+                <div class="q_stat" id="easy_stat">Easy: {{ easy }}</div>
+                <div class="q_stat" id="medium_stat">Medium: {{ medium }}</div>
+                <div class="q_stat" id="hard_stat">Hard: {{ hard }}</div>
+            </div>
         </div>
 
         <div id="right_area">
 
             <div id="top_stats">
-
-                <div id="questions_card">
-                    <h3>Questions Solved</h3>
-
-                    <div id="q_stats_box">
-                        <div class="q_stat" id="easy_stat">Easy: {{ easy }}</div>
-                        <div class="q_stat" id="medium_stat">Medium: {{ medium }}</div>
-                        <div class="q_stat" id="hard_stat">Hard: {{ hard }}</div>
-                    </div>
+                <div id="piechart">
+                    PIE CHART HOLDER
                 </div>
 
-
-                <div id="rank_card">
-                    TOP 3 RANKS PLACEHOLDER
-                    Rank: {{ rank }}
+                <div id="leaderboard_area">
+                    <div class="leaderboard_card">RANK 1</div>
+                    <div class="leaderboard_card">RANK 2</div>
+                    <div class="leaderboard_card">RANK 3</div>
+                    <div class="leaderboard_card">MY RANK</div>
                 </div>
 
             </div>
