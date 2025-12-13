@@ -88,7 +88,10 @@ def questions():
             option2 = options[1]
             option3 = options[2]
             option4 = options[3]
-
+            session['option1'] = option1
+            session['option2'] = option2
+            session['option3'] = option3
+            session['option4'] = option4
             session['answer'] = answer
             html = render_template("questions.html",
                                     question = question, 
@@ -103,14 +106,29 @@ def questions():
 
 @app.route('/check_answers', methods=['POST'])
 def check_answers():
-    data = request.get_json()
-    if not data:
-        print("none")
-    selected = data.get('selected')
-    print("Selected:", selected)
-
+    option1 = session.get('option1')
+    option2 = session.get('option2')
+    option3 = session.get('option3')
+    option4 = session.get('option4')
     answer = session.get('answer')
-    print("Correct Answer:", answer)
+
+    data = request.get_json()
+
+    
+    selected = int(data.get('selected'))
+    if selected == 1:
+        op_sel = option1
+    elif selected == 2:
+        op_sel = option2
+    elif selected == 3:
+        op_sel = option3
+    elif selected == 4:
+        op_sel = option4
+
+    if op_sel == answer:
+        print('correct answer')
+    else:
+        print('wrong answer')
     
     return jsonify({"correct": selected == answer, "correct_answer": answer})
 

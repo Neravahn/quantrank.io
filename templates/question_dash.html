@@ -187,24 +187,10 @@
 
             cards.forEach(card => {
                 card.addEventListener("click", () => {
-                    const topic = card.dataset.topic;
-                    const difficulty = difficultySelect.value;
+                    currentTopic = card.dataset.topic;
+                    currentDifficulty = difficultySelect.value;
 
-                    fetch("/questions", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            topic: topic,
-                            difficulty: difficulty
-                        })
-                    })
-                        .then(res => res.json())
-                        .then(data => {
-                            //DISPLAY QUESTIONS AND OPTIONS I WILL ADD buttons
-                            document.getElementById("questions_area").innerHTML = data.html;
-                        });
+                    loadQuestion(currentTopic, currentDifficulty);
                 });
             });
 
@@ -217,6 +203,8 @@
                     .then(res => res.json())
                     .then(data => {
                         console.log(data.message);
+
+                        loadQuestion();
                     });
             }
             document.getElementById("questions_area").addEventListener("click", function (e) {
@@ -224,14 +212,14 @@
                     const selected = e.target.dataset.option;
                     submitAnswer(selected);
                 }
-                if (e.target.id === "skip_button") {
+                if (e.target.id === "skip_button" || e.target.closest('#skip_button')) {
                     skipQuestion();
                 }
             });
 
             function loadQuestion(topic = null, difficulty = null) {
-                if (!topic) topic = document.querySelector(".card.selected")?.dataset.topic;
-                if (!difficulty) difficulty = document.getElementById("difficulty").value;
+                if (!topic) topic = currentTopic;
+                if (!difficulty) difficulty = currentDifficulty;
 
                 fetch("/questions", {
                     method: "POST",
@@ -247,7 +235,6 @@
             function skipQuestion() {
                 loadQuestion();
             }
-
         </script>
 </body>
 

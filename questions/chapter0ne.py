@@ -563,7 +563,7 @@ def ratio_12():
             else:
                 continue
         
-        option = f"({ear[0], ear[1]})"
+        option = f"{ear[0], ear[1]}"
         if option not in options and option != answer:
             options.append(option)
         else:
@@ -571,6 +571,9 @@ def ratio_12():
     
     random.shuffle(options)
     return question, options, answer
+
+q, o, a = ratio_12()
+print(q, o, a)
 
 
 
