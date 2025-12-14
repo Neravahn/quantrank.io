@@ -29,3 +29,13 @@ def check_email(email):
     cursor.close()
     conn.close()
     return user
+
+def getPFP(username):
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute("SELECT profile_pic FROM users WHERE username = ?", (username,))
+    pfp = cursor.fetchone()[0]
+    conn.close()
+    
+
+    return pfp

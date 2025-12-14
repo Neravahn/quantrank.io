@@ -281,6 +281,107 @@
         .solved_count {
             font-weight: bold;
         }
+
+        #profile {
+            margin-bottom: 10px;
+        }
+
+        #profile img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        #email {
+            margin-bottom: 20px;
+        }
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+        }
+
+        .modal_content {
+            background: #111;
+            border: 2px solid #151515;
+            border-radius: 12px;
+            padding: 25px 20px;
+            width: 320px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+
+        .modal_content h3 {
+            color: #fff;
+            font-family: 'Sekuya', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        #pfp_preview {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ccc;
+            margin-bottom: 15px;
+        }
+
+        #pfp_input {
+            width: 100%;
+            color: white;
+            background: #222;
+            border: 1px solid #333;
+            border-radius: 6px;
+            padding: 6px;
+            cursor: pointer;
+        }
+
+        .modal_actions {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: 20px;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 8px 18px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .btn.cancel {
+            background: #333;
+            color: #ccc;
+        }
+
+        .btn.cancel:hover {
+            background: #444;
+        }
+
+        .btn.save {
+            background: rgb(255, 183, 0);
+            color: black;
+        }
+
+        .btn.save:hover {
+            background: #e6b800;
+        }
     </style>
 </head>
 
@@ -298,15 +399,22 @@
             </a>
             <a href="{{ url_for('questions') }}">Practice</a>
         </div>
-
         <div id="profile_pic">
-            <img src="https://avatars.slack-edge.com/2025-11-02/9825435132418_f6e6637b29c5a816a4b2_192.jpg">
+            <img src="{{ profile_pic }}">
         </div>
     </nav>
 
     <div id="main_area">
 
         <div id="stats_areaU">
+
+            <div id="profile">
+                <img src="{{ profile_pic }}">
+            </div>
+            <div id="email">
+                {{ email }}
+            </div>
+
 
             <div class="info_card">
                 <img src="{{ url_for('static', filename='images/points.png') }}">
@@ -406,12 +514,27 @@
                 </div>
             </div>
         </div>
-
-
-
-
-
     </div>
+
+
+    <div id="pfp_modal" class="modal">
+        <div class="modal_content">
+            <h3>CHANGE PFP</h3>
+
+            <img id="pfp_preview" src="{{ profile_pic }}">
+
+            <form action="{{ url_for('update_pfp') }}" method="POST" enctype="multipart/form-data">
+                <input id="pfp_input" type="file" name="pfp" accept="image/*" required>
+                <div class="modal_actions">
+                    <button type="button" class="btn cancel" onclick="closePfpModal()">Cancel</button>
+                    <button type="submit" class="btn save">Save</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
 
 
 
@@ -624,6 +747,31 @@
             });
         })();
 
+        const modal = document.getElementById("pfp_modal");
+        const preview = document.getElementById("pfp_preview");
+        const input = document.getElementById("pfp_input");
+
+        document.querySelectorAll("#profile img, #profile_pic img").forEach(img => {
+            img.addEventListener("click", () => {
+                modal.style.display = "flex";
+            });
+        });
+
+        function closePfpModal() {
+            modal.style.display = "none";
+            input.value = "";
+        }
+
+        input.addEventListener("change", () => {
+            const file = input.files[0];
+            if (file) {
+                preview.src = URL.createObjectURL(file);
+            }
+        });
+
+        modal.addEventListener("click", e => {
+            if (e.target === modal) closePfpModal();
+        });
 
 
     </script>

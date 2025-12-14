@@ -1,13 +1,23 @@
-from flask import Flask, render_template, request, session, redirect, jsonify
+from flask import Flask, render_template, request, session, redirect, jsonify, url_for
 from auth.emailAuth import send_otp
-from auth.user import check_email, check_username
+from auth.user import check_email, check_username, getPFP
 from auth.save_user import save
 from auth.login import verify_user
 from questionImport import check
 from statsFolder.userStats import stats_save, update_points, update_stats
 from statsFolder.getUserDetails import getUserData
 from statsFolder.leaderboard import leaderboard_get
+from statsFolder.getEmail import emailOf
+from werkzeug.utils import secure_filename
+import sqlite3
 
+import os
+
+
+
+
+
+os.makedirs("static/uploads/pfp", exist_ok=True)
 
 
 
@@ -109,7 +119,14 @@ def dashboard():
         if username == leaderboard[i][0] == username:
             rank = i + 1
 
-        
+    #EMAIL
+    email = emailOf(username)
+
+    #PFP
+    data = getPFP(username)
+    
+    profile_pic =data or url_for('static', filename='images/default_pfp.jpg')
+
 
     
     return render_template('dashboard.html',
@@ -119,7 +136,9 @@ def dashboard():
                             username = username,
                             points = points,
                             leaderboard = leaderboard,
-                            rank = rank
+                            rank = rank,
+                            email = email,
+                            profile_pic = profile_pic
                             )
 
 @app.route('/questions', methods = ['GET', 'POST'])
@@ -144,7 +163,7 @@ def questions():
                                     option1 = option1,
                                     option2 = option2,
                                     option3 = option3,
-                                    option4 = option4
+                                    option4 = option4,
                                     )
             return jsonify({"html": html})
     return render_template('question_dash.html')
@@ -180,6 +199,41 @@ def check_answers():
     else:
         update_points(username, -1)
         return jsonify({"message" : "wrong"})
+    
+
+
+
+@app.route("/update_pfp", methods=["POST"])
+def update_pfp():
+    DB_PATH = 'database.db'
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    if "pfp" not in request.files:
+        return redirect(url_for("dashboard"))
+
+    file = request.files["pfp"]
+
+    if file.filename == "":
+        return redirect(url_for("dashboard"))
+
+    ext = file.filename.rsplit(".", 1)[1].lower()
+    if ext not in ["png", "jpg", "jpeg", "webp"]:
+        return "Invalid file", 400
+
+    filename = f"user_{session['username']}.{ext}"
+    path = os.path.join("static/uploads/pfp", filename)
+
+    file.save(path)
+
+
+    cursor.execute(
+        "UPDATE users SET profile_pic = ? WHERE username = ?",
+        (path, session["username"])
+    )
+    conn.commit()
+
+    return redirect(url_for("dashboard"))
+
 
 
 
