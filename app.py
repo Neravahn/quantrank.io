@@ -6,6 +6,11 @@ from auth.login import verify_user
 from questionImport import check
 from statsFolder.userStats import stats_save, update_points, update_stats
 from statsFolder.getUserDetails import getUserData
+from statsFolder.leaderboard import leaderboard_get
+
+
+
+
 app = Flask(__name__)
 app.secret_key = "idk_what_secretkey_to_use"
 
@@ -92,16 +97,29 @@ def dashboard():
     easy = data[0]
     medium = data[1]
     hard = data[2]
+    points = data[3]
+
+
+    #LEADERBOARD 
+    leaderboard = leaderboard_get()
+
+    #RANK
+    rank = None
+    for i in range(len(leaderboard)):
+        if username == leaderboard[i][0] == username:
+            rank = i + 1
+
+        
+
     
     return render_template('dashboard.html',
                             easy = easy, 
                             medium = medium, 
                             hard = hard, 
                             username = username,
-                            accuracy = 'PH',
-                            total = 'PH',
-                            correct = 'PH',
-                            wrong = 'PH'
+                            points = points,
+                            leaderboard = leaderboard,
+                            rank = rank
                             )
 
 @app.route('/questions', methods = ['GET', 'POST'])
