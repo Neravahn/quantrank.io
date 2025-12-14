@@ -4,7 +4,7 @@ from auth.user import check_email, check_username, getPFP
 from auth.save_user import save
 from auth.login import verify_user
 from questionImport import check
-from statsFolder.userStats import stats_save, update_points, update_stats
+from statsFolder.userStats import stats_save, update_points, update_stats, getChapterData
 from statsFolder.getUserDetails import getUserData
 from statsFolder.leaderboard import leaderboard_get
 from statsFolder.getEmail import emailOf
@@ -123,9 +123,14 @@ def dashboard():
     email = emailOf(username)
 
     #PFP
-    data = getPFP(username)
+    data_pfp = getPFP(username)
+
+
+    #CHAPTERS DATA
+    data = getChapterData(username)
     
-    profile_pic =data or url_for('static', filename='images/default_pfp.jpg')
+    
+    profile_pic = data_pfp or url_for('static', filename='images/default_pfp.jpg')
 
 
     
@@ -138,7 +143,18 @@ def dashboard():
                             leaderboard = leaderboard,
                             rank = rank,
                             email = email,
-                            profile_pic = profile_pic
+                            profile_pic = profile_pic,
+                            chapter1 = data[0],
+                            chapter2 = data[1],
+                            chapter3 = data[2],
+                            chapter4 = data[3],
+                            chapter5 = data[4],
+                            chapter6 = data[5],
+                            chapter7 = data[6],
+                            chapter8 = data[7],
+                            chapter9 = data[8],
+                            chapter10 = data[9],
+                            chapter11 = data[10]
                             )
 
 @app.route('/questions', methods = ['GET', 'POST'])
@@ -148,6 +164,7 @@ def questions():
             topic = data.get("topic")
             difficulty = data.get('difficulty')
             session['difficulty'] = difficulty
+            session['topic'] = topic
             question, options, answer = check(difficulty, topic)
             option1 = options[0]
             option2 = options[1]
@@ -176,6 +193,7 @@ def check_answers():
     option4 = session.get('option4')
     answer = session.get('answer')
     username = session.get('username')
+    topic = session.get('topic')
     difficulty = session.get('difficulty')
 
     data = request.get_json()
@@ -193,7 +211,7 @@ def check_answers():
 
 
     if op_sel == answer:
-        update_stats(username, difficulty)
+        update_stats(username, difficulty, topic)
         update_points(username, 1)
         return jsonify({"message" : "correct"})
     else:

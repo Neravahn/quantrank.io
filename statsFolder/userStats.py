@@ -13,18 +13,28 @@ def stats_save(username):
     conn.close()
 
 
-def update_stats(username, difficulty):
+def update_stats(username, difficulty, topic):
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
 
-    query = None
-    if difficulty == 'easy':
-        query = "UPDATE stats SET easy = easy + 1 WHERE username = ?"
-    elif difficulty == 'medium':
-        query = "UPDATE stats SET medium = medium + 1 WHERE username = ?"
-    elif difficulty == 'hard':
-        query = "UPDATE stats SET hard = hard + 1 WHERE username = ?"
+    ALLOWED_COLUMNS = {
+        "easy", "medium", "hard",
+        "ratio_proportion", "indices", "logarithm",
+        "equations", "inequalities", "finance",
+        "permutations", "progression", "central_tendency",
+        "dispersion", "correlation"
+    }
 
+    if difficulty not in ALLOWED_COLUMNS or topic not in ALLOWED_COLUMNS:
+        raise ValueError("Invalid column name")
+
+    query = f"""
+    UPDATE stats
+    SET 
+        "{difficulty}" = "{difficulty}" + 1,
+        "{topic}" = "{topic}" + 1
+    WHERE username = ?
+    """
 
     cursor.execute(query, (username,))
     conn.commit()
@@ -38,7 +48,7 @@ def update_points(username, points):
 
     if points > 0:
         query = "UPDATE stats SET total_points = total_points + 1 WHERE username = ?"
-    else:
+    elif points < 0:
         query = "UPDATE stats SET total_points = total_points - 1 WHERE username = ?"
 
     cursor.execute(query, (username,))
@@ -47,6 +57,33 @@ def update_points(username, points):
     conn.close()
 
 
+def getChapterData(username):
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
 
-update_stats('prashant', 'easy')
-update_points('prashant', -1)
+    chapters = ["ratio_proportion", "indices", "logarithm",
+        "equations", "inequalities", "finance",
+        "permutations", "progression", "central_tendency",
+        "dispersion", "correlation"]
+
+    nos = []
+    for i in range( len(chapters)):
+        chapter = chapters[i]
+
+        query = f"""SELECT "{chapter}" FROM stats where username = ?"""
+        cursor.execute(query, (username,))
+
+        data = cursor.fetchone()[0]
+
+        nos.append(data)
+
+
+    cursor.close()
+    conn.close()
+    return nos
+
+
+
+
+
+
