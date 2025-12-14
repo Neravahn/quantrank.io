@@ -75,7 +75,8 @@
             width: 100%;
             display: flex;
             gap: 20px;
-            height: calc(100vh - 125px);
+            height: calc(100vh - 450px);
+            border: 2px solid #15151500;
         }
 
         #right_area {
@@ -154,29 +155,27 @@
             margin-left: 20px;
         }
 
-        #heatmap_area {
-            background: #000000;
-            min-height: 140px;
-            padding: 12px;
+        #heatmap {
+            display: inline-block;
+            background: #000;
             border-radius: 12px;
-            border: 2px solid #15151500;
-            width: 1000px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            border: 2px solid #151515;
+            width: 600px;
+            margin-top: 5px;;
         }
 
-        #profile_area {
-            border: 2px solid #151515;
+        #stats_areaU {
+            border: 2px solid #15151500;
             border-radius: 12px;
             margin-bottom: 50px;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
-            width: 350px;
-            margin-left: 250px;
+            width: 700px;
+            margin-left: 100px;
             height: 800px;
+            padding: 20px;
         }
 
         #profile-pic {
@@ -204,7 +203,7 @@
         #logo_leader {
             font-family: 'Sekuya';
             font-size: 2rem;
-            color: rgb(255, 183, 0);
+            color: rgb(206, 206, 206);
             margin-top: 20px;
         }
 
@@ -216,8 +215,8 @@
             border: 2px solid #151515;
             border-radius: 12px;
             padding: 10px 20px;
-            margin: 10px 0;
-            width: 90%;
+            margin: 5px 0;
+            width: 50%;
             color: #ffffff;
             font-size: 16px;
             gap: 10px;
@@ -227,6 +226,11 @@
             filter: invert(1);
             width: 24px;
             height: 24px;
+        }
+
+        #heatmap_text{
+            margin-top: 30px;
+            font-size: 16px;
         }
     </style>
 </head>
@@ -252,11 +256,7 @@
 
     <div id="main_area">
 
-        <div id="profile_area">
-            <img id="profile-pic" src="https://via.placeholder.com/150">
-            <div id="username">
-                uName: {{ username }}
-            </div>
+        <div id="stats_areaU">
 
             <div class="info_card">
                 <img src="{{ url_for('static', filename='images/points.png') }}">
@@ -266,6 +266,15 @@
             <div class="info_card">
                 <img src="{{ url_for('static', filename='images/rank.png') }}">
                 <span>RANK: {{ rank }}</span>
+            </div>
+
+            <div id="heatmap_text">
+                CONSISTENCY MATRIX
+            </div>
+
+            <div id="heatmap">
+                <canvas id="heatmap_canvas" width="598" height="94"></canvas>
+
             </div>
         </div>
 
@@ -287,14 +296,7 @@
                         <span>{{ points }} pts</span>
                     </div>
                     {% endfor %}
-
                 </div>
-            </div>
-
-
-            <div id="heatmap_area">
-                <div id="heatmap_txt">HEATMAP <hhi>PLACEHOLDER</hhi> TEXT</div>
-                <canvas id="heatmap_canvas" width="969" height="141"></canvas>
             </div>
 
         </div>
@@ -342,7 +344,7 @@
             const chart = new Chart(ctx, {
                 type: 'doughnut',
                 data: {
-                    labels: isEmpty ? ['NO DATA'] : canvas['EASY', 'MEDIUM', 'HARD'],
+                    labels: isEmpty ? ['NO DATA'] : ['EASY', 'MEDIUM', 'HARD'],
                     datasets: [{
                         data: isEmpty ? [1] : [easy, medium, hard],
                         backgroundColor: isEmpty
@@ -404,11 +406,11 @@
                 const canvas = document.getElementById('heatmap_canvas');
                 const ctx = canvas.getContext('2d');
 
-                const COLS = 54;
+                const COLS = 50;
                 const ROWS = 8;
-                const CELL = 15;
-                const GAP = 3;
-                const RADIUS = 5;
+                const CELL = 10;
+                const GAP = 2;
+                const RADIUS = 2;
 
                 const values = Array.from({ length: ROWS }, () =>
                     Array.from({ length: COLS }, () => Math.floor(Math.random() * 30))
