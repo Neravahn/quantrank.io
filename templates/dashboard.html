@@ -75,7 +75,7 @@
             width: 100%;
             display: flex;
             gap: 20px;
-            height: calc(100vh - 450px);
+            height: 2000px;
             border: 2px solid #15151500;
         }
 
@@ -112,7 +112,7 @@
         }
 
         .leaderboard_card {
-            border-radius: 10px;
+            border-radius: 8px;
             background: rgb(19, 19, 19);
             color: #ffffff;
             font-size: 18px;
@@ -160,8 +160,9 @@
             background: #000;
             border-radius: 12px;
             border: 2px solid #151515;
-            width: 600px;
-            margin-top: 5px;;
+            width: 700px;
+            margin-top: 5px;
+            ;
         }
 
         #stats_areaU {
@@ -176,15 +177,6 @@
             margin-left: 100px;
             height: 800px;
             padding: 20px;
-        }
-
-        #profile-pic {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid #fff;
-            margin-top: 50px;
         }
 
         navhi {
@@ -213,7 +205,7 @@
             justify-content: flex-start;
             background: rgb(19, 19, 19);
             border: 2px solid #151515;
-            border-radius: 12px;
+            border-radius: 8px;
             padding: 10px 20px;
             margin: 5px 0;
             width: 50%;
@@ -228,9 +220,66 @@
             height: 24px;
         }
 
-        #heatmap_text{
+        #heatmap_text {
             margin-top: 30px;
             font-size: 16px;
+        }
+
+        #profile_pic {
+            display: flex;
+            align-items: center;
+        }
+
+        #profile_pic img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        time {
+            color: rgb(255, 183, 0);
+        }
+
+        #chapters_area {
+            width: 80%;
+            margin: 20px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+            text-align: center;
+        }
+
+        #chapters_area h3 {
+            font-family: 'Sekuya';
+            font-size: 2rem;
+            color: rgb(206, 206, 206);
+            margin-top: 20px;
+        }
+
+        .chapter_card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgb(19, 19, 19);
+            border: 2px solid #151515;
+            border-radius: 12px;
+            padding: 10px 20px;
+            color: #ffffff;
+            font-size: 18px;
+            transition: 0.2s;
+            height: 75px;
+            width: 70%;
+        }
+
+        .chapter_card:hover {
+            cursor: pointer;
+        }
+
+        .solved_count {
+            font-weight: bold;
         }
     </style>
 </head>
@@ -248,9 +297,10 @@
                 <navhi>Dashboard</navhi>
             </a>
             <a href="{{ url_for('questions') }}">Practice</a>
-            <a href="#">Leaderboard</a>
-            <a href="#">Analysis</a>
-            <a href="#">Profile</a>
+        </div>
+
+        <div id="profile_pic">
+            <img src="https://avatars.slack-edge.com/2025-11-02/9825435132418_f6e6637b29c5a816a4b2_192.jpg">
         </div>
     </nav>
 
@@ -269,17 +319,15 @@
             </div>
 
             <div id="heatmap_text">
-                CONSISTENCY MATRIX
+                CONSISTENCY MATRIX <time>(UTC+5:30)</time>
             </div>
 
             <div id="heatmap">
-                <canvas id="heatmap_canvas" width="598" height="94"></canvas>
-
+                <canvas id="heatmap_canvas" width="698" height="110"></canvas>
             </div>
         </div>
 
         <div id="right_area">
-
             <div id="top_stats">
                 <div id="piechart">
                     <canvas id="difficultyPieChart"></canvas>
@@ -299,218 +347,286 @@
                 </div>
             </div>
 
+            <div id="chapters_area">
+                <h3>Chapters Solved</h3>
+
+                <div class="chapter_card" data-topic="ratio_proportion">
+                    <span>Chapter 1. Ratio and Proportion</span>
+                    <span class="solved_count">0 Qs</span>
+                </div>
+
+                <div class="chapter_card" data-topic="indices">
+                    <span>Chapter 2. Indices</span>
+                    <span class="solved_count">0 Qs</span>
+                </div>
+
+                <div class="chapter_card" data-topic="logarithm">
+                    <span>Chapter 3. Logarithm</span>
+                    <span class="solved_count">0 Qs</span>
+                </div>
+
+                <div class="chapter_card" data-topic="equations">
+                    <span>Chapter 4. Equations</span>
+                    <span class="solved_count">0 Qs</span>
+                </div>
+
+                <div class="chapter_card" data-topic="inequalities">
+                    <span>Chapter 5 Linear Inequalities</span>
+                    <span class="solved_count">0 Qs</span>
+                </div>
+
+                <div class="chapter_card" data-topic="finance">
+                    <span>Chapter 6. Mathematics of Finance</span>
+                    <span class="solved_count">0 Qs</span>
+                </div>
+
+                <div class="chapter_card" data-topic="permutations">
+                    <span>Chapter 7. Permutations and Combinations</span>
+                    <span class="solved_count">0 Qs</span>
+                </div>
+
+                <div class="chapter_card" data-topic="progression">
+                    <span>Chapter 8. Arithmetic and Geometric Progression</span>
+                    <span class="solved_count">0 Qs</span>
+                </div>
+
+                <div class="chapter_card" data-topic="central_tendency">
+                    <span>Chapter 9. Measures of Central Tendency</span>
+                    <span class="solved_count">0 Qs</span>
+                </div>
+
+                <div class="chapter_card" data-topic="dispersion">
+                    <span>Chapter 10. Dispersion</span>
+                    <span class="solved_count">0 Qs</span>
+                </div>
+
+                <div class="chapter_card" data-topic="correlation">
+                    <span>Chapter 11. Correlation and Regression</span>
+                    <span class="solved_count">0 Qs</span>
+                </div>
+            </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@1.2.0/dist/chartjs-chart-matrix.min.js"></script>
 
-        <script>
-            const canvas = document.getElementById('difficultyPieChart');
-            const ctx = canvas.getContext('2d');
 
-            // BACKEND VALUES
-            const easy = {{ easy }};
-            const medium = {{ medium }};
-            const hard = {{ hard }};
 
-            const centerTextPlugin = {
-                id: 'centerText',
-                beforeDraw(chart) {
-                    const { ctx, chartArea } = chart;
-                    const centerX = (chartArea.left + chartArea.right) / 2;
-                    const centerY = (chartArea.top + chartArea.bottom) / 2;
 
-                    ctx.save();
-                    ctx.textAlign = 'center';
-                    ctx.textBaseline = 'middle';
 
-                    const text = chart.$centerText || '';
-                    const lines = text.split('\n');
+    </div>
 
-                    ctx.font = '600 22px Nunito';
-                    ctx.fillStyle = '#ffffff';
-                    ctx.fillText(lines[0] || '', centerX, centerY + 10);
 
-                    ctx.font = '400 20px Nunito';
-                    ctx.fillStyle = '#bfbfbf';
-                    ctx.fillText(lines[1] || '', centerX, centerY + 30);
 
-                    ctx.restore();
-                }
-            };
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@1.2.0/dist/chartjs-chart-matrix.min.js"></script>
 
-            const total = easy + medium + hard
-            const isEmpty = total == 0
+    <script>
+        const canvas = document.getElementById('difficultyPieChart');
+        const ctx = canvas.getContext('2d');
 
-            const chart = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: isEmpty ? ['NO DATA'] : ['EASY', 'MEDIUM', 'HARD'],
-                    datasets: [{
-                        data: isEmpty ? [1] : [easy, medium, hard],
-                        backgroundColor: isEmpty
-                            ? ['#555']
-                            : ['#2ecc71', '#f1c40f', '#e74c3c'],
-                        borderWidth: 0,
-                        hoverOffset: 20
-                    }]
-                },
-                options: {
-                    cutout: '60%',
-                    rotation: -135,
-                    circumference: 270,
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    layout: {
-                        padding: 25
-                    },
-                    plugins: {
-                        legend: { display: false },
-                        tooltip: { enabled: false }
-                    }
-                },
-                plugins: [centerTextPlugin]
-            });
+        // BACKEND VALUES
+        const easy = {{ easy }};
+        const medium = {{ medium }};
+        const hard = {{ hard }};
 
-            chart.$centerText = isEmpty ? 'NO DATA' : `TOTAL\n ${total}`;
-            chart.draw();
+        const centerTextPlugin = {
+            id: 'centerText',
+            beforeDraw(chart) {
+                const { ctx, chartArea } = chart;
+                const centerX = (chartArea.left + chartArea.right) / 2;
+                const centerY = (chartArea.top + chartArea.bottom) / 2;
 
-            if (!isEmpty) {
-                canvas.addEventListener('mousemove', (event) => {
-                    const elements = chart.getElementsAtEventForMode(
-                        event,
-                        'nearest',
-                        { intersect: true },
-                        false
-                    );
+                ctx.save();
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
 
-                    if (elements.length) {
-                        const index = elements[0].index;
-                        const label = chart.data.labels[index];
-                        const value = chart.data.datasets[0].data[index];
-                        chart.$centerText = `${label}\n${value}`;
-                    } else {
-                        chart.$centerText = `TOTAL\n${total}`;
-                    }
+                const text = chart.$centerText || '';
+                const lines = text.split('\n');
 
-                    chart.draw();
-                });
+                ctx.font = '600 22px Nunito';
+                ctx.fillStyle = '#ffffff';
+                ctx.fillText(lines[0] || '', centerX, centerY + 10);
 
-                canvas.addEventListener('mouseleave', () => {
-                    chart.$centerText = `TOTAL\n${total}`;
-                    chart.draw();
-                });
+                ctx.font = '400 20px Nunito';
+                ctx.fillStyle = '#bfbfbf';
+                ctx.fillText(lines[1] || '', centerX, centerY + 30);
+
+                ctx.restore();
             }
+        };
 
-            // HEATMAP CHART
-            (() => {
-                const canvas = document.getElementById('heatmap_canvas');
-                const ctx = canvas.getContext('2d');
+        const total = easy + medium + hard
+        const isEmpty = total == 0
 
-                const COLS = 50;
-                const ROWS = 8;
-                const CELL = 10;
-                const GAP = 2;
-                const RADIUS = 2;
+        const chart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: isEmpty ? ['NO DATA'] : ['EASY', 'MEDIUM', 'HARD'],
+                datasets: [{
+                    data: isEmpty ? [1] : [easy, medium, hard],
+                    backgroundColor: isEmpty
+                        ? ['#555']
+                        : ['#2ecc71', '#f1c40f', '#e74c3c'],
+                    borderWidth: 0,
+                    hoverOffset: 20
+                }]
+            },
+            options: {
+                cutout: '60%',
+                rotation: -135,
+                circumference: 270,
+                responsive: true,
+                maintainAspectRatio: false,
+                layout: {
+                    padding: 25
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { enabled: false }
+                }
+            },
+            plugins: [centerTextPlugin]
+        });
 
-                const values = Array.from({ length: ROWS }, () =>
-                    Array.from({ length: COLS }, () => Math.floor(Math.random() * 30))
+        chart.$centerText = isEmpty ? 'NO DATA' : `TOTAL\n ${total}`;
+        chart.draw();
+
+        if (!isEmpty) {
+            canvas.addEventListener('mousemove', (event) => {
+                const elements = chart.getElementsAtEventForMode(
+                    event,
+                    'nearest',
+                    { intersect: true },
+                    false
                 );
 
-                function getHeatColor(value) {
-                    if (value <= 0) return 'rgba(40, 40, 40, 1)';
-                    const max = 20;
-                    const intensity = Math.min(value, max) / max;
-                    const r = Math.floor(46 * (0.3 + 0.7 * intensity));
-                    const g = Math.floor(204 * (0.3 + 0.7 * intensity));
-                    const b = Math.floor(113 * (0.3 + 0.7 * intensity));
-                    return `rgb(${r}, ${g}, ${b})`;
+                if (elements.length) {
+                    const index = elements[0].index;
+                    const label = chart.data.labels[index];
+                    const value = chart.data.datasets[0].data[index];
+                    chart.$centerText = `${label}\n${value}`;
+                } else {
+                    chart.$centerText = `TOTAL\n${total}`;
                 }
 
-                function roundRect(x, y, w, h, r) {
-                    ctx.beginPath();
-                    ctx.moveTo(x + r, y);
-                    ctx.lineTo(x + w - r, y);
-                    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
-                    ctx.lineTo(x + w, y + h - r);
-                    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
-                    ctx.lineTo(x + r, y + h);
-                    ctx.quadraticCurveTo(x, y + h, x, y + h - r);
-                    ctx.lineTo(x, y + r);
-                    ctx.quadraticCurveTo(x, y, x + r, y);
-                    ctx.closePath();
-                    ctx.fill();
-                }
+                chart.draw();
+            });
 
-                function draw() {
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    for (let y = 0; y < ROWS; y++) {
-                        for (let x = 0; x < COLS; x++) {
-                            const px = x * (CELL + GAP);
-                            const py = y * (CELL + GAP);
+            canvas.addEventListener('mouseleave', () => {
+                chart.$centerText = `TOTAL\n${total}`;
+                chart.draw();
+            });
+        }
+
+        // HEATMAP CHART
+        (() => {
+            const canvas = document.getElementById('heatmap_canvas');
+            const ctx = canvas.getContext('2d');
+
+            const COLS = 50;
+            const ROWS = 8;
+            const CELL = 10;
+            const GAP = 4
+            const RADIUS = 2;
+
+            const values = Array.from({ length: ROWS }, () =>
+                Array.from({ length: COLS }, () => Math.floor(Math.random() * 30))
+            );
+
+            function getHeatColor(value) {
+                if (value <= 0) return 'rgba(40, 40, 40, 1)';
+                const max = 20;
+                const intensity = Math.min(value, max) / max;
+                const r = Math.floor(46 * (0.3 + 0.7 * intensity));
+                const g = Math.floor(204 * (0.3 + 0.7 * intensity));
+                const b = Math.floor(113 * (0.3 + 0.7 * intensity));
+                return `rgb(${r}, ${g}, ${b})`;
+            }
+
+            function roundRect(x, y, w, h, r) {
+                ctx.beginPath();
+                ctx.moveTo(x + r, y);
+                ctx.lineTo(x + w - r, y);
+                ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+                ctx.lineTo(x + w, y + h - r);
+                ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+                ctx.lineTo(x + r, y + h);
+                ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+                ctx.lineTo(x, y + r);
+                ctx.quadraticCurveTo(x, y, x + r, y);
+                ctx.closePath();
+                ctx.fill();
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                for (let y = 0; y < ROWS; y++) {
+                    for (let x = 0; x < COLS; x++) {
+                        const px = x * (CELL + GAP);
+                        const py = y * (CELL + GAP);
+                        const value = values[y][x];
+                        ctx.fillStyle = getHeatColor(value);
+                        roundRect(px, py, CELL, CELL, RADIUS);
+                    }
+                }
+            }
+
+            draw();
+
+            const tooltip = document.createElement('div');
+            tooltip.style.position = 'absolute';
+            tooltip.style.padding = '6px 10px';
+            tooltip.style.background = '#222';
+            tooltip.style.color = '#fff';
+            tooltip.style.borderRadius = '4px';
+            tooltip.style.border = '1.5px solid #fff';
+            tooltip.style.fontSize = '14px';
+            tooltip.style.pointerEvents = 'none';
+            tooltip.style.transition = '0.1s';
+            tooltip.style.opacity = 0;
+            document.body.appendChild(tooltip);
+
+            canvas.addEventListener('mousemove', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                const mouseX = e.clientX - rect.left;
+                const mouseY = e.clientY - rect.top;
+
+                let found = false;
+
+                for (let y = 0; y < ROWS; y++) {
+                    for (let x = 0; x < COLS; x++) {
+                        const px = x * (CELL + GAP);
+                        const py = y * (CELL + GAP);
+                        if (
+                            mouseX >= px &&
+                            mouseX <= px + CELL &&
+                            mouseY >= py &&
+                            mouseY <= py + CELL
+                        ) {
                             const value = values[y][x];
-                            ctx.fillStyle = getHeatColor(value);
-                            roundRect(px, py, CELL, CELL, RADIUS);
+                            tooltip.innerText = `Points: ${value} on 00-00-0000`;
+                            tooltip.style.left = `${rect.left + mouseX + 10}px`;
+                            tooltip.style.top = `${rect.top + mouseY + 10}px`;
+                            tooltip.style.opacity = 1;
+                            found = true;
+                            canvas.style.cursor = 'pointer';
+                            break;
                         }
                     }
+                    if (found) break;
                 }
 
-                draw();
-
-                const tooltip = document.createElement('div');
-                tooltip.style.position = 'absolute';
-                tooltip.style.padding = '6px 10px';
-                tooltip.style.background = '#222';
-                tooltip.style.color = '#fff';
-                tooltip.style.borderRadius = '4px';
-                tooltip.style.border = '1.5px solid #fff';
-                tooltip.style.fontSize = '14px';
-                tooltip.style.pointerEvents = 'none';
-                tooltip.style.transition = '0.1s';
-                tooltip.style.opacity = 0;
-                document.body.appendChild(tooltip);
-
-                canvas.addEventListener('mousemove', (e) => {
-                    const rect = canvas.getBoundingClientRect();
-                    const mouseX = e.clientX - rect.left;
-                    const mouseY = e.clientY - rect.top;
-
-                    let found = false;
-
-                    for (let y = 0; y < ROWS; y++) {
-                        for (let x = 0; x < COLS; x++) {
-                            const px = x * (CELL + GAP);
-                            const py = y * (CELL + GAP);
-                            if (
-                                mouseX >= px &&
-                                mouseX <= px + CELL &&
-                                mouseY >= py &&
-                                mouseY <= py + CELL
-                            ) {
-                                const value = values[y][x];
-                                tooltip.innerText = `Points: ${value} on 00-00-0000`;
-                                tooltip.style.left = `${rect.left + mouseX + 10}px`;
-                                tooltip.style.top = `${rect.top + mouseY + 10}px`;
-                                tooltip.style.opacity = 1;
-                                found = true;
-                                break;
-                            }
-                        }
-                        if (found) break;
-                    }
-
-                    if (!found) {
-                        tooltip.style.opacity = 0;
-                    }
-                });
-
-                canvas.addEventListener('mouseleave', () => {
+                if (!found) {
                     tooltip.style.opacity = 0;
-                });
-            })();
+                }
+            });
+
+            canvas.addEventListener('mouseleave', () => {
+                tooltip.style.opacity = 0;
+            });
+        })();
 
 
 
-        </script>
+    </script>
 
 </body>
 
