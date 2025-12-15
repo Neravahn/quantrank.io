@@ -24,12 +24,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: #0d0d0d;
+            background: #000000;
             color: white;
+            flex-direction: column;
         }
 
         #main_container {
-            background: #1b1b1b;
+            background: #0a0a0a;
             padding: 35px;
             width: 350px;
             border-radius: 14px;
@@ -50,17 +51,18 @@
 
         input {
             padding: 12px;
-            border-radius: 2px;
+            border-radius: 8px;
             border: none;
-            background: #2b2b2b;
+            background: #161616;
             color: white;
             font-size: 15px;
             outline: none;
             transition: 0.2s;
+            border: 1px solid #161616;
         }
 
         input:focus {
-            background: #333;
+            background: #1f1f1f;
             border: 1px solid rgb(255, 183, 0);
             outline: none;
         }
@@ -100,15 +102,22 @@
                 padding: 25px;
             }
         }
+
+        #login_logo {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
     </style>
 
 </head>
 
 <body>
+    <div id="login_logo">
+            LOGIN
+        </div>
     <div id="main_container">
         <form id="login_form" action="/login" method="POST">
-
-            <label for="username">ENTER USERANAME</label>
+            <label for="username">ENTER USERNAME</label>
             <input id="username" name="username" type="text" required>
 
             <label for="password">ENTER PASSWORD</label>

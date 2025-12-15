@@ -9,6 +9,7 @@ from statsFolder.getUserDetails import getUserData
 from statsFolder.leaderboard import leaderboard_get
 from statsFolder.getEmail import emailOf
 from werkzeug.utils import secure_filename
+from statsFolder.heatmap import init_newUser, save_Points
 import sqlite3
 
 import os
@@ -35,13 +36,16 @@ def signup():
         name = request.form['name']
         email = request.form['email']
         password = request.form['password']
-        username = request.form['username']
+        username = request.form['username'].replace(" ", "")
 
         if check_username(username):
             return render_template('auth/signup.html', error = "USERNAME already in use")
         
         elif check_email(email):
             return render_template('auth/signup.html', error= "E-MAIL already in use")
+        if " " in username:
+            return render_template("auth/signup.html", error="Username cannot contain spaces")
+
         
         otp = send_otp(email)
         if otp is None:
@@ -67,8 +71,14 @@ def verify():
 
 
         if user_otp == real_otp:
-            save(name, username, email, password)
+            pfp = 'static/images/default_pfp.png'
+            
+            #DATABASE SAVINGS
+            save(name, username, email, password, pfp)
             stats_save(username)
+            init_newUser(username)
+
+
             session.pop('username_signup', None)
             session.pop('email_signup', None)
             session.pop('password_signup', None)
@@ -213,6 +223,7 @@ def check_answers():
     if op_sel == answer:
         update_stats(username, difficulty, topic)
         update_points(username, 1)
+        save_Points(username)
         return jsonify({"message" : "correct"})
     else:
         update_points(username, -1)
