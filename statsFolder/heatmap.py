@@ -59,3 +59,18 @@ def save_Points(username):
 
     conn.commit()
     conn.close()
+
+
+
+def getHeatMap_data(username):
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+
+    query = "SELECT activity_date, points FROM heatmap WHERE username = ?"
+    cursor.execute(query, (username,))
+    data = cursor.fetchall()
+
+    conn.close()
+
+    return data
+

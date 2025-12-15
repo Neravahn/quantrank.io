@@ -159,7 +159,7 @@
             display: inline-block;
             background: #000;
             border-radius: 12px;
-            border: 2px solid #151515;
+            border: 2px solid #15151500;
             width: 700px;
             margin-top: 5px;
             ;
@@ -643,110 +643,121 @@
         // HEATMAP CHART
         (() => {
             const canvas = document.getElementById('heatmap_canvas');
-            const ctx = canvas.getContext('2d');
+            const HEATMAP_DATA = {{ heatmap_data | tojson
+        }};
+        const ctx = canvas.getContext('2d');
 
-            const COLS = 50;
-            const ROWS = 8;
-            const CELL = 10;
-            const GAP = 4
-            const RADIUS = 2;
+        const COLS = 50;
+        const ROWS = 8;
+        const CELL = 10;
+        const GAP = 4;
+        const RADIUS = 2;
 
-            const values = Array.from({ length: ROWS }, () =>
-                Array.from({ length: COLS }, () => Math.floor(Math.random() * 30))
-            );
+        // Sort dates ascending
+        const dates = Object.keys(HEATMAP_DATA).sort();
+        const pointsArray = dates.map(d => HEATMAP_DATA[d]);
 
-            function getHeatColor(value) {
-                if (value <= 0) return 'rgba(40, 40, 40, 1)';
-                const max = 20;
-                const intensity = Math.min(value, max) / max;
-                const r = Math.floor(46 * (0.3 + 0.7 * intensity));
-                const g = Math.floor(204 * (0.3 + 0.7 * intensity));
-                const b = Math.floor(113 * (0.3 + 0.7 * intensity));
-                return `rgb(${r}, ${g}, ${b})`;
-            }
+        // Fill 8x50 matrix
+        const values = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
+        for (let i = 0; i < COLS * ROWS; i++) {
+            const row = Math.floor(i / COLS);
+            const col = i % COLS;
+            if (i < pointsArray.length) values[row][col] = pointsArray[i];
+        }
 
-            function roundRect(x, y, w, h, r) {
-                ctx.beginPath();
-                ctx.moveTo(x + r, y);
-                ctx.lineTo(x + w - r, y);
-                ctx.quadraticCurveTo(x + w, y, x + w, y + r);
-                ctx.lineTo(x + w, y + h - r);
-                ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
-                ctx.lineTo(x + r, y + h);
-                ctx.quadraticCurveTo(x, y + h, x, y + h - r);
-                ctx.lineTo(x, y + r);
-                ctx.quadraticCurveTo(x, y, x + r, y);
-                ctx.closePath();
-                ctx.fill();
-            }
+        function getHeatColor(value) {
+            if (value <= 0) return 'rgba(40, 40, 40, 1)';
+            const max = 20;
+            const intensity = Math.min(value, max) / max;
+            const r = Math.floor(46 * (0.3 + 0.7 * intensity));
+            const g = Math.floor(204 * (0.3 + 0.7 * intensity));
+            const b = Math.floor(113 * (0.3 + 0.7 * intensity));
+            return `rgb(${r}, ${g}, ${b})`;
+        }
 
-            function draw() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                for (let y = 0; y < ROWS; y++) {
-                    for (let x = 0; x < COLS; x++) {
-                        const px = x * (CELL + GAP);
-                        const py = y * (CELL + GAP);
-                        const value = values[y][x];
-                        ctx.fillStyle = getHeatColor(value);
-                        roundRect(px, py, CELL, CELL, RADIUS);
-                    }
+        function roundRect(x, y, w, h, r) {
+            ctx.beginPath();
+            ctx.moveTo(x + r, y);
+            ctx.lineTo(x + w - r, y);
+            ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+            ctx.lineTo(x + w, y + h - r);
+            ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+            ctx.lineTo(x + r, y + h);
+            ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+            ctx.lineTo(x, y + r);
+            ctx.quadraticCurveTo(x, y, x + r, y);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let y = 0; y < ROWS; y++) {
+                for (let x = 0; x < COLS; x++) {
+                    const px = x * (CELL + GAP);
+                    const py = y * (CELL + GAP);
+                    const value = values[y][x] || 0;
+                    ctx.fillStyle = getHeatColor(value);
+                    roundRect(px, py, CELL, CELL, RADIUS);
                 }
             }
+        }
 
-            draw();
+        draw();
 
-            const tooltip = document.createElement('div');
-            tooltip.style.position = 'absolute';
-            tooltip.style.padding = '6px 10px';
-            tooltip.style.background = '#222';
-            tooltip.style.color = '#fff';
-            tooltip.style.borderRadius = '4px';
-            tooltip.style.border = '1.5px solid #fff';
-            tooltip.style.fontSize = '14px';
-            tooltip.style.pointerEvents = 'none';
-            tooltip.style.transition = '0.1s';
+        // Tooltip
+        const tooltip = document.createElement('div');
+        tooltip.style.position = 'absolute';
+        tooltip.style.padding = '6px 10px';
+        tooltip.style.background = '#222';
+        tooltip.style.color = '#fff';
+        tooltip.style.borderRadius = '4px';
+        tooltip.style.border = '1.5px solid #fff';
+        tooltip.style.fontSize = '14px';
+        tooltip.style.pointerEvents = 'none';
+        tooltip.style.transition = '0.1s';
+        tooltip.style.opacity = 0;
+        document.body.appendChild(tooltip);
+
+        canvas.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+
+            let found = false;
+            for (let y = 0; y < ROWS; y++) {
+                for (let x = 0; x < COLS; x++) {
+                    const px = x * (CELL + GAP);
+                    const py = y * (CELL + GAP);
+                    if (
+                        mouseX >= px &&
+                        mouseX <= px + CELL &&
+                        mouseY >= py &&
+                        mouseY <= py + CELL
+                    ) {
+                        const idx = y * COLS + x;
+                        const value = pointsArray[idx] || 0;
+                        const date = dates[idx] || 'N/A';
+                        tooltip.innerText = `Points: ${value} on ${date}`;
+                        tooltip.style.left = `${rect.left + mouseX + 10}px`;
+                        tooltip.style.top = `${rect.top + mouseY + 10}px`;
+                        tooltip.style.opacity = 1;
+                        found = true;
+                        canvas.style.cursor = 'pointer';
+                        break;
+                    }
+                }
+                if (found) break;
+            }
+
+            if (!found) tooltip.style.opacity = 0;
+        });
+
+        canvas.addEventListener('mouseleave', () => {
             tooltip.style.opacity = 0;
-            document.body.appendChild(tooltip);
+        });
+}) ();
 
-            canvas.addEventListener('mousemove', (e) => {
-                const rect = canvas.getBoundingClientRect();
-                const mouseX = e.clientX - rect.left;
-                const mouseY = e.clientY - rect.top;
-
-                let found = false;
-
-                for (let y = 0; y < ROWS; y++) {
-                    for (let x = 0; x < COLS; x++) {
-                        const px = x * (CELL + GAP);
-                        const py = y * (CELL + GAP);
-                        if (
-                            mouseX >= px &&
-                            mouseX <= px + CELL &&
-                            mouseY >= py &&
-                            mouseY <= py + CELL
-                        ) {
-                            const value = values[y][x];
-                            tooltip.innerText = `Points: ${value} on 00-00-0000`;
-                            tooltip.style.left = `${rect.left + mouseX + 10}px`;
-                            tooltip.style.top = `${rect.top + mouseY + 10}px`;
-                            tooltip.style.opacity = 1;
-                            found = true;
-                            canvas.style.cursor = 'pointer';
-                            break;
-                        }
-                    }
-                    if (found) break;
-                }
-
-                if (!found) {
-                    tooltip.style.opacity = 0;
-                }
-            });
-
-            canvas.addEventListener('mouseleave', () => {
-                tooltip.style.opacity = 0;
-            });
-        })();
 
         const modal = document.getElementById("pfp_modal");
         const preview = document.getElementById("pfp_preview");

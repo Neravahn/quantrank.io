@@ -9,7 +9,7 @@ from statsFolder.getUserDetails import getUserData
 from statsFolder.leaderboard import leaderboard_get
 from statsFolder.getEmail import emailOf
 from werkzeug.utils import secure_filename
-from statsFolder.heatmap import init_newUser, save_Points
+from statsFolder.heatmap import init_newUser, save_Points, getHeatMap_data
 import sqlite3
 
 import os
@@ -113,11 +113,11 @@ def dashboard():
         return redirect('/login')
     
     username = session.get('username')
-    data = getUserData(username)
-    easy = data[0]
-    medium = data[1]
-    hard = data[2]
-    points = data[3]
+    data_u = getUserData(username)
+    easy = data_u[0]
+    medium = data_u[1]
+    hard = data_u[2]
+    points = data_u[3]
 
 
     #LEADERBOARD 
@@ -126,7 +126,7 @@ def dashboard():
     #RANK
     rank = None
     for i in range(len(leaderboard)):
-        if username == leaderboard[i][0] == username:
+        if username == leaderboard[i][0]:
             rank = i + 1
 
     #EMAIL
@@ -138,6 +138,13 @@ def dashboard():
 
     #CHAPTERS DATA
     data = getChapterData(username)
+
+
+    #HEATMAP 
+    rows = getHeatMap_data(username)
+
+    heatmap_data = {date: points for date, points in rows}
+
     
     
     profile_pic = data_pfp or url_for('static', filename='images/default_pfp.jpg')
@@ -164,7 +171,8 @@ def dashboard():
                             chapter8 = data[7],
                             chapter9 = data[8],
                             chapter10 = data[9],
-                            chapter11 = data[10]
+                            chapter11 = data[10],
+                            heatmap_data = heatmap_data
                             )
 
 @app.route('/questions', methods = ['GET', 'POST'])
