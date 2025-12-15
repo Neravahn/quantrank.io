@@ -134,6 +134,7 @@ def dashboard():
 
     #PFP
     data_pfp = getPFP(username)
+    profile_pic = data_pfp or url_for('static', filename='images/default_pfp.jpg')
 
 
     #CHAPTERS DATA
@@ -147,7 +148,7 @@ def dashboard():
 
     
     
-    profile_pic = data_pfp or url_for('static', filename='images/default_pfp.jpg')
+
 
 
     
@@ -177,6 +178,11 @@ def dashboard():
 
 @app.route('/questions', methods = ['GET', 'POST'])
 def questions():
+    username = session.get('username')
+    data_pfp = getPFP(username)
+    profile_pic = data_pfp or url_for('static', filename='images/default_pfp.jpg')
+
+
     if request.method== 'POST':
             data = request.get_json()
             topic = data.get("topic")
@@ -193,15 +199,16 @@ def questions():
             session['option3'] = option3
             session['option4'] = option4
             session['answer'] = answer
+
             html = render_template("questions.html",
                                     question = question, 
                                     option1 = option1,
                                     option2 = option2,
                                     option3 = option3,
-                                    option4 = option4,
+                                    option4 = option4
                                     )
             return jsonify({"html": html})
-    return render_template('question_dash.html')
+    return render_template('question_dash.html', profile_pic = profile_pic)
 
 @app.route('/check_answers', methods=['POST'])
 def check_answers():
@@ -272,6 +279,12 @@ def update_pfp():
     return redirect(url_for("dashboard"))
 
 
+
+
+@app.route('/logout', methods=['POST'])
+def logout():
+    session.clear()
+    return redirect('/') 
 
 
 if __name__ == "__main__":

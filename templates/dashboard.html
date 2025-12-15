@@ -18,8 +18,8 @@
         }
 
         @font-face {
-            font-family: 'Sekuya';
-            src: url("{{ url_for('static', filename='fonts/Sekuya-Regular.ttf') }}") format('truetype');
+            font-family: 'Bungee';
+            src: url("{{ url_for('static', filename='fonts/Bungee-Regular.ttf') }}") format('truetype');
         }
 
         * {
@@ -75,7 +75,7 @@
             width: 100%;
             display: flex;
             gap: 20px;
-            height: 2000px;
+            height: 550px;
             border: 2px solid #15151500;
         }
 
@@ -193,10 +193,11 @@
         }
 
         #logo_leader {
-            font-family: 'Sekuya';
+            font-family: 'Bungee';
             font-size: 2rem;
             color: rgb(206, 206, 206);
             margin-top: 20px;
+            letter-spacing: 2px;
         }
 
         .info_card {
@@ -243,20 +244,21 @@
         }
 
         #chapters_area {
-            width: 80%;
-            margin: 20px auto;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            align-items: center;
+            width: 90%;
+            margin: 10px auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
             text-align: center;
+
         }
 
         #chapters_area h3 {
-            font-family: 'Sekuya';
+            font-family: 'Bungee';
             font-size: 2rem;
             color: rgb(206, 206, 206);
             margin-top: 20px;
+            letter-spacing: 2px;
         }
 
         .chapter_card {
@@ -270,13 +272,16 @@
             color: #ffffff;
             font-size: 18px;
             transition: 0.2s;
-            height: 75px;
-            width: 70%;
+            height: 70px;
+            width: 100%;
+            transition: all 0.2s ease;
         }
 
         .chapter_card:hover {
             cursor: pointer;
+            transform: scale(1.01);
         }
+
 
         .solved_count {
             font-weight: bold;
@@ -325,7 +330,7 @@
 
         .modal_content h3 {
             color: #fff;
-            font-family: 'Sekuya', sans-serif;
+            font-family: 'Bungee', sans-serif;
             font-size: 1.5rem;
             margin-bottom: 10px;
         }
@@ -383,6 +388,13 @@
         .btn.save:hover {
             background: #e6b800;
         }
+
+        #nav-center img {
+            width: 25px;
+            height: 25px;
+            filter: invert(1);
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -394,15 +406,29 @@
             </h3>
         </div>
 
+
+        <!---CENTER NAV AREA-->
         <div id="nav-center">
+
             <a href="{{ url_for('dashboard') }}">
                 <navhi>Dashboard</navhi>
             </a>
-            <a href="{{ url_for('questions') }}">Practice</a>
+            <a href="{{ url_for('questions') }}">
+                Practice
+            </a>
+
+            <form id="logoutForm" action="{{ url_for('logout') }}" method="POST" style="display:none;"></form>
+
+            <img src="{{ url_for('static', filename='images/logout.png') }}" alt="Logout"
+                onclick="document.getElementById('logoutForm').submit();">
+
         </div>
+
+        <!--RIGHT PROFILE PIC-->
         <div id="profile_pic">
             <img src="{{ profile_pic }}">
         </div>
+
     </nav>
 
     <div id="main_area">
@@ -419,7 +445,7 @@
 
             <div class="info_card">
                 <img src="{{ url_for('static', filename='images/points.png') }}">
-                <span>POINTS EARNED: {{ points }}</span>
+                <span>TOTAL POINTS: {{ points }}</span>
             </div>
 
             <div class="info_card">
@@ -428,7 +454,7 @@
             </div>
 
             <div id="heatmap_text">
-                CONSISTENCY MATRIX <time>(UTC+5:30)</time>
+                CONSISTENCY MATRIX | TIMEZONE <time>(UTC+5:30)</time>
             </div>
 
             <div id="heatmap">
@@ -455,65 +481,65 @@
                     {% endfor %}
                 </div>
             </div>
+        </div>
+    </div>
 
-            <div id="chapters_area">
-                <h3>Chapters Solved</h3>
+    <div id="chapters_area">
+        <h3>Chapters Solved:</h3>
 
-                <div class="chapter_card" data-topic="ratio_proportion">
-                    <span>Chapter 1. Ratio and Proportion</span>
-                    <span class="solved_count">{{ chapter1 }} Qs</span>
-                </div>
+        <div class="chapter_card" data-topic="ratio_proportion">
+            <span>Chapter 1. Ratio and Proportion</span>
+            <span class="solved_count">{{ chapter1 }} Qs</span>
+        </div>
 
-                <div class="chapter_card" data-topic="indices">
-                    <span>Chapter 2. Indices</span>
-                    <span class="solved_count">{{ chapter2 }} Qs</span>
-                </div>
+        <div class="chapter_card" data-topic="indices">
+            <span>Chapter 2. Indices</span>
+            <span class="solved_count">{{ chapter2 }} Qs</span>
+        </div>
 
-                <div class="chapter_card" data-topic="logarithm">
-                    <span>Chapter 3. Logarithm</span>
-                    <span class="solved_count">{{ chapter3 }} Qs</span>
-                </div>
+        <div class="chapter_card" data-topic="logarithm">
+            <span>Chapter 3. Logarithm</span>
+            <span class="solved_count">{{ chapter3 }} Qs</span>
+        </div>
 
-                <div class="chapter_card" data-topic="equations">
-                    <span>Chapter 4. Equations</span>
-                    <span class="solved_count">{{ chapter4 }} Qs</span>
-                </div>
+        <div class="chapter_card" data-topic="equations">
+            <span>Chapter 4. Equations</span>
+            <span class="solved_count">{{ chapter4 }} Qs</span>
+        </div>
 
-                <div class="chapter_card" data-topic="inequalities">
-                    <span>Chapter 5 Linear Inequalities</span>
-                    <span class="solved_count">{{ chapter5 }} Qs</span>
-                </div>
+        <div class="chapter_card" data-topic="inequalities">
+            <span>Chapter 5 Linear Inequalities</span>
+            <span class="solved_count">{{ chapter5 }} Qs</span>
+        </div>
 
-                <div class="chapter_card" data-topic="finance">
-                    <span>Chapter 6. Mathematics of Finance</span>
-                    <span class="solved_count">{{ chapter6 }} Qs</span>
-                </div>
+        <div class="chapter_card" data-topic="finance">
+            <span>Chapter 6. Mathematics of Finance</span>
+            <span class="solved_count">{{ chapter6 }} Qs</span>
+        </div>
 
-                <div class="chapter_card" data-topic="permutations">
-                    <span>Chapter 7. Permutations and Combinations</span>
-                    <span class="solved_count">{{ chapter7 }} Qs</span>
-                </div>
+        <div class="chapter_card" data-topic="permutations">
+            <span>Chapter 7. Permutations and Combinations</span>
+            <span class="solved_count">{{ chapter7 }} Qs</span>
+        </div>
 
-                <div class="chapter_card" data-topic="progression">
-                    <span>Chapter 8. Arithmetic and Geometric Progression</span>
-                    <span class="solved_count">{{ chapter8 }} Qs</span>
-                </div>
+        <div class="chapter_card" data-topic="progression">
+            <span>Chapter 8. Arithmetic and Geometric Progression</span>
+            <span class="solved_count">{{ chapter8 }} Qs</span>
+        </div>
 
-                <div class="chapter_card" data-topic="central_tendency">
-                    <span>Chapter 9. Measures of Central Tendency</span>
-                    <span class="solved_count">{{ chapter9 }} Qs</span>
-                </div>
+        <div class="chapter_card" data-topic="central_tendency">
+            <span>Chapter 9. Measures of Central Tendency</span>
+            <span class="solved_count">{{ chapter9 }} Qs</span>
+        </div>
 
-                <div class="chapter_card" data-topic="dispersion">
-                    <span>Chapter 10. Dispersion</span>
-                    <span class="solved_count">{{ chapter10 }} Qs</span>
-                </div>
+        <div class="chapter_card" data-topic="dispersion">
+            <span>Chapter 10. Dispersion</span>
+            <span class="solved_count">{{ chapter10 }} Qs</span>
+        </div>
 
-                <div class="chapter_card" data-topic="correlation">
-                    <span>Chapter 11. Correlation and Regression</span>
-                    <span class="solved_count">{{ chapter11 }} Qs</span>
-                </div>
-            </div>
+        <div class="chapter_card" data-topic="correlation">
+            <span>Chapter 11. Correlation and Regression</span>
+            <span class="solved_count">{{ chapter11 }} Qs</span>
         </div>
     </div>
 

@@ -133,16 +133,17 @@
             color: rgb(255, 183, 0);
         }
 
-        #profile_pic {
-            display: flex;
-            align-items: center;
-        }
-
         #profile_pic img {
             width: 45px;
             height: 45px;
             border-radius: 50%;
             object-fit: cover;
+            cursor: pointer;
+        }
+        #nav-center img {
+            width: 25px;
+            height: 25px;
+            filter: invert(1);
             cursor: pointer;
         }
     </style>
@@ -156,15 +157,23 @@
         </div>
 
         <div id="nav-center">
+
             <a href="{{ url_for('dashboard') }}">
                 Dashboard
             </a>
             <a href="{{ url_for('questions') }}">
-                <navhi>Practice</navhi></a>
+                <navhi>Practice</navhi>
+            </a>
+
+            <form id="logoutForm" action="{{ url_for('logout') }}" method="POST" style="display:none;"></form>
+
+            <img src="{{ url_for('static', filename='images/logout.png') }}" alt="Logout"
+                onclick="document.getElementById('logoutForm').submit();">
+
         </div>
 
         <div id="profile_pic">
-            <img src="https://avatars.slack-edge.com/2025-11-02/9825435132418_f6e6637b29c5a816a4b2_192.jpg">
+            <img src="{{ profile_pic }}">
         </div>
     </nav>
 
