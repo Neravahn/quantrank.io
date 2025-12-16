@@ -666,7 +666,7 @@
             });
         }
 
-        // HEATMAP CHART
+
         (() => {
             const canvas = document.getElementById('heatmap_canvas');
             const HEATMAP_DATA = {{ heatmap_data | tojson
@@ -679,18 +679,17 @@
         const GAP = 4;
         const RADIUS = 2;
 
-        // Sort dates ascending
         const dates = Object.keys(HEATMAP_DATA).sort();
         const pointsArray = dates.map(d => HEATMAP_DATA[d]);
 
-        // Fill 8x50 matrix
+
         const values = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
+
         for (let i = 0; i < COLS * ROWS; i++) {
-            const row = Math.floor(i / COLS);
-            const col = i % COLS;
+            const col = Math.floor(i / ROWS); 
+            const row = i % ROWS;
             if (i < pointsArray.length) values[row][col] = pointsArray[i];
         }
-
         function getHeatColor(value) {
             if (value <= 0) return 'rgba(40, 40, 40, 1)';
             const max = 20;
@@ -718,20 +717,25 @@
 
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+
             for (let y = 0; y < ROWS; y++) {
                 for (let x = 0; x < COLS; x++) {
+                    const idx = y + x * ROWS;
+                    const value = pointsArray[idx];
+
+                    if (!value || value === 0) continue;
+
                     const px = x * (CELL + GAP);
                     const py = y * (CELL + GAP);
-                    const value = values[y][x] || 0;
                     ctx.fillStyle = getHeatColor(value);
                     roundRect(px, py, CELL, CELL, RADIUS);
                 }
             }
         }
 
+
         draw();
 
-        // Tooltip
         const tooltip = document.createElement('div');
         tooltip.style.position = 'absolute';
         tooltip.style.padding = '6px 10px';
@@ -751,37 +755,37 @@
             const mouseY = e.clientY - rect.top;
 
             let found = false;
+
             for (let y = 0; y < ROWS; y++) {
                 for (let x = 0; x < COLS; x++) {
+                    const idx = y + x * ROWS;
+                    const value = pointsArray[idx];
+
+                    if (!value || value === 0) continue;
+
                     const px = x * (CELL + GAP);
                     const py = y * (CELL + GAP);
-                    if (
-                        mouseX >= px &&
-                        mouseX <= px + CELL &&
-                        mouseY >= py &&
-                        mouseY <= py + CELL
-                    ) {
-                        const idx = y * COLS + x;
-                        const value = pointsArray[idx] || 0;
+
+                    if (mouseX >= px && mouseX <= px + CELL && mouseY >= py && mouseY <= py + CELL) {
                         const date = dates[idx] || 'N/A';
                         tooltip.innerText = `Points: ${value} on ${date}`;
                         tooltip.style.left = `${rect.left + mouseX + 10}px`;
                         tooltip.style.top = `${rect.top + mouseY + 10}px`;
                         tooltip.style.opacity = 1;
-                        found = true;
                         canvas.style.cursor = 'pointer';
+                        found = true;
                         break;
                     }
                 }
                 if (found) break;
             }
 
-            if (!found) tooltip.style.opacity = 0;
+            if (!found) {
+                tooltip.style.opacity = 0;
+                canvas.style.cursor = 'default';
+            }
         });
 
-        canvas.addEventListener('mouseleave', () => {
-            tooltip.style.opacity = 0;
-        });
 }) ();
 
 

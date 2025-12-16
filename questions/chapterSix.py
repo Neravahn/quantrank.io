@@ -1,4 +1,5 @@
 import random
+import math
 
 
 
@@ -204,5 +205,56 @@ def mof_8():
     
     random.shuffle(options)
     return question, options, answer
-q, o, a = mof_8()
-print(q, o, a)
+
+
+
+def mof_9():
+    rate = random.randint(2, 25)
+    question = f"The effective rate of interest to a nominal rate {rate} % pa payable in half year will be"
+    answer = round(((1 + rate / 200) ** 2 - 1) * 100 , 2)
+
+
+    options = []
+    options.append(answer)
+    while len(options) < 4:
+        option_rate = random.randint(2, 25)
+        option = round(((1 + option_rate / 200) ** 2 - 1) * 100 , 2)
+
+        if option not in options and option != answer:
+            options.append(option)
+        else:
+            continue
+
+    random.shuffle(options)
+    return question, options, answer
+
+
+
+
+
+def mof_10():
+
+    cost = random.randint(50000, 500000)
+    scrap = random.randint(10000, 50000)
+    rate = random.randint(12, 25)
+    question = f"A machine is depreciated at a rate of  {rate}% on reducing balance. The original cost of the machine was {cost}, the ultimate scrap value is {scrap}, the effective life of the machine is"
+    
+    right = scrap / cost
+    left = 1 - (rate / 100)
+    time = math.log(right) / math.log(left)
+    answer = f"{round(time, 2)} yrs"
+
+    options = []
+    options.append(answer)
+    while len(options) < 4:
+        option = round(random.uniform(10, 50), 2)
+        if option not in options and option != answer:
+            options.append(option)
+        else:
+            continue
+
+    random.shuffle(options)
+    return question, options, answer
+q, a = mof_10()
+print(q, a)
+

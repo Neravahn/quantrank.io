@@ -4,7 +4,7 @@ from zoneinfo import ZoneInfo
 
 
 
-DB_PATH = 'database.db'
+DB_PATH = '/home/prashant/Desktop/QuantRank.io/database.db'
 def get_today_ist():
     return datetime.now(ZoneInfo("Asia/Kolkata")).date().isoformat()
 
