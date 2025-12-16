@@ -247,7 +247,7 @@ def mof_10():
     options = []
     options.append(answer)
     while len(options) < 4:
-        option = round(random.uniform(10, 50), 2)
+        option = f"{round(random.uniform(10, 50), 2)} yrs"
         if option not in options and option != answer:
             options.append(option)
         else:
@@ -255,6 +255,160 @@ def mof_10():
 
     random.shuffle(options)
     return question, options, answer
-q, a = mof_10()
-print(q, a)
+
+
+
+
+def mof_11():
+    principal = random.randint(20000, 50000)
+    time = random.randint(2, 15)
+    rate = random.randint(12, 25)
+    amt = round(principal * (1 +( rate / 200)) ** (2 * time))
+
+
+    question = f"If A = {amt}, n = {time} years,  R = {rate} % per annum compound interest payable half yearly, then principal (P) is"
+    answer = principal
+    options = []
+    options.append(answer)
+    while len(options) < 4:
+        option = random.randint(20000, 50000)
+        if option not in options and option != answer:
+            options.append(option)
+        else:
+            continue
+
+    random.shuffle(options)
+    return question, options, answer
+
+
+
+def mof_12():
+    rate1 = random.randint(2, 8)
+    rate2 = random.randint(10,50)
+
+    time = math.log((rate2 + 100) / 100 ) / math.log(1 + (rate1/100))
+
+
+    question = f"""The population of a town increases every year by {rate1}% of the population at the begining of that year. The number
+    of year by which the total increases of population be {rate2}% is"""
+    answer = f"{round(time, 2)} yrs"
+
+    options = []
+    options.append(answer)
+    while len(options)< 4:
+        option = f"{round(random.uniform(10, 50), 2)} yrs"
+        if option not in options and option != answer:
+            options.append(option)
+        else:
+            continue
+
+    random.shuffle(options)
+    return question, options, answer
+
+
+
+
+def mof_13():
+    principal = random.randint(2000, 5000)
+    time = random.randint(2, 8)
+    rate = random.randint(12, 25)
+
+    SI = (principal * rate * time) // 100
+    CI = principal * ((1 + (rate / 100)) ** time)
+
+    diff = round(abs(SI - CI))
+
+    question = f"The diffrence between C.I and S.I on a certain sum of money invested for {time} yrs at {rate}% per annum is {diff}. The principal is"
+    answer = principal
+    options = []
+    options.append(answer)
+    while len(options) < 4:
+        option = random.randint(2000, 5000)
+        if option not in options and option != answer:
+            options.append(option)
+        else:
+            continue
+
+    random.shuffle(options)
+    return question, options, answer
+
+
+
+
+
+def mof_14():
+    cost = random.randint(5000, 50000)
+    rate = random.randint(12, 25)
+    time = random.randint(5, 15)
+
+    scrap_val = cost * ((1 - rate / 100) ** time)
+    question = f"The useful life of a machine is estimated to be {time} yrs and cost {cost}. Rate of depreciation is {rate}% p.a. The scrap value at the end of its life is"
+
+    answer = round(scrap_val)
+
+    options = []
+    options.append(answer)
+    while len(options)< 4:
+        option = random.randint(1000, 9000)
+        if option not in options and answer != option :
+            options.append(option)
+        else:
+            continue
+
+    random.shuffle(options)
+    return question, options, answer
+
+
+
+
+def mof_15():
+    rate = random.randint(12, 25)
+
+    effective_rate = (((1 + rate / 400) ** 4) - 1) * 100
+    question = f"The effective rate of interest corresponding to nominal rate of {rate}% p.a convertible quaterly is"
+    answer = f"{round(effective_rate, 2)}"
+
+    options = []
+    options.append(answer)
+    while len(options) < 4:
+        option = round(random.uniform(15, 40), 2)
+        if option not in options and option != answer:
+            options.append(option)
+        else:
+            continue
+    
+
+    random.shuffle(options)
+    return question, options, answer
+
+
+
+
+def mof_16():
+    people = random.randint(2000, 5000)
+
+    rate_d = round(random.uniform(12, 25), 2)
+    rate_b = round(rate_d + random.uniform(5, 10), 2)
+    
+    effective_rate =( rate_b - rate_d) / people
+
+    time = math.log((2 * people) / people)  / math.log(1 + (effective_rate)) 
+
+    question = f"""The annual birth and death rates per {people} are {rate_b} and {rate_d} respectively. The number of years in which the population will be doubled
+    assuming there is no immigration or emigration"""
+    answer = f"{round(time, 2)} yrs"
+
+    options = []
+    options.append(answer)
+    while len(options) < 4:
+        option = f"{round(random.uniform(300, 600), 2)} yrs"
+        if option not in options and option != answer:
+            options.append(option)
+        else:
+            continue
+    
+    random.shuffle(options)
+    return question, options, answer
+q, o, a = mof_16()
+print(q, o, a)
 
