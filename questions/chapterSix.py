@@ -537,6 +537,46 @@ def mof_21():
 
     random.shuffle(options)
     return question, options, answer
-q, o, a = mof_21()
-print(q,  o, a)
+
+
+
+
+def mof_22():
+    amt = random.randint(1000, 5000)
+    rate = random.randint(12, 25)
+    time = random.randint(2, 8)
+    i = rate / 100
+
+    fv = ((((1 + i) ** time) - 1) /  i) * amt
+    question = f"""A person invests {amt} at the end of each year with a bank which pays interest at {rate}% p.a C.I annually. Tha amount standing to his credit one year after he has made his yearly
+    investment for the {time}th time"""
+    answer = round(fv + (fv * rate / 100), 2)
+
+    options = []
+    options.append(answer)
+    while len(options) < 4:
+        option = round(random.uniform(10000, 90000), 2)
+        if option not in options and option != answer:
+            options.append(option)
+        else:
+            continue
+
+    random.shuffle(options)
+    return question, options, answer
+
+
+
+
+
+def mof_23():
+    upfront = random.randint(100000, 300000)
+    amt = upfront + ( random.randint(100000, 300000))
+    rate = random.randint(12, 25)
+    inst = random.randint(10, 20)
+    question = f"""A man purchases a house valued at {amt}. He paid {upfront} at the time of purchase and agreed to pay the balance with interest at {rate}% per annum
+    compounded half yearly in {inst} equal half yearly installments. If the first installment paid after 6 months from the date of purchase then the amount of each
+    installment is?"""
+    return question
+q= mof_23()
+print(q)
 
