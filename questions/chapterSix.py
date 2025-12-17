@@ -573,10 +573,52 @@ def mof_23():
     amt = upfront + ( random.randint(100000, 300000))
     rate = random.randint(12, 25)
     inst = random.randint(10, 20)
+
+    r = rate / 200
+
+    inst_amt = ((amt - upfront) * r) / (1 - ( 1 + r ) ** -inst)
+
     question = f"""A man purchases a house valued at {amt}. He paid {upfront} at the time of purchase and agreed to pay the balance with interest at {rate}% per annum
     compounded half yearly in {inst} equal half yearly installments. If the first installment paid after 6 months from the date of purchase then the amount of each
     installment is?"""
-    return question
-q= mof_23()
-print(q)
+
+    answer = round(inst_amt, 2)
+
+    options = []
+    options.append(answer)
+    while len(options) < 4:
+        option = round(random.uniform(10000, 30000), 2)
+        if option not in options and option != answer:
+            options.append(option)
+        else:
+            continue
+    
+    random.shuffle(options)
+    return question, options, answer
+
+
+
+
+def mof_24():
+    upfront = random.randint(10000, 50000)
+    inst = random.randint(2000, 5000)
+    time = random.randint(10, 30)
+    rate = random.randint(12, 25)
+    i = rate / 100
+    amt = inst * ((1 - ((1 + i) ** -time) ) / i)
+    question = f"A person bought a house paying {upfront} cash down and {inst} at the end of each year for {time} years at {rate}% p.a C.I. The cash down price is?"
+    answer = round(amt + upfront, 2)
+    options =[]
+    options.append(answer)
+    while len(options) < 4:
+        option = round(random.uniform(30000, 80000), 2)
+        if option not in options and option != answer:
+            options.append(option)
+        else:
+            continue
+
+    random.shuffle(options)
+    return question, options, answer
+q, o, a= mof_24()
+print(q, o, a)
 
