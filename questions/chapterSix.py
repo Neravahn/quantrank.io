@@ -85,7 +85,7 @@ def mof_4():
     options.append(answer)
     while len(options) < 4:
         option = random.randint(2, 8)
-        if options not in options and option != answer:
+        if option not in options and option != answer:
             options.append(option)
         else:
             continue
@@ -409,6 +409,78 @@ def mof_16():
     
     random.shuffle(options)
     return question, options, answer
-q, o, a = mof_16()
-print(q, o, a)
+
+
+
+
+def mof_17():
+    amt = random.randint(2000, 5000)
+    time = random.randint(2, 8)
+    rate = random.randint(12, 25)
+
+    present_val = amt * ((1 - (1 + rate / 100) ** (- time)) / (rate / 100))
+    question = f"The present value of an annuity of {amt} for {time} at {rate}% p.a C.I is"
+    answer = round(present_val, 2)
+
+    options = []
+    options.append(answer)
+    while len(options) < 4:
+        option = round(random.uniform(3000, 5000), 2)
+        if option not in options and option != answer:
+            options.append(option)
+        else:
+            continue
+
+    random.shuffle(options)
+    return question, options, answer
+
+
+
+def mof_18():
+    amt = random.randint(200, 900)
+    time = random.randint(2, 15)
+    rate = round(random.uniform(2, 9), 2)
+
+    fv = ((((1 + (rate / 100)) ** time) - 1) / (rate / 100)) * amt
+    question= f"The amount of annuity certain of {amt} for {time} years at {rate}% p.a C.I is"
+    answer = round(fv, 2 )
+
+
+    options = []
+    options.append(answer)
+    while len(options) < 4:
+        option = round(random.uniform(2000, 7000), 2)
+        if option not in options and option != answer:
+            options.append(option)
+        else:
+            continue
+    
+    random.shuffle(options)
+    return question, options, answer
+
+
+
+
+def mof_19():
+    amt = random.randint(5000, 50000)
+    rate = random.randint(12, 25)
+    inst = random.randint(15, 50)
+    inst_amt = amt * (rate /100) / (1 - (1 + rate / 100) ** (- inst))
+
+    question = f"A loan of {amt} is to be paid back in {inst} equal installments. The amount of each installments to cover the principal at {rate}% p.a C.I is"
+    answer = round(inst_amt, 2)
+
+    options = []
+    options.append(answer)
+    while len(options) < 4:
+        option  = round(random.uniform(5000, 9000), 2)
+        if option not in options and option != answer:
+            options.append(option)
+        else:
+            continue
+
+    random.shuffle(options)
+    return question, options, answer
+q, o, a = mof_19()
+print(q, o,a)
 
