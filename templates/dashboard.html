@@ -686,7 +686,7 @@
         const values = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
 
         for (let i = 0; i < COLS * ROWS; i++) {
-            const col = Math.floor(i / ROWS); 
+            const col = Math.floor(i / ROWS);
             const row = i % ROWS;
             if (i < pointsArray.length) values[row][col] = pointsArray[i];
         }
@@ -721,17 +721,25 @@
             for (let y = 0; y < ROWS; y++) {
                 for (let x = 0; x < COLS; x++) {
                     const idx = y + x * ROWS;
-                    const value = pointsArray[idx];
 
-                    if (!value || value === 0) continue;
+                    const date = dates[idx];    
+                    if (!date) continue;      
 
+                    const value = pointsArray[idx] || 0;
                     const px = x * (CELL + GAP);
                     const py = y * (CELL + GAP);
-                    ctx.fillStyle = getHeatColor(value);
+                    if (value === 0) {
+                        ctx.fillStyle = 'rgba(40, 40, 40, 1)';
+                    }
+                    else {
+                        ctx.fillStyle = getHeatColor(value);
+                    }
+
                     roundRect(px, py, CELL, CELL, RADIUS);
                 }
             }
         }
+
 
 
         draw();
@@ -761,14 +769,20 @@
                     const idx = y + x * ROWS;
                     const value = pointsArray[idx];
 
-                    if (!value || value === 0) continue;
+                    const date = dates[idx];
+                    if (!date) continue;
+
 
                     const px = x * (CELL + GAP);
                     const py = y * (CELL + GAP);
 
                     if (mouseX >= px && mouseX <= px + CELL && mouseY >= py && mouseY <= py + CELL) {
                         const date = dates[idx] || 'N/A';
-                        tooltip.innerText = `Points: ${value} on ${date}`;
+                        tooltip.innerText =
+                            value === 0
+                                ? `No activity on ${date}`
+                                : `Points: ${value} on ${date}`;
+
                         tooltip.style.left = `${rect.left + mouseX + 10}px`;
                         tooltip.style.top = `${rect.top + mouseY + 10}px`;
                         tooltip.style.opacity = 1;

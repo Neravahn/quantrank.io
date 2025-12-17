@@ -481,6 +481,62 @@ def mof_19():
 
     random.shuffle(options)
     return question, options, answer
-q, o, a = mof_19()
-print(q, o,a)
+
+
+
+
+def mof_20():
+    amt = random.randint(20000, 50000)
+    rate = random.randint(12, 25)
+    inst = ((amt * rate) / 100) + random.randint(100, 5000)
+
+
+    r = rate / 100 
+    time = math.log(inst / (inst - amt * r)) / math.log(1 + r)
+
+    question = f"A company borrows {amt} on condition to repay it with compound interest at {rate} % p.a by annual installments of {inst} the number of years by which the debts will be cleared is"
+    answer = f"{round(time, 2)} yrs"
+
+    options = []
+    options.append(answer)
+    while len(options) < 4:
+        option = f"{round(random.uniform(3, 15), 2)} yrs"
+        if option not in options and option != answer:
+            options.append(option)
+        else:
+            continue
+
+    random.shuffle(options)
+    return question, options, answer
+
+
+
+
+
+def mof_21():
+    principal = random.randint(4000, 15000)
+    rate = random.randint(12, 25)
+    time = random.randint(2, 8)
+
+
+    amt = principal * ((1 + rate / 100) ** time)
+    interest = amt - principal
+
+
+    question = f"Mr. X borrowed {principal} at {rate}% p.a C.I. At the end of {time} years, the money was repaid along with the interest acccrued. The amount of interest paid by him is"
+    answer = round( interest, 2)
+
+    options = []
+    options.append(answer)
+    while len(options) < 4:
+        option = round(random.uniform(2000, 15000), 2)
+        if option not in options and option != answer:
+            options.append(option)
+        else:
+            continue
+
+    random.shuffle(options)
+    return question, options, answer
+q, o, a = mof_21()
+print(q,  o, a)
 
