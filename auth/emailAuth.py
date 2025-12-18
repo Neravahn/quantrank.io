@@ -114,8 +114,6 @@ def send_otp(receiver_email):
   </body>
 </html>
 
-
-
     """, 'html')
 
     msg['Subject'] = "Email Verification"

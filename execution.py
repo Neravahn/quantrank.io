@@ -16,27 +16,14 @@ def insert(chapter_name, difficulty, function_name):
 
     return 'done'
 
+
+insert('finance', 'medium', 'mof_29')
     
 
 
 
 
-def index_exists(index_name):
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
 
-    cursor.execute("""
-        SELECT 1
-        FROM sqlite_master
-        WHERE type='index' AND name=?
-    """, (index_name,))
-
-    exists = cursor.fetchone() is not None
-    conn.close()
-    return exists
-
-
-print(index_exists("idx_heatmap_user_date"))
 
 
 
