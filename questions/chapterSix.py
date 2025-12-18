@@ -619,6 +619,110 @@ def mof_24():
 
     random.shuffle(options)
     return question, options, answer
-q, o, a= mof_24()
+
+
+
+
+def mof_25():
+    amt = random.randint(20000, 50000)
+    time = random.randint(2, 8)
+    rate = random.randint(12, 25)
+
+    i = rate / 100
+
+    pv = amt / (1 + i) ** time
+    
+    question = f"The present value of {amt} due in {time}years at {rate}% p.a compound interest when the interest is paid on yearly basis is"
+    answer = round(pv, 2)
+
+    options = []
+    options.append(answer)
+    while len(options) < 4:
+        option = round(random.uniform(5000, 30000), 2)
+        if option not in options and option != answer:
+            options.append(option)
+        else:
+            continue
+
+    random.shuffle(options)
+
+    return question, options, answer
+
+
+
+def mof_26():
+    amt = random.randint(20000, 50000)
+    time = random.randint(2, 15)
+    rate = random.randint(12, 25)
+    i = rate / 100
+
+    question = f"A sinking fund is created for redemning debentures worth {amt} at the end of {time} years. How much provision needs to be made out of profits each year provided sinking fund investments accumulate at {rate}%"
+    r = amt / ((((1 + i) ** time) - 1) / i)
+
+    answer = round(r, 2)
+    options = []
+    options.append(answer)
+    while len(options) < 4:
+        option = round(random.uniform(500, 15000), 2)
+        if option not in options and option != answer:
+            options.append(option)
+        else:
+            continue
+    
+    random.shuffle(options)
+    return question, options, answer
+
+
+
+
+def mof_27():
+    age = random.randint(20, 50)
+    life = random.randint(10, 50)
+    rate = random.randint(12, 25)
+    amt = random.randint(1000000, 9000000)
+    i = rate / 100
+
+    inst = amt /(((((1 + i) ** life) - 1) / i) * (1 + i))
+
+    question = f"""Raja aged {age} wishes his wife to have {amt} at his death. If his expectation of life is another {life} years and he starts making an annual
+    investments commencing now at {rate}% p.a C.I, How much should he invest"""
+    answer =round(inst, 2)
+
+    options = []
+    options.append(answer)
+    while len(options) < 4:
+        option = round(random.uniform(1500, 30000), 2)
+        if option not in options and option != answer:
+            options.append(option)
+        else:
+            continue
+
+    random.shuffle(options)
+    return question, options, answer
+
+
+
+def mof_28():
+    rate = random.randint(12, 25)
+    amt = random.randint(15000, 50000)
+    sale = random.randint(1000, 10000)
+
+    time = math.log(sale / amt) / math.log(1 - (rate / 100))
+
+    question = f"""A machine depreciate at {rate}% of its value at the begining of a year. The cost and scrap value realized at the time of sale begin {amt} and
+    {sale} respectively. For how many years the machine was put to use ?"""
+    answer = round(time, 2)
+    options = []
+    options.append(answer)
+    while len(options) < 4:
+        option = round(random.uniform(2, 20), 2)
+        if option not in options and option != answer:
+            options.append(option)
+        else:
+            continue
+    
+    random.shuffle(options)
+    return question , options, answer
+q, o, a= mof_28()
 print(q, o, a)
 
