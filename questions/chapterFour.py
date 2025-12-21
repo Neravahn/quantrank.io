@@ -45,6 +45,24 @@ def equation_1():
     ]  
 
     question = random.choice(templates)
-    return question
+    answer = f"(x={x}, y={y})"
+    options = []
+    while len(options) < 4:
+        option_x = random.randint(2, 9)
+        option_y = random.randint(2, 9)
 
-print(equation_1())
+        option = f"(x={option_x}, y={option_y})"
+        if option not in options and option != answer:
+            options.append(option)
+        else:
+            continue
+
+
+    random.shuffle(options)
+
+    return question, options, answer
+
+
+q, o, a = equation_1()
+
+print(q, o, a)
