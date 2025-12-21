@@ -4,8 +4,11 @@ def equation_1():
     const1 = random.randint(2, 9)
     const2 = random.randint(2, 9)
 
-    x = random.randint(2, 9)
-    y = random.randint(2, 9)
+    while True:
+        x = random.randint(2, 9)
+        y = random.randint(2, 9)
+        if x != y and x + y != 0 :
+            break
 
     eq_templates = [
         f"(x / {const1}) + (y / {const2})",
