@@ -1,5 +1,6 @@
 import random
 from fractions import Fraction
+import math
 
 def equation_1():
     const1 = random.randint(2, 9)
@@ -127,9 +128,63 @@ def equation_2():
 
     random.shuffle(options)
     return question, options, answer
-q, o, a = equation_2()
+
+
+
+
+
+
+def equation_3():
+    num_val = []
+    while len(num_val) < 2:
+        z = random.randint(2, 20)
+        if z not in num_val:
+            num_val.append(z)
+        else:
+            continue
+
+    x = num_val[0]
+    y = num_val[1]
+    while True :
+        mul = random.randint(40, 100)
+        real_x = x * mul
+        real_y = y * mul
+
+        save = random.randint(10, min(real_x, real_y) - 1)
+
+        spend_x = real_x - save
+        spend_y = real_y - save
+
+        gcd = math.gcd(spend_x, spend_y)
+        if gcd:
+            p = spend_x // gcd
+            q = spend_y // gcd
+            break
+        else:
+            continue
+
+
+    question = f"Monthly income of two persons are in the ratio {x} : {y} and their monthly expenses are in the ratio {p} : {q}. If each saves {save} per month find their monthly incomes"
+
+    answer = f"({real_x}, {real_y})"
+
+    options = []
+    options.append(answer)
+    while len(options) < 4:
+        x = random.randint(80, 2000)
+        y = random.randint(80, 2000)
+        if x != y:
+            option = f"({x}, {y})"
+            if option not in options:
+                options.append(option)
+            else:
+                continue
+        else:
+            continue
+
+    
+    random.shuffle(options)
+    
+    return question, options, answer
+q, o, a = equation_3()
 print(q, o, a)
-
-
-
-
