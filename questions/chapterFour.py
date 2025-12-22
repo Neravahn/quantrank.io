@@ -186,5 +186,49 @@ def equation_3():
     random.shuffle(options)
     
     return question, options, answer
-q, o, a = equation_3()
-print(q, o, a)
+
+
+
+
+
+
+
+def equation_4():
+    while True:
+        num = random.randint(101, 999)
+        numList = list(map(int, str(num)))
+
+        sumList = sum(numList)
+
+
+        rev_list = numList[::-1]
+        new_num = int(''.join(map(str, rev_list))) 
+
+        if new_num > num:
+            operation = 'increased'
+            diff = new_num - num
+        elif new_num < num:
+            operation = 'decreased'
+            diff = num - new_num
+        else:
+            continue
+
+        ten_rev = [numList[0], numList[2], numList[1]]
+        ten_num = int(''.join(map(str, ten_rev)))
+        if ten_num > num:
+            operation_2 = 'increases'
+            diff_2 = ten_num - num
+        elif ten_num < num:
+            operation_2 = 'decreases'
+            diff_2 = num - ten_num
+        else:
+            continue
+
+        break
+
+    question = f"The sum of digits in a three digit num is {sumList}. If the digits are reversed the num is {operation} by {diff} but reversing only the ten's and unit digits {operation_2} the number by {diff_2}. The number is"
+    answer = num
+
+    return question, answer
+q,a  = equation_4()
+print(q, a)
