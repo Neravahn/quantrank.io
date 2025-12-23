@@ -238,10 +238,11 @@ def check_answers():
     if op_sel == answer:
         update_stats(username, difficulty, topic)
         update_points(username, 1)
-        save_Points(username)
+        save_Points(username, correct=True)
         return jsonify({"message" : "correct"})
     else:
         update_points(username, -1)
+        save_Points(username, correct=False)
         return jsonify({"message" : "wrong"})
     
 

@@ -44,17 +44,28 @@ def daily_Users():
 
 
 
-def save_Points(username):
+def save_Points(username, correct):
     today = get_today_ist()
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
 
-    query = f""" 
-    INSERT INTO heatmap (username, activity_date, points)
-    VALUES (?, ?, 1)
-    ON CONFLICT(username, activity_date)
-    DO UPDATE SET points = points + 1;
-    """
+
+    if correct == True:
+        query = f""" 
+        INSERT INTO heatmap (username, activity_date, points, total_attempted, total_correct)
+        VALUES (?, ?, 1, 1, 1)
+        ON CONFLICT(username, activity_date)
+        DO UPDATE SET points = points + 1, total_attempted = total_attempted + 1, total_correct = total_correct + 1;
+        """
+
+    else:
+        query = f""" 
+        INSERT INTO heatmap (username, activity_date, points, total_attempted, total_correct)
+        VALUES (?, ?, 0, 1, 0)
+        ON CONFLICT(username, activity_date)
+        DO UPDATE SET points = points + 0, total_attempted = total_attempted + 1, total_correct = total_correct + 0;
+        """
+
     cursor.execute(query, (username, today))
 
     conn.commit()

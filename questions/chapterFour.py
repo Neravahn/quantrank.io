@@ -190,9 +190,6 @@ def equation_3():
 
 
 
-
-
-
 def equation_4():
     while True:
         num = random.randint(101, 999)
@@ -229,6 +226,22 @@ def equation_4():
     question = f"The sum of digits in a three digit num is {sumList}. If the digits are reversed the num is {operation} by {diff} but reversing only the ten's and unit digits {operation_2} the number by {diff_2}. The number is"
     answer = num
 
-    return question, answer
-q,a  = equation_4()
-print(q, a)
+    options = []
+    options.append(answer)
+    while len(options) < 4:
+        option = random.randint(101, 999)
+        optionList = list(map(int, str(option)))
+
+        if sum(optionList) == sumList and option not in options:
+            options.append(option)
+        else:
+            continue
+    
+    random.shuffle(options)
+    return question, options, answer
+
+
+
+
+
+
