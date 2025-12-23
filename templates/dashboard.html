@@ -71,12 +71,12 @@
         }
 
         #main_area {
-            margin: 20px auto;
             width: 100%;
             display: flex;
             gap: 20px;
             height: 550px;
             border: 2px solid #15151500;
+            border-radius: 12px;
         }
 
         #right_area {
@@ -84,6 +84,10 @@
             display: flex;
             flex-direction: column;
             gap: 25px;
+            border: 2px solid #15151500;
+            border-radius: 12px;
+            margin: auto;
+            margin-right: 10px;
         }
 
         #top_stats {
@@ -93,14 +97,15 @@
         }
 
         #piechart {
-            border: 1px solid #00000000;
             width: 500px;
-            background: #000000;
             height: 500px;
+            border: 3px solid #151515;
+            border-radius: 12px;
+            background-color: #0c0c0c;
         }
 
         #leaderboard_area {
-            border: 2px solid #15151500;
+            border: 3px solid #151515;
             width: 500px;
             border-radius: 12px;
             display: flex;
@@ -109,11 +114,12 @@
             max-height: 500px;
             overflow-y: auto;
             padding-bottom: 10px;
+            background-color: #0c0c0c;
         }
 
         .leaderboard_card {
-            border-radius: 8px;
-            background: rgb(19, 19, 19);
+            border-radius: 12px;
+            background: rgb(26, 25, 25);
             color: #ffffff;
             font-size: 18px;
             margin: 8px 0;
@@ -122,7 +128,7 @@
             align-items: center;
             justify-content: space-between;
             padding: 0 16px;
-            border: 0.5px solid #151515;
+            border: 0.5px solid #242323;
             transition: all 0.25s ease;
             width: 90%;
             margin-top: 10px;
@@ -168,15 +174,17 @@
         #stats_areaU {
             border: 2px solid #15151500;
             border-radius: 12px;
-            margin-bottom: 50px;
+            margin: auto;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
             width: 700px;
-            margin-left: 100px;
-            height: 800px;
+            height: 500px;
             padding: 20px;
+            margin-left: 30px;
+            margin-top: 25px;
+            margin-bottom: 25px;
         }
 
         navhi {
@@ -244,13 +252,15 @@
         }
 
         #chapters_area {
-            width: 90%;
-            margin: 10px auto;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            width: 30%;
             gap: 8px;
             text-align: center;
-
+            border: 3px solid #151515;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #0c0c0c;
+            border-radius: 12px;
         }
 
         #chapters_area h3 {
@@ -265,15 +275,15 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgb(19, 19, 19);
-            border: 2px solid #151515;
+            background: rgb(26, 25, 25);
+            border: 0.5px solid #242323;
             border-radius: 12px;
             padding: 10px 20px;
             color: #ffffff;
             font-size: 18px;
             transition: 0.2s;
             height: 70px;
-            width: 100%;
+            width: 90%;
             transition: all 0.2s ease;
         }
 
@@ -395,6 +405,26 @@
             filter: invert(1);
             cursor: pointer;
         }
+
+        #analytics {
+            width: 500px;
+            height: 500px;
+        }
+
+        #bottomArea {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            
+        }
+
+        #analytics {
+            width: 1000px;
+            height: 700px;
+            border: 3px solid #151515;
+            border-radius: 12px;
+            background-color: #0c0c0c;
+        }
     </style>
 </head>
 
@@ -484,65 +514,71 @@
         </div>
     </div>
 
-    <div id="chapters_area">
-        <h3>Chapters Solved:</h3>
+    <div id="bottomArea">
 
-        <div class="chapter_card" data-topic="ratio_proportion">
-            <span>Chapter 1. Ratio and Proportion</span>
-            <span class="solved_count">{{ chapter1 }} Qs</span>
+        <div id="analytics">
+            <canvas id="analyticsChart"></canvas>
         </div>
 
-        <div class="chapter_card" data-topic="indices">
-            <span>Chapter 2. Indices</span>
-            <span class="solved_count">{{ chapter2 }} Qs</span>
-        </div>
+        <div id="chapters_area">
+            <h3>Chapters Solved:</h3>
 
-        <div class="chapter_card" data-topic="logarithm">
-            <span>Chapter 3. Logarithm</span>
-            <span class="solved_count">{{ chapter3 }} Qs</span>
-        </div>
+            <div class="chapter_card" data-topic="ratio_proportion">
+                <span>Chapter 1. Ratio and Proportion</span>
+                <span class="solved_count">{{ chapter1 }} Qs</span>
+            </div>
 
-        <div class="chapter_card" data-topic="equations">
-            <span>Chapter 4. Equations</span>
-            <span class="solved_count">{{ chapter4 }} Qs</span>
-        </div>
+            <div class="chapter_card" data-topic="indices">
+                <span>Chapter 2. Indices</span>
+                <span class="solved_count">{{ chapter2 }} Qs</span>
+            </div>
 
-        <div class="chapter_card" data-topic="inequalities">
-            <span>Chapter 5 Linear Inequalities</span>
-            <span class="solved_count">{{ chapter5 }} Qs</span>
-        </div>
+            <div class="chapter_card" data-topic="logarithm">
+                <span>Chapter 3. Logarithm</span>
+                <span class="solved_count">{{ chapter3 }} Qs</span>
+            </div>
 
-        <div class="chapter_card" data-topic="finance">
-            <span>Chapter 6. Mathematics of Finance</span>
-            <span class="solved_count">{{ chapter6 }} Qs</span>
-        </div>
+            <div class="chapter_card" data-topic="equations">
+                <span>Chapter 4. Equations</span>
+                <span class="solved_count">{{ chapter4 }} Qs</span>
+            </div>
 
-        <div class="chapter_card" data-topic="permutations">
-            <span>Chapter 7. Permutations and Combinations</span>
-            <span class="solved_count">{{ chapter7 }} Qs</span>
-        </div>
+            <div class="chapter_card" data-topic="inequalities">
+                <span>Chapter 5 Linear Inequalities</span>
+                <span class="solved_count">{{ chapter5 }} Qs</span>
+            </div>
 
-        <div class="chapter_card" data-topic="progression">
-            <span>Chapter 8. Arithmetic and Geometric Progression</span>
-            <span class="solved_count">{{ chapter8 }} Qs</span>
-        </div>
+            <div class="chapter_card" data-topic="finance">
+                <span>Chapter 6. Mathematics of Finance</span>
+                <span class="solved_count">{{ chapter6 }} Qs</span>
+            </div>
 
-        <div class="chapter_card" data-topic="central_tendency">
-            <span>Chapter 9. Measures of Central Tendency</span>
-            <span class="solved_count">{{ chapter9 }} Qs</span>
-        </div>
+            <div class="chapter_card" data-topic="permutations">
+                <span>Chapter 7. Permutations and Combinations</span>
+                <span class="solved_count">{{ chapter7 }} Qs</span>
+            </div>
 
-        <div class="chapter_card" data-topic="dispersion">
-            <span>Chapter 10. Dispersion</span>
-            <span class="solved_count">{{ chapter10 }} Qs</span>
-        </div>
+            <div class="chapter_card" data-topic="progression">
+                <span>Chapter 8. Arithmetic and Geometric Progression</span>
+                <span class="solved_count">{{ chapter8 }} Qs</span>
+            </div>
 
-        <div class="chapter_card" data-topic="correlation">
-            <span>Chapter 11. Correlation and Regression</span>
-            <span class="solved_count">{{ chapter11 }} Qs</span>
+            <div class="chapter_card" data-topic="central_tendency">
+                <span>Chapter 9. Measures of Central Tendency</span>
+                <span class="solved_count">{{ chapter9 }} Qs</span>
+            </div>
+
+            <div class="chapter_card" data-topic="dispersion">
+                <span>Chapter 10. Dispersion</span>
+                <span class="solved_count">{{ chapter10 }} Qs</span>
+            </div>
+
+            <div class="chapter_card" data-topic="correlation">
+                <span>Chapter 11. Correlation and Regression</span>
+                <span class="solved_count">{{ chapter11 }} Qs</span>
+            </div>
         </div>
     </div>
-
 
     <div id="pfp_modal" class="modal">
         <div class="modal_content">
@@ -722,8 +758,8 @@
                 for (let x = 0; x < COLS; x++) {
                     const idx = y + x * ROWS;
 
-                    const date = dates[idx];    
-                    if (!date) continue;      
+                    const date = dates[idx];
+                    if (!date) continue;
 
                     const value = pointsArray[idx] || 0;
                     const px = x * (CELL + GAP);
