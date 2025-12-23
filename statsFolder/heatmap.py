@@ -85,3 +85,39 @@ def getHeatMap_data(username):
 
     return data
 
+
+
+
+
+
+def accuracyData(username, time) :
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+
+
+    if time == 7:
+        query = "SELECT total_attempted, total_correct, activity_date FROM heatmap WHERE username = ? AND activity_date >= date('now', '-6 days') ORDER BY activity_date ASC;"
+
+    elif time == 30:
+        query = "SELECT total_attempted, total_correct, activity_date FROM heatmap WHERE username = ? AND activity_date >= date('now', '-29 days') ORDER BY activity_date ASC;"
+    
+    elif time == 'full':
+        query = "SELECT total_attempted, total_correct, activity_date FROM heatmap WHERE username = ? ORDER BY activity_date ASC;"
+    
+    
+    cursor.execute(query, (username,))
+
+
+    rows = cursor.fetchall()
+    
+    data = []
+    for attempted , correct, date in rows:
+        data.append({
+            "date": date,
+            "attempted": attempted,
+            "correct": correct
+        })
+
+    return data
+
+print(accuracyData('prashant', 7))
