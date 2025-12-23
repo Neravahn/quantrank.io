@@ -103,21 +103,28 @@ def accuracyData(username, time) :
     
     elif time == 'full':
         query = "SELECT total_attempted, total_correct, activity_date FROM heatmap WHERE username = ? ORDER BY activity_date ASC;"
+        
+    else:
+        pass
     
     
     cursor.execute(query, (username,))
 
 
     rows = cursor.fetchall()
+
+    if len(rows) < time and time != "full":
+        return None
     
-    data = []
-    for attempted , correct, date in rows:
-        data.append({
-            "date": date,
-            "attempted": attempted,
-            "correct": correct
-        })
+    else:
+        data = []
+        for attempted , correct, date in rows:
+            data.append({
+                "date": date,
+                "attempted": attempted,
+                "correct": correct
+            })
 
-    return data
-
+        return data
+    
 print(accuracyData('prashant', 7))

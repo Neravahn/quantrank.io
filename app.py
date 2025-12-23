@@ -9,7 +9,7 @@ from statsFolder.getUserDetails import getUserData
 from statsFolder.leaderboard import leaderboard_get
 from statsFolder.getEmail import emailOf
 from werkzeug.utils import secure_filename
-from statsFolder.heatmap import init_newUser, save_Points, getHeatMap_data
+from statsFolder.heatmap import init_newUser, save_Points, getHeatMap_data, accuracyData
 import sqlite3
 
 import os
@@ -147,7 +147,7 @@ def dashboard():
     heatmap_data = {date: points for date, points in rows}
 
     
-    
+    # ACCURACY DATA
 
 
 
@@ -279,6 +279,29 @@ def update_pfp():
 
     return redirect(url_for("dashboard"))
 
+@app.route("/accuracy-data")
+def accuracy_data():
+    username = session["username"]   # or however you store login
+    time_range = request.args.get("range")  # '7', '30', 'full'
+
+    if time_range == "7":
+        time_range = 7
+    elif time_range == "30":
+        time_range = 30
+    elif time_range == "full":
+        time_range = "full"
+    else:
+        return jsonify({"status": "invalid"})
+
+    data = accuracyData(username, time_range)
+
+    if data is None:
+        return jsonify({"status": "no_data"})
+
+    return jsonify({
+        "status": "ok",
+        "data": data
+    })
 
 
 
