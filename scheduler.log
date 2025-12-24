@@ -1,0 +1,63 @@
+cron ran at 2025-12-24 11:47:01.878623
+Traceback (most recent call last):
+  File "/home/prashant/Desktop/QuantRank.io/cronHeatmap.py", line 7, in <module>
+    daily_Users()
+    ~~~~~~~~~~~^^
+  File "/home/prashant/Desktop/QuantRank.io/statsFolder/heatmap.py", line 32, in daily_Users
+    cursor.execute(query)
+    ~~~~~~~~~~~~~~^^^^^^^
+sqlite3.OperationalError: no such table: users
+cron ran at 2025-12-24 11:48:01.954080
+Traceback (most recent call last):
+  File "/home/prashant/Desktop/QuantRank.io/cronHeatmap.py", line 7, in <module>
+    daily_Users()
+    ~~~~~~~~~~~^^
+  File "/home/prashant/Desktop/QuantRank.io/statsFolder/heatmap.py", line 32, in daily_Users
+    cursor.execute(query)
+    ~~~~~~~~~~~~~~^^^^^^^
+sqlite3.OperationalError: no such table: users
+cron ran at 2025-12-24 11:49:02.024977
+Traceback (most recent call last):
+  File "/home/prashant/Desktop/QuantRank.io/cronHeatmap.py", line 7, in <module>
+    daily_Users()
+    ~~~~~~~~~~~^^
+  File "/home/prashant/Desktop/QuantRank.io/statsFolder/heatmap.py", line 32, in daily_Users
+    cursor.execute(query)
+    ~~~~~~~~~~~~~~^^^^^^^
+sqlite3.OperationalError: no such table: users
+cron ran at 2025-12-24 11:50:01.098437
+Traceback (most recent call last):
+  File "/home/prashant/Desktop/QuantRank.io/cronHeatmap.py", line 7, in <module>
+    daily_Users()
+    ~~~~~~~~~~~^^
+  File "/home/prashant/Desktop/QuantRank.io/statsFolder/heatmap.py", line 27, in daily_Users
+    conn = sqlite3.connect(DB_PATH)
+sqlite3.OperationalError: unable to open database file
+cron ran at 2025-12-24 11:51:01.178038
+Traceback (most recent call last):
+  File "/home/prashant/Desktop/QuantRank.io/cronHeatmap.py", line 7, in <module>
+    daily_Users()
+    ~~~~~~~~~~~^^
+  File "/home/prashant/Desktop/QuantRank.io/statsFolder/heatmap.py", line 27, in daily_Users
+    conn = sqlite3.connect(DB_PATH)
+sqlite3.OperationalError: unable to open database file
+cron ran at 2025-12-24 11:52:01.260606
+Traceback (most recent call last):
+  File "/home/prashant/Desktop/QuantRank.io/cronHeatmap.py", line 7, in <module>
+    daily_Users()
+    ~~~~~~~~~~~^^
+  File "/home/prashant/Desktop/QuantRank.io/statsFolder/heatmap.py", line 27, in daily_Users
+    conn = sqlite3.connect(DB_PATH)
+sqlite3.OperationalError: unable to open database file
+cron ran at 2025-12-24 11:53:01.339446
+cron ran at 2025-12-24 11:54:01.414938
+cron ran at 2025-12-24 11:55:01.495696
+cron ran at 2025-12-24 11:56:01.569615
+cron ran at 2025-12-24 11:57:01.640627
+cron ran at 2025-12-24 11:58:01.723077
+cron ran at 2025-12-24 11:59:01.822244
+cron ran at 2025-12-24 12:00:01.898678
+cron ran at 2025-12-24 12:01:01.966780
+cron ran at 2025-12-24 12:02:02.062122
+cron ran at 2025-12-24 12:03:01.139972
+cron ran at 2025-12-24 12:04:01.217625

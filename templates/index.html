@@ -36,9 +36,10 @@
             align-items: center;
             font-size: 3rem;
             font-family: 'JotiOne';
+            height: 100px;
         }
 
-        hi {
+        #hilight {
             color: rgb(255, 183, 0);
         }
 
@@ -67,13 +68,27 @@
         .button:hover {
             background: rgb(255, 200, 60);
         }
+
+        #para {
+            max-width: 900px;
+            text-align: center;
+            line-height: 1.6;
+            margin: 20px 0 40px 0;
+            opacity: 0.85;
+        }
     </style>
 </head>
 
 <body>
     <div id="logo_container">
-        <h1>quantrank.<hi>io</hi>
+        <h1>quantrank.<span id="hilight">io</hi>
         </h1>
+    </div>
+
+    <div id="para">
+        <p>Quantrank is a data-driven quantitative practice platform that focuses on improving accuracy and consistency
+            through smart analytics. It tracks chapter-wise performance, difficulty-based scoring, and daily practice
+            patterns to help users understand how they learn, not just how much they practice.</p>
     </div>
 
     <div id="button_container">

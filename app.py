@@ -281,8 +281,8 @@ def update_pfp():
 
 @app.route("/accuracy-data")
 def accuracy_data():
-    username = session["username"]   # or however you store login
-    time_range = request.args.get("range")  # '7', '30', 'full'
+    username = session["username"] 
+    time_range = request.args.get("range")
 
     if time_range == "7":
         time_range = 7

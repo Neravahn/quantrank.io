@@ -127,4 +127,3 @@ def accuracyData(username, time) :
 
         return data
     
-print(accuracyData('prashant', 7))

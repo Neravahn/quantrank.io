@@ -1,7 +1,6 @@
 import random
 from fractions import Fraction
 import math
-from sub_supScript import sup_num
 
 def equation_1():
     const1 = random.randint(2, 9)

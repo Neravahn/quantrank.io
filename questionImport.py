@@ -1,6 +1,7 @@
 import sqlite3
 import questions.chapter0ne as ch1
 import questions.chapterSix as ch6
+import questions.chapterFour as ch4
 
 
 DB_PATH = 'database.db'
@@ -18,9 +19,14 @@ def check(difficulty, chapter_name):
         x = ch1
     if chapter_name == 'finance':
         x = ch6
+    if chapter_name == 'equations':
+        x = ch4
     
     func = getattr(x, func_name)
     question, options, answer = func()
 
     return question, options, answer
+
+
+
 

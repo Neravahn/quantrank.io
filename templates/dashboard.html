@@ -939,40 +939,59 @@
 
         // ACCURACY CHART
 
-
         const analyticsCtx = document
             .getElementById('analyticsChart')
             .getContext('2d');
 
-        const labels = [
-            "Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"
-        ];
+        const notENoughDataPlugin= {
+            id: 'centerMessage',
+            beforeDraw(chart) {
+                if (!chart.$showMessage) return;
 
-        const attemptedData = [10, 12, 8, 15, 14, 9, 11];
-        const correctData = [7, 9, 5, 11, 10, 6, 8];
+                const { ctx, chartArea } = chart;
+                if (!chartArea) return;
+
+                const centerX = (chartArea.left + chartArea.right) / 2;
+                const centerY = (chartArea.top + chartArea.bottom) / 2;
+
+                ctx.save();
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+
+                ctx.font = '600 18px Nunito';
+                ctx.fillStyle = '#ffffff';
+                ctx.fillText('Not enough data', centerX, centerY - 10);
+
+                ctx.font = '400 14px Nunito';
+                ctx.fillStyle = '#bfbfbf';
+                ctx.fillText(
+                    'Solve questions for at least 7 days to unlock this chart',
+                    centerX,
+                    centerY + 15
+                );
+
+                ctx.restore();
+            }
+        };
 
         const analyticsChart = new Chart(analyticsCtx, {
             type: 'line',
             data: {
-                labels: labels,
+                labels: [],
                 datasets: [
                     {
                         label: "Attempted",
-                        data: attemptedData,
+                        data: [],
                         borderColor: "#f1c40f",
-                        backgroundColor: "rgba(241,196,15,0.2)",
-                        tension: 0.1,
-                        fill: false,
-                        borderWidth: 1
+                        tension: 0.25,
+                        fill: false
                     },
                     {
                         label: "Correct",
-                        data: correctData,
+                        data: [],
                         borderColor: "#2ecc71",
-                        backgroundColor: "rgba(46,204,113,0.2)",
-                        tension: 0.1,
-                        fill: false,
-                        borderWidth: 1
+                        tension: 0.25,
+                        fill: false
                     }
                 ]
             },
@@ -980,9 +999,7 @@
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
-                    legend: {
-                        display: false
-                    }
+                    legend: { display: false }
                 },
                 scales: {
                     x: {
@@ -990,13 +1007,69 @@
                         grid: { color: "#222" }
                     },
                     y: {
-                        ticks: { color: "#bfbfbf" },
+                        ticks: { color: "#bfbfbf", stepSize: 1},
                         grid: { color: "#222" },
-                        beginAtZero: true
+                        beginAtZero: true,
                     }
                 }
-            }
+            },
+            plugins: [notENoughDataPlugin]   
         });
+
+        async function loadAccuracy(range) {
+            try {
+                const res = await fetch(`/accuracy-data?range=${range}`);
+                const json = await res.json();
+
+                if (json.status !== "ok" || json.data.length < 7) {
+                    analyticsChart.data.labels = [];
+                    analyticsChart.data.datasets.forEach(ds => ds.data = []);
+                    analyticsChart.$showMessage = true; 
+                    analyticsChart.update();
+                    return;
+                }
+
+                analyticsChart.$showMessage = false;
+
+                analyticsChart.data.labels = json.data.map(d => d.date);
+                analyticsChart.data.datasets[0].data = json.data.map(d => d.attempted);
+                analyticsChart.data.datasets[1].data = json.data.map(d => d.correct);
+
+                analyticsChart.update();
+            } catch (err) {
+                console.error("Analytics fetch error:", err);
+            }
+        }
+
+        document.getElementById("7days").addEventListener("click", () => {
+            loadAccuracy(7);
+            setActiveButton("7days");
+        });
+
+        document.getElementById("30days").addEventListener("click", () => {
+            loadAccuracy(30);
+            setActiveButton("30days");
+        });
+
+        document.getElementById("fullHistory").addEventListener("click", () => {
+            loadAccuracy("full");
+            setActiveButton("fullHistory");
+        });
+
+        loadAccuracy(7);
+        setActiveButton("7days");
+
+        function setActiveButton(activeId) {
+            document.querySelectorAll(".toggles").forEach(btn => {
+                btn.style.background = "#222";
+                btn.style.color = "#fff";
+            });
+
+            const activeBtn = document.getElementById(activeId);
+            activeBtn.style.background = "rgb(255, 183, 0)";
+            activeBtn.style.color = "#000";
+        }
+
 
     </script>
 
