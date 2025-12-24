@@ -460,8 +460,27 @@
         }
 
         #analyticsChart {
-            width: 100% ;
-            height: 100% ;
+            width: 100%;
+            height: 100%;
+        }
+
+        #userTooltip {
+            color: white;
+            margin-top: 10px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .dot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 4px;
+            vertical-align: middle;
         }
     </style>
 </head>
@@ -563,6 +582,12 @@
             <div id="analyticsAreaCanvas">
                 <canvas id="analyticsChart"></canvas>
             </div>
+            <div id="userTooltip">
+                Total Attempted: <span class="dot" style="background-color:#f1c40f;"></span>
+                &nbsp;&nbsp;
+                Total Correct: <span class="dot" style="background-color:#2ecc71;"></span>
+            </div>
+
         </div>
 
         <div id="chapters_area">
@@ -750,7 +775,8 @@
 
         (() => {
             const canvas = document.getElementById('heatmap_canvas');
-            const HEATMAP_DATA = {{ heatmap_data | tojson }};
+            const HEATMAP_DATA = {{ heatmap_data | tojson
+        }};
         const ctx = canvas.getContext('2d');
 
         const COLS = 50;

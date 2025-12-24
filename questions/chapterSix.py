@@ -731,11 +731,28 @@ def mof_29():
     rate = random.randint(12, 25)
     time = random.randint(10, 30)
 
-    inst = amt / (1 - ((1 + rate / 100) ** -time)) / (rate / 100)
+    r = rate / 100
 
-    question = f"Alibaba borrows {amt} Housing Loan a {rate}% repayable in {time} equal annual installments commencing at the end of the first year. How much annual payment is necessary"
-    answer = round(inst , 2)
-    return question, answer
-q, a= mof_29()
-print(q, a)
+    inst = (amt * r )/ (1 - (1 + r) ** (-time))
+
+    question = (
+        f"Alibaba borrows {amt} as a housing loan at {rate}% p.a., repayable in {time} equal annual instalments commencing at the end of the first year. How much annual payment is necessary?"
+    )
+
+    answer = round(inst, 2)
+
+    options = []
+    options.append(answer)
+    while len(options) < 4:
+        option = round(random.uniform(5000, 15000), 2)
+        if option not in options and option != answer:
+            options.append(option)
+        else:
+            continue
+
+    random.shuffle(options)
+
+    return question, options, answer
+
+
 
