@@ -2,6 +2,9 @@
 quantrank.io is an interactive web platform desgined to help students practice quatitative aptitute efficiently. It tracks user performance, provides analytics, and offers a gamified experience to motivate consistent practics
 
 
+[DEMO](https://drive.google.com/file/d/1HGhjwuwTLpOd3-BUfxsw4ekn1H5x31i5/view?usp=sharing)
+
+
 ## Project Overview
 quantrank.io is built to provide:
 - Chapter-wise accuracy tracking – Understand which topics need more practice.
