@@ -1,11 +1,11 @@
 import sqlite3
 
 
-DB_PATH = 'database.db'
+DB_PATH = 'home/quantrank/QuantRank.io/database.db'
 
 def check_username(username):
 
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(DB_PATH, check_same_thread=False)
     cursor = conn.cursor()
 
     query = "SELECT name FROM users WHERE username = ?"
@@ -19,7 +19,7 @@ def check_username(username):
 
 def check_email(email):
 
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(DB_PATH, check_same_thread=False)
     cursor = conn.cursor()
 
     query = "SELECT name FROM users WHERE email = ?"
@@ -31,7 +31,7 @@ def check_email(email):
     return user
 
 def getPFP(username):
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(DB_PATH, check_same_thread=False)
     cursor = conn.cursor()
     cursor.execute("SELECT profile_pic FROM users WHERE username = ?", (username,))
     pfp = cursor.fetchone()[0]

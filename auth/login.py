@@ -2,12 +2,12 @@ from mathhash import verify_password
 import sqlite3
 
 
-DB_PATH = 'database.db'
+DB_PATH = '/home/quantrank/QuantRank.io/database.db'
 
 def verify_user(username, password):
 
 
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(DB_PATH, check_same_thread=False)
     cursor  = conn.cursor()
 
     query =f"""

@@ -4,13 +4,13 @@ from zoneinfo import ZoneInfo
 
 
 
-DB_PATH = '/home/prashant/Desktop/QuantRank.io/database.db'
+DB_PATH = '/home/quantrank/QuantRank.io/database.db'
 def get_today_ist():
     return datetime.now(ZoneInfo("Asia/Kolkata")).date().isoformat()
 
 
 def init_newUser(username):
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(DB_PATH, check_same_thread=False)
     cursor = conn.cursor()
     today = get_today_ist()
 
@@ -24,7 +24,7 @@ def init_newUser(username):
 
 
 def daily_Users():
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(DB_PATH, check_same_thread=False)
     cursor = conn.cursor()
     today = get_today_ist()
 
@@ -46,7 +46,7 @@ def daily_Users():
 
 def save_Points(username, correct):
     today = get_today_ist()
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(DB_PATH, check_same_thread=False)
     cursor = conn.cursor()
 
 
@@ -74,7 +74,7 @@ def save_Points(username, correct):
 
 
 def getHeatMap_data(username):
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(DB_PATH, check_same_thread=False)
     cursor = conn.cursor()
 
     query = "SELECT activity_date, points FROM heatmap WHERE username = ?"
@@ -91,7 +91,7 @@ def getHeatMap_data(username):
 
 
 def accuracyData(username, time) :
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(DB_PATH, check_same_thread=False)
     cursor = conn.cursor()
 
 

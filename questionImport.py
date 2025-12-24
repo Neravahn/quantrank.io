@@ -4,9 +4,9 @@ import questions.chapterSix as ch6
 import questions.chapterFour as ch4
 
 
-DB_PATH = 'database.db'
+DB_PATH = '/home/quuantrank/QuantRank.io/database.db'
 def check(difficulty, chapter_name):
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(DB_PATH, check_same_thread=False)
     cursor = conn.cursor()
 
     query = """

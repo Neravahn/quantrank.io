@@ -4,7 +4,7 @@ import sqlite3
 DB_PATH = 'database.db'
 
 def stats_save(username):
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(DB_PATH, check_same_thread=False)
     cursor = conn.cursor()
     query = "INSERT INTO stats (username) VALUES (?)"
     cursor.execute(query, (username,))
@@ -14,7 +14,7 @@ def stats_save(username):
 
 
 def update_stats(username, difficulty, topic):
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(DB_PATH, check_same_thread=False)
     cursor = conn.cursor()
 
     ALLOWED_COLUMNS = {
@@ -43,7 +43,7 @@ def update_stats(username, difficulty, topic):
 
 
 def update_points(username, points):
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(DB_PATH, check_same_thread=False)
     cursor = conn.cursor()
 
     if points > 0:
@@ -58,7 +58,7 @@ def update_points(username, points):
 
 
 def getChapterData(username):
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(DB_PATH, check_same_thread=False)
     cursor = conn.cursor()
 
     chapters = ["ratio_proportion", "indices", "logarithm",

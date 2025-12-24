@@ -61,3 +61,85 @@ cron ran at 2025-12-24 12:01:01.966780
 cron ran at 2025-12-24 12:02:02.062122
 cron ran at 2025-12-24 12:03:01.139972
 cron ran at 2025-12-24 12:04:01.217625
+cron ran at 2025-12-24 12:05:01.311048
+cron ran at 2025-12-24 12:06:01.382042
+cron ran at 2025-12-24 12:07:01.454391
+cron ran at 2025-12-24 12:08:01.531360
+cron ran at 2025-12-24 12:09:01.603141
+cron ran at 2025-12-24 12:10:01.690654
+cron ran at 2025-12-24 12:11:01.760982
+cron ran at 2025-12-24 12:12:01.832307
+cron ran at 2025-12-24 12:13:01.912507
+cron ran at 2025-12-24 12:14:01.987461
+cron ran at 2025-12-24 12:15:01.062230
+cron ran at 2025-12-24 12:16:01.139319
+cron ran at 2025-12-24 12:17:01.209601
+cron ran at 2025-12-24 12:18:01.295632
+cron ran at 2025-12-24 12:19:01.382757
+cron ran at 2025-12-24 12:20:01.457731
+cron ran at 2025-12-24 12:21:01.535941
+cron ran at 2025-12-24 12:22:01.609348
+cron ran at 2025-12-24 12:23:01.686436
+cron ran at 2025-12-24 12:24:01.759423
+cron ran at 2025-12-24 12:25:01.831849
+cron ran at 2025-12-24 12:26:01.913502
+cron ran at 2025-12-24 12:27:01.993848
+cron ran at 2025-12-24 12:28:01.072355
+cron ran at 2025-12-24 12:29:01.165251
+cron ran at 2025-12-24 12:30:01.280186
+cron ran at 2025-12-24 12:31:01.390260
+cron ran at 2025-12-24 12:32:01.470403
+cron ran at 2025-12-24 12:33:01.547657
+cron ran at 2025-12-24 12:34:01.622974
+cron ran at 2025-12-24 12:35:01.700083
+cron ran at 2025-12-24 13:24:20.121697
+cron ran at 2025-12-24 13:25:01.208469
+cron ran at 2025-12-24 13:26:01.327248
+cron ran at 2025-12-24 13:27:01.410915
+cron ran at 2025-12-24 13:28:01.544145
+cron ran at 2025-12-24 13:29:01.638853
+cron ran at 2025-12-24 13:30:01.734847
+cron ran at 2025-12-24 13:31:01.846283
+cron ran at 2025-12-24 13:32:01.945716
+cron ran at 2025-12-24 13:33:02.879966
+cron ran at 2025-12-24 13:34:01.970205
+cron ran at 2025-12-24 13:35:02.089095
+cron ran at 2025-12-24 13:36:01.172142
+cron ran at 2025-12-24 13:37:01.272899
+cron ran at 2025-12-24 13:38:01.361347
+cron ran at 2025-12-24 13:39:01.444796
+cron ran at 2025-12-24 13:40:01.576577
+cron ran at 2025-12-24 13:41:01.669259
+cron ran at 2025-12-24 13:42:01.765175
+cron ran at 2025-12-24 13:43:01.849056
+Traceback (most recent call last):
+  File "/home/prashant/Desktop/QuantRank.io/cronHeatmap.py", line 7, in <module>
+    daily_Users()
+    ~~~~~~~~~~~^^
+  File "/home/prashant/Desktop/QuantRank.io/statsFolder/heatmap.py", line 27, in daily_Users
+    conn = sqlite3.connect(DB_PATH, check_same_thread=False)
+sqlite3.OperationalError: unable to open database file
+cron ran at 2025-12-24 13:44:01.961434
+Traceback (most recent call last):
+  File "/home/prashant/Desktop/QuantRank.io/cronHeatmap.py", line 7, in <module>
+    daily_Users()
+    ~~~~~~~~~~~^^
+  File "/home/prashant/Desktop/QuantRank.io/statsFolder/heatmap.py", line 27, in daily_Users
+    conn = sqlite3.connect(DB_PATH, check_same_thread=False)
+sqlite3.OperationalError: unable to open database file
+cron ran at 2025-12-24 13:45:02.079960
+Traceback (most recent call last):
+  File "/home/prashant/Desktop/QuantRank.io/cronHeatmap.py", line 7, in <module>
+    daily_Users()
+    ~~~~~~~~~~~^^
+  File "/home/prashant/Desktop/QuantRank.io/statsFolder/heatmap.py", line 27, in daily_Users
+    conn = sqlite3.connect(DB_PATH, check_same_thread=False)
+sqlite3.OperationalError: unable to open database file
+cron ran at 2025-12-24 13:46:01.196699
+Traceback (most recent call last):
+  File "/home/prashant/Desktop/QuantRank.io/cronHeatmap.py", line 7, in <module>
+    daily_Users()
+    ~~~~~~~~~~~^^
+  File "/home/prashant/Desktop/QuantRank.io/statsFolder/heatmap.py", line 27, in daily_Users
+    conn = sqlite3.connect(DB_PATH, check_same_thread=False)
+sqlite3.OperationalError: unable to open database file

@@ -1,9 +1,9 @@
 import sqlite3
 
 
-DB_PATH = 'database.db'
+DB_PATH = '/home/quantrank/QuantRank.io/database.db'
 def leaderboard_get():
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(DB_PATH, check_same_thread=False)
     cursor = conn.cursor()
 
     query = """SELECT username, total_points
@@ -19,9 +19,6 @@ def leaderboard_get():
     return data
 
 
-def rank(username):
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
 
 
 

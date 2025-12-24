@@ -251,7 +251,7 @@ def check_answers():
 @app.route("/update_pfp", methods=["POST"])
 def update_pfp():
     DB_PATH = 'database.db'
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(DB_PATH, check_same_thread=False)
     cursor = conn.cursor()
     if "pfp" not in request.files:
         return redirect(url_for("dashboard"))
