@@ -4,6 +4,10 @@ quantrank.io is an interactive web platform desgined to help students practice q
 
 [DEMO](https://drive.google.com/file/d/1HGhjwuwTLpOd3-BUfxsw4ekn1H5x31i5/view?usp=sharing)
 
+## TEST ACCOUNT
+username: prashant
+password: prashant01
+
 
 ## Project Overview
 quantrank.io is built to provide:
